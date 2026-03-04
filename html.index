@@ -3,175 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>África Notícias 🇲🇿</title>
+    <title>África Notícias 🇲🇿 | Portal Avançado</title>
     <style>
-        /* Estilos CSS para deixar o site com cara de Aplicativo */
+        /* ================= Variaveis de Cores ================= */
         :root {
-            --cor-primaria: #00732E; /* Verde bandeira Moçambique */
+            --cor-primaria: #00732E; /* Verde Moçambique */
+            --cor-secundaria: #FDE910; /* Amarelo */
+            --cor-destaque: #D1101A; /* Vermelho */
             --cor-fundo: #f4f7f6;
-            --cor-texto: #333;
-            --cor-destaque: #D1101A; /* Vermelho bandeira */
+            --cor-texto: #333333;
+            --cor-card: #ffffff;
+            --cor-borda: #dddddd;
+            --transicao: all 0.3s ease;
         }
 
+        /* Variaveis para o Modo Escuro */
+        [data-theme="dark"] {
+            --cor-fundo: #121212;
+            --cor-texto: #e0e0e0;
+            --cor-card: #1e1e1e;
+            --cor-borda: #333333;
+            --cor-primaria: #00993d;
+        }
+
+        /* ================= Estilos Globais ================= */
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
+            margin: 0;
+            transition: var(--transicao);
         }
 
+        /* ================= Cabeçalho e Navegação ================= */
         header {
             background-color: var(--cor-primaria);
             color: white;
             padding: 15px 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 100;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .status-bar {
-            background-color: #e2e8f0;
-            padding: 8px 20px;
-            font-size: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #cbd5e1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
-        .loader {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: 2px solid var(--cor-primaria);
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-        /* Estilo dos Cartões de Notícia */
-        .noticia-card {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--cor-primaria);
-            transition: transform 0.2s;
+        header h1 { margin: 0; font-size: 1.5rem; }
+        
+        .controles-topo button {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
             cursor: pointer;
-        }
-
-        .noticia-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .noticia-titulo {
-            font-size: 18px;
             font-weight: bold;
-            margin: 0 0 10px 0;
-            line-height: 1.3;
+            transition: var(--transicao);
+        }
+        .controles-topo button:hover {
+            background: white;
+            color: var(--cor-primaria);
         }
 
-        .noticia-footer {
+        /* ================= Barra de Pesquisa e Filtros ================= */
+        .ferramentas {
+            padding: 15px 20px;
+            background-color: var(--cor-card);
+            border-bottom: 1px solid var(--cor-borda);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .pesquisa {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            font-size: 16px;
+        }
+        .categorias {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        .btn-categoria {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            border: 1px solid var(--cor-borda);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-categoria.ativo {
+            background-color: var(--cor-destaque);
+            color: white;
+            border-color: var(--cor-destaque);
+        }
+
+        /* ================= Layout Principal e Cartões ================= */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        .status-atualizacao {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        .feed {
+            display: grid;
+            gap: 15px;
+        }
+        .card-noticia {
+            background-color: var(--cor-card);
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: var(--transicao);
+            position: relative;
+        }
+        .card-noticia:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .categoria-tag {
+            display: inline-block;
+            background-color: var(--cor-primaria);
+            color: white;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .titulo-noticia { margin: 0 0 10px 0; font-size: 1.25rem; line-height: 1.4; }
+        .resumo-noticia { font-size: 0.95rem; color: #666; margin-bottom: 15px; }
+        [data-theme="dark"] .resumo-noticia { color: #aaa; }
+        
+        .rodape-noticia {
             display: flex;
             justify-content: space-between;
-            font-size: 13px;
-            color: #666;
+            align-items: center;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--cor-borda);
+            padding-top: 10px;
         }
+        .fonte { font-weight: bold; color: var(--cor-destaque); }
+        
+        .btn-favorito {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ccc;
+            transition: var(--transicao);
+        }
+        .btn-favorito.salvo { color: var(--cor-secundaria); text-shadow: 0 0 2px #000; }
 
-        .noticia-fonte {
-            color: var(--cor-destaque);
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>África Notícias 🇲🇿</h1>
+        <div class="controles-topo">
+            <button onclick="alternarTema()" id="btn-tema">🌙 Escuro</button>
+        </div>
     </header>
 
-    <div class="status-bar">
-        <span id="status-texto">Atualizado agora</span>
-        <span id="loader-icon" class="loader" style="display: none;"></span>
+    <div class="ferramentas">
+        <input type="text" class="pesquisa" id="input-pesquisa" placeholder="Pesquisar notícias (Ex: Economia, Mambas)..." onkeyup="pesquisarNoticias()">
+        
+        <div class="categorias" id="container-categorias">
+            <button class="btn-categoria ativo" onclick="filtrarCategoria('Todas')">Todas</button>
+            <button class="btn-categoria" onclick="filtrarCategoria('Política')">Política</button>
+            <button class="btn-categoria" onclick="filtrarCategoria('Economia')">Economia</button>
+            <button class="btn-categoria" onclick="filtrarCategoria('Desporto')">Desporto</button>
+            <button class="btn-categoria" onclick="filtrarCategoria('Favoritos')">⭐ Favoritos</button>
+        </div>
     </div>
 
-    <div class="container" id="feed-noticias">
-        </div>
+    <div class="container">
+        <div class="status-atualizacao" id="status-texto">Pronto. Atualizando em tempo real...</div>
+        <div class="feed" id="feed-noticias">
+            </div>
+    </div>
 
     <script>
-        // Simulador de Banco de Dados / API
-        const noticiasBase = [
-            { titulo: "Descoberta nova reserva de gás natural na bacia do Rovuma", fonte: "Jornal Notícias", tempo: "Há 5 min" },
-            { titulo: "Mambas preparam-se para o jogo decisivo de qualificação", fonte: "Folha de Maputo", tempo: "Há 12 min" },
-            { titulo: "Metical mantém-se estável face ao dólar esta semana", fonte: "O País", tempo: "Há 45 min" },
-            { titulo: "Governo lança novo programa de reabilitação de estradas na Zambézia", fonte: "Carta de Moçambique", tempo: "Há 1 hora" },
-            { titulo: "Festival de Marrabenta atrai milhares à capital", fonte: "AIM", tempo: "Há 2 horas" }
+        // 1. BANCO DE DADOS INICIAL (Simulação)
+        let bancoDeNoticias = [
+            { id: 1, titulo: "Presidente inaugura nova ponte em Cabo Delgado", resumo: "A infraestrutura visa melhorar a ligação entre os distritos do norte e impulsionar o comércio local.", categoria: "Política", fonte: "Jornal Notícias", tempo: "Há 10 min" },
+            { id: 2, titulo: "Inflação recua 0.5% no último mês em Moçambique", resumo: "Dados do INE mostram uma ligeira estabilização nos preços dos produtos de primeira necessidade.", categoria: "Economia", fonte: "O País", tempo: "Há 45 min" },
+            { id: 3, titulo: "Mambas convocados para a qualificação da CAN", resumo: "O selecionador nacional divulgou a lista dos 23 jogadores que vão defrontar o Senegal.", categoria: "Desporto", fonte: "Folha de Maputo", tempo: "Há 2 horas" },
+            { id: 4, titulo: "Novo investimento milionário nas areias pesadas de Chibuto", resumo: "Empresa multinacional assina acordo para expansão das operações na província de Gaza.", categoria: "Economia", fonte: "Carta de Moçambique", tempo: "Há 3 horas" }
         ];
 
-        const feedContainer = document.getElementById('feed-noticias');
-        const statusTexto = document.getElementById('status-texto');
-        const loaderIcon = document.getElementById('loader-icon');
+        // 2. VARIÁVEIS DE ESTADO DO APLICATIVO
+        let noticiasExibidas = [...bancoDeNoticias];
+        let categoriaAtual = 'Todas';
+        // Recupera favoritos do celular/computador ou cria uma lista vazia
+        let favoritos = JSON.parse(localStorage.getItem('africaNoticiasFavoritos')) || []; 
 
-        // Função para desenhar as notícias na tela
-        function renderizarNoticias(noticias) {
-            feedContainer.innerHTML = ''; // Limpa a tela
-            
-            noticias.forEach(noticia => {
-                const card = document.createElement('div');
-                card.className = 'noticia-card';
-                card.innerHTML = `
-                    <h2 class="noticia-titulo">${noticia.titulo}</h2>
-                    <div class="noticia-footer">
-                        <span class="noticia-fonte">${noticia.fonte}</span>
+        // 3. FUNÇÃO PRINCIPAL: RENDERIZAR AS NOTÍCIAS NA TELA
+        function renderizarFeed() {
+            const feed = document.getElementById('feed-noticias');
+            feed.innerHTML = ''; // Limpa a tela
+
+            if (noticiasExibidas.length === 0) {
+                feed.innerHTML = '<p style="text-align:center;">Nenhuma notícia encontrada.</p>';
+                return;
+            }
+
+            noticiasExibidas.forEach(noticia => {
+                const ehFavorito = favoritos.includes(noticia.id);
+                const iconeEstrela = ehFavorito ? '⭐' : '☆';
+                const classeEstrela = ehFavorito ? 'salvo' : '';
+
+                // Cria o HTML de cada cartão
+                const cartao = document.createElement('div');
+                cartao.className = 'card-noticia';
+                cartao.innerHTML = `
+                    <span class="categoria-tag">${noticia.categoria}</span>
+                    <button class="btn-favorito ${classeEstrela}" onclick="alternarFavorito(${noticia.id})" style="position:absolute; right:15px; top:15px;">${iconeEstrela}</button>
+                    <h2 class="titulo-noticia">${noticia.titulo}</h2>
+                    <p class="resumo-noticia">${noticia.resumo}</p>
+                    <div class="rodape-noticia">
+                        <span class="fonte">${noticia.fonte}</span>
                         <span>${noticia.tempo}</span>
                     </div>
                 `;
-                // Simula o clique para abrir a notícia
-                card.onclick = () => alert(`Você seria redirecionado para ler: "${noticia.titulo}"`);
-                feedContainer.appendChild(card);
+                feed.appendChild(cartao);
             });
         }
 
-        // Função que simula a busca de notícias em Tempo Real
-        function atualizarNoticias() {
-            statusTexto.textContent = "Buscando atualizações...";
-            loaderIcon.style.display = "inline-block";
-
-            // Simula o tempo de rede (1.5 segundos)
-            setTimeout(() => {
-                // Aqui bagunçamos o array para simular que chegaram notícias novas
-                const noticiasAtualizadas = [...noticiasBase].sort(() => 0.5 - Math.random());
-                
-                renderizarNoticias(noticiasAtualizadas);
-                
-                statusTexto.textContent = "Atualizado agora mesmo";
-                loaderIcon.style.display = "none";
-            }, 1500);
+        // 4. FUNÇÃO DE SALVAR FAVORITOS
+        function alternarFavorito(idNoticia) {
+            const index = favoritos.indexOf(idNoticia);
+            if (index > -1) {
+                favoritos.splice(index, 1); // Remove se já existe
+            } else {
+                favoritos.push(idNoticia); // Adiciona se não existe
+            }
+            // Salva na memória do navegador
+            localStorage.setItem('africaNoticiasFavoritos', JSON.stringify(favoritos));
+            
+            // Se estivermos na aba de favoritos, re-filtra imediatamente
+            if (categoriaAtual === 'Favoritos') {
+                filtrarCategoria('Favoritos');
+            } else {
+                renderizarFeed(); // Apenas atualiza as estrelas
+            }
         }
 
-        // Inicializa o site pela primeira vez
-        renderizarNoticias(noticiasBase);
+        // 5. FUNÇÃO DE FILTRO POR CATEGORIA
+        function filtrarCategoria(categoria) {
+            categoriaAtual = categoria;
+            
+            // Atualiza o visual dos botões
+            document.querySelectorAll('.btn-categoria').forEach(btn => {
+                btn.classList.remove('ativo');
+                if (btn.innerText.includes(categoria)) btn.classList.add('ativo');
+            });
 
-        // Define a atualização em "tempo real" (aqui configurado para a cada 10 segundos para você ver o efeito)
-        setInterval(atualizarNoticias, 10000);
+            // Lógica de filtragem
+            if (categoria === 'Todas') {
+                noticiasExibidas = [...bancoDeNoticias];
+            } else if (categoria === 'Favoritos') {
+                noticiasExibidas = bancoDeNoticias.filter(n => favoritos.includes(n.id));
+            } else {
+                noticiasExibidas = bancoDeNoticias.filter(n => n.categoria === categoria);
+            }
+            
+            // Limpa a pesquisa e renderiza
+            document.getElementById('input-pesquisa').value = '';
+            renderizarFeed();
+        }
+
+        // 6. FUNÇÃO DE PESQUISA (Busca em tempo real enquanto digita)
+        function pesquisarNoticias() {
+            const termo = document.getElementById('input-pesquisa').value.toLowerCase();
+            
+            // Filtra primeiro pela categoria atual, depois pelo texto
+            let baseDeBusca = bancoDeNoticias;
+            if (categoriaAtual !== 'Todas' && categoriaAtual !== 'Favoritos') {
+                baseDeBusca = bancoDeNoticias.filter(n => n.categoria === categoriaAtual);
+            } else if (categoriaAtual === 'Favoritos') {
+                baseDeBusca = bancoDeNoticias.filter(n => favoritos.includes(n.id));
+            }
+
+            noticiasExibidas = baseDeBusca.filter(n => 
+                n.titulo.toLowerCase().includes(termo) || 
+                n.resumo.toLowerCase().includes(termo) ||
+                n.fonte.toLowerCase().includes(termo)
+            );
+            
+            renderizarFeed();
+        }
+
+        // 7. FUNÇÃO DE MODO ESCURO (Dark Mode)
+        function alternarTema() {
+            const html = document.documentElement;
+            const btnTema = document.getElementById('btn-tema');
+            
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                btnTema.innerText = '🌙 Escuro';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btnTema.innerText = '☀️ Claro';
+            }
+        }
+
+        // 8. SIMULADOR DE TEMPO REAL (Busca notícias novas na "API")
+        let contadorId = 5;
+        function buscarNoticiasEmTempoReal() {
+            const status = document.getElementById('status-texto');
+            status.innerText = 'Buscando atualizações de Moçambique...';
+            
+            setTimeout(() => {
+                // Cria uma notícia aleatória falsa para simular a internet
+                const fontes = ["STV", "AIM", "Folha de Maputo", "O País"];
+                const categorias = ["Política", "Economia", "Desporto"];
+                const novaNoticia = {
+                    id: contadorId++,
+                    titulo: `Notícia de Última Hora ${contadorId}: Atualização Urgente`,
+                    resumo: "Esta é uma notícia gerada automaticamente pelo sistema de tempo real do aplicativo.",
+                    categoria: categorias[Math.floor(Math.random() * categorias.length)],
+                    fonte: fontes[Math.floor(Math.random() * fontes.length)],
+                    tempo: "Agora mesmo"
+                };
+
+                // Adiciona a notícia no topo do banco de dados
+                bancoDeNoticias.unshift(novaNoticia);
+                
+                // Se o usuário não estiver pesquisando e estiver na aba certa, mostra na hora
+                const termoPesquisa = document.getElementById('input-pesquisa').value;
+                if (termoPesquisa === '' && (categoriaAtual === 'Todas' || categoriaAtual === novaNoticia.categoria)) {
+                    filtrarCategoria(categoriaAtual);
+                }
+
+                status.innerText = 'Feed atualizado! Próxima verificação em breve...';
+            }, 2000); // Demora 2 segundos para "baixar" da internet
+        }
+
+        // 9. INICIALIZAÇÃO DO APLICATIVO
+        window.onload = () => {
+            renderizarFeed();
+            // Inicia o loop de tempo real (busca notícias a cada 15 segundos)
+            setInterval(buscarNoticiasEmTempoReal, 15000);
+        };
 
     </script>
 </body>
