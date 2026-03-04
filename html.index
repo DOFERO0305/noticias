@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>África Notícias 🇲🇿</title>
+    <style>
+        /* Estilos CSS para deixar o site com cara de Aplicativo */
+        :root {
+            --cor-primaria: #00732E; /* Verde bandeira Moçambique */
+            --cor-fundo: #f4f7f6;
+            --cor-texto: #333;
+            --cor-destaque: #D1101A; /* Vermelho bandeira */
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+        }
+
+        header {
+            background-color: var(--cor-primaria);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .status-bar {
+            background-color: #e2e8f0;
+            padding: 8px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--cor-primaria);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Estilo dos Cartões de Notícia */
+        .noticia-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--cor-primaria);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .noticia-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .noticia-titulo {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            line-height: 1.3;
+        }
+
+        .noticia-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .noticia-fonte {
+            color: var(--cor-destaque);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>África Notícias 🇲🇿</h1>
+    </header>
+
+    <div class="status-bar">
+        <span id="status-texto">Atualizado agora</span>
+        <span id="loader-icon" class="loader" style="display: none;"></span>
+    </div>
+
+    <div class="container" id="feed-noticias">
+        </div>
+
+    <script>
+        // Simulador de Banco de Dados / API
+        const noticiasBase = [
+            { titulo: "Descoberta nova reserva de gás natural na bacia do Rovuma", fonte: "Jornal Notícias", tempo: "Há 5 min" },
+            { titulo: "Mambas preparam-se para o jogo decisivo de qualificação", fonte: "Folha de Maputo", tempo: "Há 12 min" },
+            { titulo: "Metical mantém-se estável face ao dólar esta semana", fonte: "O País", tempo: "Há 45 min" },
+            { titulo: "Governo lança novo programa de reabilitação de estradas na Zambézia", fonte: "Carta de Moçambique", tempo: "Há 1 hora" },
+            { titulo: "Festival de Marrabenta atrai milhares à capital", fonte: "AIM", tempo: "Há 2 horas" }
+        ];
+
+        const feedContainer = document.getElementById('feed-noticias');
+        const statusTexto = document.getElementById('status-texto');
+        const loaderIcon = document.getElementById('loader-icon');
+
+        // Função para desenhar as notícias na tela
+        function renderizarNoticias(noticias) {
+            feedContainer.innerHTML = ''; // Limpa a tela
+            
+            noticias.forEach(noticia => {
+                const card = document.createElement('div');
+                card.className = 'noticia-card';
+                card.innerHTML = `
+                    <h2 class="noticia-titulo">${noticia.titulo}</h2>
+                    <div class="noticia-footer">
+                        <span class="noticia-fonte">${noticia.fonte}</span>
+                        <span>${noticia.tempo}</span>
+                    </div>
+                `;
+                // Simula o clique para abrir a notícia
+                card.onclick = () => alert(`Você seria redirecionado para ler: "${noticia.titulo}"`);
+                feedContainer.appendChild(card);
+            });
+        }
+
+        // Função que simula a busca de notícias em Tempo Real
+        function atualizarNoticias() {
+            statusTexto.textContent = "Buscando atualizações...";
+            loaderIcon.style.display = "inline-block";
+
+            // Simula o tempo de rede (1.5 segundos)
+            setTimeout(() => {
+                // Aqui bagunçamos o array para simular que chegaram notícias novas
+                const noticiasAtualizadas = [...noticiasBase].sort(() => 0.5 - Math.random());
+                
+                renderizarNoticias(noticiasAtualizadas);
+                
+                statusTexto.textContent = "Atualizado agora mesmo";
+                loaderIcon.style.display = "none";
+            }, 1500);
+        }
+
+        // Inicializa o site pela primeira vez
+        renderizarNoticias(noticiasBase);
+
+        // Define a atualização em "tempo real" (aqui configurado para a cada 10 segundos para você ver o efeito)
+        setInterval(atualizarNoticias, 10000);
+
+    </script>
+</body>
+</html>
