@@ -1,236 +1,131 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-MZ">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>África Notícias 🇲🇿 | Real-Time</title>
-    <style>
-        /* ================= Variaveis de Cores ================= */
-        :root {
-            --cor-primaria: #121212; 
-            --cor-secundaria: #E31C25; 
-            --cor-destaque: #00E676; 
-            --cor-fundo: #0a0a0a; 
-            --cor-fundo-contudo: #ffffff; 
-            --cor-texto: #e0e0e0; 
-            --cor-texto-escuro: #333333; 
-            --cor-card: #1e1e1e; 
-            --cor-borda: #333333; 
-            --transicao: all 0.2s ease-in-out;
-            --sombra-premium: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ================= Estilos Globais ================= */
-        * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); margin: 0; line-height: 1.6; }
-
-        header { background-color: var(--cor-primaria); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--cor-secundaria); }
-        .logo h1 { margin: 0; font-size: 1.6rem; font-weight: 800; text-transform: uppercase; color: #fff; }
-        .logo h1 span { color: var(--cor-secundaria); }
-
-        .ferramentas { padding: 20px 25px; background-color: #1a1a1a; border-bottom: 1px solid var(--cor-borda); }
-        .pesquisa { width: 100%; padding: 15px 20px; border: 2px solid #333; border-radius: 30px; background-color: #262626; color: var(--cor-texto); font-size: 16px; margin-bottom: 15px; }
-        .pesquisa:focus { outline: none; border-color: var(--cor-secundaria); }
-
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .status-atualizacao { text-align: center; font-size: 0.95rem; color: #00E676; margin-bottom: 25px; font-weight: bold; }
-        
-        .feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        .card-noticia { background-color: var(--cor-card); border-radius: 15px; overflow: hidden; box-shadow: var(--sombra-premium); transition: var(--transicao); display: flex; flex-direction: column; border: 1px solid var(--cor-borda); cursor: pointer; }
-        .card-noticia:hover { transform: translateY(-5px); border-color: var(--cor-secundaria); }
-        .imagem-noticia { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid var(--cor-secundaria); background-color: #333; }
-        .conteudo-card { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .titulo-noticia { margin: 0 0 12px 0; font-size: 1.2rem; font-weight: 700; color: #fff; line-height: 1.3; }
-        .rodape-noticia { margin-top: auto; display: flex; justify-content: space-between; font-size: 0.85rem; border-top: 1px solid var(--cor-borda); padding-top: 15px; color: #aaa; }
-        .fonte { font-weight: bold; color: var(--cor-secundaria); }
-
-        /* Modal */
-        .modal-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 20px; backdrop-filter: blur(5px); }
-        .modal-conteudo { background-color: var(--cor-fundo-contudo); color: var(--cor-texto-escuro); width: 100%; max-width: 900px; max-height: 90vh; border-radius: 15px; overflow-y: auto; position: relative; }
-        .btn-fechar-modal { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); color: white; border: none; font-size: 1.5rem; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; }
-        .modal-imagem { width: 100%; height: 40vh; object-fit: cover; border-bottom: 5px solid var(--cor-secundaria); }
-        .modal-corpo { padding: 40px; }
-        .modal-titulo { font-size: 2rem; font-weight: 800; margin: 0 0 20px 0; color: #1a1a1a; }
-        .modal-texto { font-size: 1.1rem; line-height: 1.8; color: #444; margin-bottom: 30px; }
-        .btn-ler-original { display: inline-block; background-color: var(--cor-secundaria); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; }
-    </style>
+    <title>MozaNews - O Seu Agregador de Notícias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Acompanhe as últimas notícias de Moçambique, África e do Mundo em tempo real.">
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-    <header>
-        <div class="logo">
-            <h1>África<span>Notícias</span>🇲🇿</h1>
-        </div>
-    </header>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-blue-700">Moza<span class="text-orange-500">News</span></a>
+            
+            <div class="hidden md:flex items-center bg-gray-100 rounded-full px-4 py-2 w-1/3">
+                <input type="text" placeholder="Pesquisar notícias..." class="bg-transparent border-none outline-none w-full text-sm">
+                <button class="text-gray-500 hover:text-blue-700">🔍</button>
+            </div>
 
-    <div class="ferramentas">
-        <input type="text" class="pesquisa" id="input-pesquisa" placeholder="Pesquisar notícias..." onkeyup="pesquisarNoticias()">
-    </div>
-
-    <div class="container">
-        <div class="status-atualizacao" id="status-texto">Iniciando sistema...</div>
-        <div class="feed" id="feed-noticias"></div>
-    </div>
-
-    <div class="modal-background" id="modal-noticia" onclick="fecharModalExterno(event)">
-        <div class="modal-conteudo">
-            <button class="btn-fechar-modal" onclick="fecharModal()">×</button>
-            <img class="modal-imagem" id="modal-imagem" src="" alt="Imagem da Notícia">
-            <div class="modal-corpo">
-                <h1 class="modal-titulo" id="modal-titulo"></h1>
-                <p style="color: var(--cor-secundaria); font-weight: bold;" id="modal-fonte"></p>
-                <div class="modal-texto" id="modal-texto"></div>
-                <a href="#" target="_blank" class="btn-ler-original" id="modal-link">Ler notícia original completa</a>
+            <div>
+                <button class="bg-blue-700 text-white px-4 py-2 rounded font-semibold hover:bg-blue-800 transition">Assinar Newsletter</button>
             </div>
         </div>
-    </div>
+        
+        <nav class="bg-blue-900 text-white text-sm">
+            <div class="container mx-auto px-4 py-3 overflow-x-auto whitespace-nowrap">
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="hover:text-orange-400 font-semibold">Últimas</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Moçambique</a></li>
+                    <li><a href="#" class="hover:text-orange-400">África</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Mundo</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Política</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Economia</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Desporto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-    <script>
-        // 1. BANCO DE DADOS (Começa vazio, vai ser preenchido pela internet)
-        let bancoDeNoticias = [];
-        let noticiasExibidas = [];
-
-        // Fontes REAIS de Moçambique (Feeds RSS)
-        const fontesRSS = [
-            "https://opais.co.mz/feed/", // O País
-            "https://cartamz.com/index.php?format=feed&type=rss" // Carta de Moçambique
-            // Você pode adicionar mais links RSS aqui futuramente
-        ];
-
-        // 2. FUNÇÃO PARA BUSCAR NOTÍCIAS REAIS DA INTERNET
-        async function buscarNoticiasReais() {
-            const status = document.getElementById('status-texto');
-            status.innerText = 'Sincronizando com sites de Moçambique... ⏳';
-
-            let novasNoticiasEncontradas = 0;
-
-            for (let url of fontesRSS) {
-                try {
-                    // Usamos a API gratuita rss2json para converter o XML dos jornais em dados lidos pelo JavaScript
-                    const apiConverter = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
-                    const resposta = await fetch(apiConverter);
-                    const dados = await resposta.json();
-
-                    if (dados.status === 'ok') {
-                        const artigos = dados.items;
-
-                        // Lemos do mais antigo pro mais novo para manter a ordem correta quando adicionarmos no topo
-                        for (let i = artigos.length - 1; i >= 0; i--) {
-                            const item = artigos[i];
-                            
-                            // VERIFICAÇÃO CRUCIAL: A notícia já está no nosso agregador?
-                            // O código compara o link da notícia. Se já existir, ele ignora. Mantém as antigas intactas.
-                            const jaExiste = bancoDeNoticias.some(n => n.link === item.link);
-                            
-                            if (!jaExiste) {
-                                // Puxa a imagem (tenta pegar a oficial, se não tiver, põe uma genérica de jornalismo)
-                                const imagemReal = item.thumbnail || (item.enclosure && item.enclosure.link) || "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600&q=80";
-
-                                const novaNoticia = {
-                                    id: item.link, // Usamos o link como ID único
-                                    titulo: item.title,
-                                    // Removemos códigos HTML sujeira do resumo
-                                    resumo: item.description.replace(/<[^>]*>?/gm, '').substring(0, 120) + "...",
-                                    fonte: dados.feed.title || "Jornal de Moçambique",
-                                    tempo: new Date(item.pubDate).toLocaleString('pt-PT'),
-                                    imagem: imagemReal,
-                                    conteudoCompleto: item.content || item.description, // Pega o texto máximo permitido pelo jornal
-                                    link: item.link
-                                };
-
-                                // UNSHIFT: Coloca a notícia nova no TOPO da lista (mantendo as antigas para baixo)
-                                bancoDeNoticias.unshift(novaNoticia);
-                                novasNoticiasEncontradas++;
-                            }
-                        }
-                    }
-                } catch (erro) {
-                    console.error("Erro ao buscar a fonte: ", url, erro);
-                }
-            }
-
-            // Atualiza a tela se achou coisa nova
-            if (novasNoticiasEncontradas > 0) {
-                pesquisarNoticias(); // Re-aplica a pesquisa se houver e renderiza
-                status.innerText = `+${novasNoticiasEncontradas} novas notícias adicionadas! Atualizando em 1 minuto...`;
-            } else {
-                status.innerText = 'Monitoramento ativo. Atualizando em 1 minuto...';
-            }
-        }
-
-        // 3. RENDERIZAR NA TELA
-        function renderizarFeed() {
-            const feed = document.getElementById('feed-noticias');
-            feed.innerHTML = '';
-
-            if (noticiasExibidas.length === 0) {
-                feed.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">Carregando notícias ou nenhuma encontrada...</p>';
-                return;
-            }
-
-            noticiasExibidas.forEach(noticia => {
-                const cartao = document.createElement('div');
-                cartao.className = 'card-noticia';
-                cartao.onclick = () => abrirModal(noticia.id);
-
-                cartao.innerHTML = `
-                    <img class="imagem-noticia" src="${noticia.imagem}" alt="Imagem" onerror="this.src='https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600'">
-                    <div class="conteudo-card">
-                        <h2 class="titulo-noticia">${noticia.titulo}</h2>
-                        <p style="font-size: 0.9rem; color: #bbb; margin-bottom: 10px;">${noticia.resumo}</p>
-                        <div class="rodape-noticia">
-                            <span class="fonte">${noticia.fonte}</span>
-                            <span>${noticia.tempo}</span>
+    <main class="container mx-auto px-4 py-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2">
+                
+                <article class="bg-white rounded-lg shadow-sm overflow-hidden mb-8 group cursor-pointer">
+                    <div class="h-64 bg-gray-300 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Notícia Destaque" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    </div>
+                    <div class="p-6">
+                        <span class="bg-orange-500 text-white text-xs font-bold uppercase px-2 py-1 rounded">Economia</span>
+                        <h2 class="text-2xl font-bold mt-3 mb-2 group-hover:text-blue-700 transition">Novos investimentos impulsionam o setor energético em Moçambique</h2>
+                        <p class="text-gray-600 mb-4">Projetos de energia solar e gás natural prometem transformar a infraestrutura do país nos próximos cinco anos, atraindo parceiros internacionais...</p>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span class="font-semibold text-gray-700 mr-2">Via Carta de Moçambique</span> • <span class="ml-2">Há 2 horas</span>
                         </div>
                     </div>
-                `;
-                feed.appendChild(cartao);
-            });
-        }
+                </article>
 
-        // 4. PESQUISA
-        function pesquisarNoticias() {
-            const termo = document.getElementById('input-pesquisa').value.toLowerCase();
-            noticiasExibidas = bancoDeNoticias.filter(n => 
-                n.titulo.toLowerCase().includes(termo) || 
-                n.fonte.toLowerCase().includes(termo)
-            );
-            renderizarFeed();
-        }
+                <h3 class="text-xl font-bold border-b-2 border-blue-700 pb-2 mb-4">Últimas Notícias</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Notícia" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <span class="text-blue-600 text-xs font-bold uppercase">Mundo</span>
+                            <h4 class="font-bold text-lg mt-1 mb-2 hover:text-blue-700"><a href="#">Cimeira do Clima debate novas metas de redução de emissões</a></h4>
+                            <div class="text-xs text-gray-500">Via Reuters • Há 15 min</div>
+                        </div>
+                    </article>
+                    
+                    <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Notícia" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <span class="text-green-600 text-xs font-bold uppercase">Desporto</span>
+                            <h4 class="font-bold text-lg mt-1 mb-2 hover:text-blue-700"><a href="#">Mambas preparam-se para o jogo decisivo da qualificação</a></h4>
+                            <div class="text-xs text-gray-500">Via Folha de Maputo • Há 45 min</div>
+                        </div>
+                    </article>
+                </div>
+            </div>
 
-        // 5. MODAL (Janela Interna)
-        function abrirModal(id) {
-            const noticia = bancoDeNoticias.find(n => n.id === id);
-            if (!noticia) return;
+            <aside class="space-y-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-bold border-b-2 border-orange-500 pb-2 mb-4">Em Tendência 🔥</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-3xl font-bold text-gray-300 mr-3">1</span>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-blue-700">Abertura de novas vagas no setor público gera corrida nacional</a>
+                                <p class="text-xs text-gray-500 mt-1">Política • 15k leituras</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-3xl font-bold text-gray-300 mr-3">2</span>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-blue-700">Startup moçambicana de Fintech recebe prémio internacional</a>
+                                <p class="text-xs text-gray-500 mt-1">Tecnologia • 8k leituras</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-3xl font-bold text-gray-300 mr-3">3</span>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-blue-700">Novas medidas anunciadas para o trânsito em Maputo</a>
+                                <p class="text-xs text-gray-500 mt-1">Sociedade • 7.5k leituras</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-            document.getElementById('modal-imagem').src = noticia.imagem;
-            document.getElementById('modal-titulo').innerText = noticia.titulo;
-            document.getElementById('modal-fonte').innerText = noticia.fonte + ' - ' + noticia.tempo;
-            document.getElementById('modal-texto').innerHTML = noticia.conteudoCompleto; // innerHTML porque o RSS pode trazer parágrafos formatados
-            document.getElementById('modal-link').href = noticia.link;
+                <div class="bg-gray-200 h-64 flex items-center justify-center rounded-lg border-2 border-dashed border-gray-400 text-gray-500">
+                    Espaço Publicitário (AdSense)
+                </div>
+            </aside>
 
-            document.getElementById('modal-noticia').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+        </div>
+    </main>
 
-        function fecharModal() {
-            document.getElementById('modal-noticia').style.display = 'none';
-            document.body.style.overflow = '';
-        }
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p class="mb-4">&copy; 2026 MozaNews. Agregador de Notícias. Todos os direitos reservados.</p>
+            <div class="flex justify-center space-x-4 text-sm">
+                <a href="#" class="hover:text-white">Sobre Nós</a>
+                <a href="#" class="hover:text-white">Política de Privacidade</a>
+                <a href="#" class="hover:text-white">Contactos</a>
+            </div>
+        </div>
+    </footer>
 
-        function fecharModalExterno(event) {
-            if (event.target.id === 'modal-noticia') fecharModal();
-        }
-
-        // 6. INICIALIZAÇÃO E LOOP DE TEMPO REAL
-        window.onload = async () => {
-            // Busca a primeira vez imediatamente ao abrir o site
-            await buscarNoticiasReais();
-            
-            // Configura o "Tempo Real": Executa a busca a cada 60.000 milissegundos (1 minuto)
-            // É o limite ideal para ter as notícias frescas sem ser bloqueado pelos jornais!
-            setInterval(buscarNoticiasReais, 60000); 
-        };
-    </script>
 </body>
 </html>
