@@ -118,7 +118,7 @@
         /* VISTA DE LEITURA (ARTIGO) */
         #article-view { display: none; background: var(--card); min-height: 100vh; padding-bottom: 60px; }
         
-        /* NOVO CABEÇALHO DO ARTIGO - 3 BOTÕES PROFISSIONAIS */
+        /* CABEÇALHO DO ARTIGO */
         .article-header { position: sticky; top: 0; background: var(--card); padding: 12px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 8px 12px; border-radius: 6px;}
         .header-btn:hover { color: white; background: var(--primary); border-color: var(--primary); }
@@ -273,6 +273,7 @@
 </div>
 
 <script>
+// LISTA ATUALIZADA DE FONTES COM OS NOVOS SITES PEDIDOS
 const SOURCES = [
     { name: "O País", api: "https://opais.co.mz/wp-json/wp/v2/posts?_embed", slug: "opais" },
     { name: "Carta de MZ", api: "https://cartamz.com/wp-json/wp/v2/posts?_embed", slug: "carta" },
@@ -284,7 +285,7 @@ const SOURCES = [
     { name: "Ngani", api: "https://ngani.co.mz/wp-json/wp/v2/posts?_embed", slug: "ngani" },
     { name: "AIM News", api: "https://aimnews.org/wp-json/wp/v2/posts?_embed", slug: "aim" },
     { name: "Jornal Ikweli", api: "https://ikweli.co.mz/wp-json/wp/v2/posts?_embed", slug: "ikweli" },
-    { name: "Zumbo FM", api: "https://zumbofm.com/wp-json/wp/v2/posts?_embed", slug: "zumbo" },
+    { name: "Zumbo FM", api: "https://www.zumbofm.com/wp-json/wp/v2/posts?_embed", slug: "zumbo" },
     { name: "Moz24h", api: "https://moz24h.co.mz/wp-json/wp/v2/posts?_embed", slug: "moz24h" },
     { name: "Jornal Domingo", api: "https://www.jornaldomingo.co.mz/wp-json/wp/v2/posts?_embed", slug: "domingo" },
     { name: "Jornal Desafio", api: "https://www.jornaldesafio.co.mz/wp-json/wp/v2/posts?_embed", slug: "desafio" },
@@ -300,13 +301,15 @@ const SOURCES = [
     { name: "Rádio Moçambique", api: "https://www.rm.co.mz/wp-json/wp/v2/posts?_embed", slug: "rm" },
     { name: "Miramar", api: "https://miramar.co.mz/wp-json/wp/v2/posts?_embed", slug: "miramar" },
     { name: "DW Moçambique", api: "https://www.dw.com/wp-json/wp/v2/posts?_embed", slug: "dw" },
-    { name: "Times de Todos", api: "https://www.timesdetodos.com/wp-json/wp/v2/posts?_embed", slug: "timesdetodos" }
+    { name: "Times de Todos", api: "https://www.timesdetodos.com/wp-json/wp/v2/posts?_embed", slug: "timesdetodos" },
+    { name: "Jornal Rigor", api: "https://jornalrigor.co.mz/wp-json/wp/v2/posts?_embed", slug: "rigor" },
+    { name: "Club of Mozambique", api: "https://clubofmozambique.com/wp-json/wp/v2/posts?_embed", slug: "clubofmoz" },
+    { name: "Zitamar", api: "https://zitamar.com/wp-json/wp/v2/posts?_embed", slug: "zitamar" }
 ];
 
 let allPosts = [], currentPage = 1, isFetching = false, currentCat = '', isSavedView = false, sortOrder = 'new';
 let currentReadingPost = null, savedScrollPosition = 0;
 
-// SISTEMA DE CATEGORIZAÇÃO AUTOMÁTICA
 function detectCategory(title, content) {
     const text = (title + " " + (content || "")).toLowerCase();
     if (text.match(/filipe nyusi|governo|frelimo|renamo|mddm|política|eleições|parlamento|ministro|presidente/)) return 'Política';
@@ -317,7 +320,6 @@ function detectCategory(title, content) {
     return 'Geral'; 
 }
 
-// RAIO-X: EXTRAÇÃO PROFUNDA DE IMAGENS
 function extractDeepImage(p) {
     if (p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0].source_url) return p._embedded['wp:featuredmedia'][0].source_url;
     if (p.jetpack_featured_media_url) return p.jetpack_featured_media_url;
@@ -344,7 +346,15 @@ function goHome() {
     }
 }
 
-function goBack() { history.back(); }
+// CORREÇÃO DO BOTÃO VOLTAR
+function goBack() { 
+    if(currentReadingPost) {
+        closeArticleView(true); // Sempre que clicar voltar na notícia, recua para o feed principal!
+    } else {
+        history.back(); 
+    }
+}
+
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
 function toggleTheme() {
     const isDark = document.body.classList.toggle('dark-mode');
@@ -358,7 +368,6 @@ function setSort(order) {
     toggleSidebar(); renderFeed(); 
 }
 
-// BOTÃO ATUALIZAR MANUAL
 function manualRefresh() {
     const icon = document.getElementById('refresh-icon');
     icon.classList.add('fa-spin');
@@ -390,7 +399,6 @@ async function fetchWithTimeout(resource, options = {}) {
     clearTimeout(id); return response;
 }
 
-// CARREGAMENTO COM ANTI-CACHE
 async function loadNews() {
     if (isFetching || isSavedView) return;
     isFetching = true;
@@ -408,17 +416,19 @@ async function loadNews() {
             data.forEach(p => {
                 const uniqueId = `${src.slug}-${p.id}`;
                 if(!allPosts.some(oldP => oldP.uniqueId === uniqueId)) { 
+                    
+                    // CORREÇÃO DOS FUSOS HORÁRIOS: Garante que a data é absoluta para todas ficarem certas no topo!
+                    const pubDate = p.date_gmt ? (p.date_gmt + 'Z') : p.date;
+
                     allPosts.push({
-                        uniqueId: uniqueId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: src.name, srcSlug: src.slug, apiBase: src.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, p.content?.rendered || "") 
+                        uniqueId: uniqueId, apiId: p.id, title: p.title.rendered, date: pubDate, srcName: src.name, srcSlug: src.slug, apiBase: src.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, p.content?.rendered || "") 
                     });
                     added = true;
                 }
             });
             
             if (added) { 
-                // Atualiza a grelha principal
                 if (!currentReadingPost) { renderFeed(); } 
-                // Se a pessoa já estiver a ler uma notícia, o "Leia Também" ganha vida logo que chegam as novas!
                 else { renderRelatedPosts(currentReadingPost); }
                 updateTicker(); 
             }
@@ -437,18 +447,17 @@ function updateTicker() {
     }
 }
 
-// ORDENAÇÃO FÍSICA NO DOM (A MAIS RECENTE FICA ABSOLUTAMENTE NO TOPO)
+// CORREÇÃO DO SCROLL: Ordenação Física Inteligente no DOM
 function renderFeed() {
     const feed = document.getElementById('feed');
     let displayList = isSavedView ? JSON.parse(localStorage.getItem('premium_news_saved') || '[]') : [...allPosts];
     
     if(currentCat && !isSavedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
     
-    // ORDENAÇÃO ESTRITA: Compara as datas das notícias e ordena perfeitamente
-    if(sortOrder === 'new') { displayList.sort((a, b) => new Date(b.date) - new Date(a.date)); } 
-    else { displayList.sort((a, b) => new Date(a.date) - new Date(b.date)); }
+    if(sortOrder === 'new') { displayList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); } 
+    else { displayList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); }
     
-    displayList.forEach(p => {
+    displayList.forEach((p, index) => {
         let card = document.getElementById(`card-${p.uniqueId}`);
         if (!card) {
             card = document.createElement('div');
@@ -465,12 +474,15 @@ function renderFeed() {
                     </div>
                 </div>`;
         }
-        // "appendChild" reordena fisicamente os elementos no HTML, pondo as recentes primeiro sem bugs
-        feed.appendChild(card);
+        
+        // Em vez de mudar ordem via CSS, garante a posição exata no HTML
+        // Isto elimina os bugs ao fazer scroll na página!
+        if (feed.children[index] !== card) {
+            feed.insertBefore(card, feed.children[index] || null);
+        }
         card.style.display = 'flex'; 
     });
 
-    // Oculta as que não estão na lista (para as categorias funcionarem lisas)
     Array.from(feed.children).forEach(child => {
         const id = child.id.replace('card-', '');
         if(!displayList.some(p => p.uniqueId === id)) { child.style.display = 'none'; }
@@ -520,7 +532,7 @@ async function openArticleView(post, pushHistory = true) {
     updateActionBtns();
     
     const contentDiv = document.getElementById('article-content');
-    contentDiv.innerHTML = (post.contentLoaded || "Conteúdo não disponível na API.") + `
+    contentDiv.innerHTML = (post.contentLoaded || "Conteúdo indisponível.") + `
     <a href="${post.link}" target="_blank" class="read-more-btn">
         <i class="fas fa-external-link-alt"></i> Ler Notícia Completa no Site Oficial
     </a>`;
@@ -533,11 +545,14 @@ function closeArticleView(updateHistory = true) {
     document.getElementById('home-view').style.display = 'block';
     document.getElementById('article-content').innerHTML = ''; 
     currentReadingPost = null;
-    if(updateHistory) { history.pushState({ view: 'home' }, "", window.location.pathname); }
+    
+    if(updateHistory) { 
+        history.pushState({ view: 'home' }, "", window.location.pathname); 
+    }
+    
     window.scrollTo(0, savedScrollPosition);
 }
 
-// LEIA TAMBÉM SEGURO PARA LINKS PARTILHADOS
 function renderRelatedPosts(currentPost) {
     const section = document.getElementById('related-section');
     const grid = document.getElementById('related-grid');
@@ -606,8 +621,10 @@ window.onload = async () => {
                 const res = await fetch(`${source.api.split('?')[0]}/${apiId}?_embed`);
                 const p = await res.json();
                 
+                const pubDate = p.date_gmt ? (p.date_gmt + 'Z') : p.date;
+                
                 const sharedPost = {
-                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, "")
+                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: pubDate, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, "")
                 };
                 allPosts.push(sharedPost);
                 openArticleView(sharedPost, false); 
