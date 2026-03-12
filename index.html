@@ -54,6 +54,19 @@
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
+        /* NOVAS ANIMAÇÕES PREMIUM */
+        .fade-in { animation: fadeInAnim 0.4s ease-out forwards; }
+        @keyframes fadeInAnim {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        .slide-up-fade { animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
         /* HEADER PREMIUM */
         .navbar { position: sticky; top: 0; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; z-index: 1000; box-shadow: 0 4px 15px rgba(204,0,0,0.3); }
         .nav-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 12px 20px; }
@@ -219,7 +232,7 @@
     </div>
 </div>
 
-<div id="home-view">
+<div id="home-view" class="fade-in">
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo-area">
@@ -263,7 +276,7 @@
         <button class="header-btn" onclick="goHomeForce()"><i class="fas fa-home"></i> Início</button>
     </div>
 
-    <main class="article-container">
+    <main class="article-container slide-up-fade" id="article-main-container">
         <div id="source-tag" class="article-tag">...</div>
         <h1 id="article-title" class="article-title">...</h1>
         
@@ -464,7 +477,10 @@ async function loadNews() {
             });
             
             if (added) { 
+                // Se o utilizador estiver na página inicial, atualiza o feed principal
                 if (!currentReadingPost) { renderFeed(); } 
+                // Atualiza também os relacionados instantaneamente caso o utilizador esteja num artigo!
+                else { renderRelatedPosts(currentReadingPost); }
                 updateTicker(); 
             }
         } catch (e) { } 
@@ -482,11 +498,9 @@ function updateTicker() {
     }
 }
 
-// ORDENAÇÃO BLINDADA (Como você pediu: garantido que não falha)
+// CORREÇÃO DO SCROLL E VELOCIDADE: A grelha atualiza os blocos fisicamente, sem solavancos
 function renderFeed() {
     const feed = document.getElementById('feed');
-    feed.innerHTML = ''; 
-    
     let displayList = [...allPosts];
     
     if(isSavedView) { displayList = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]'); }
@@ -494,27 +508,43 @@ function renderFeed() {
     
     if(currentCat && !isSavedView && !isLikedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
     
+    // ORDENAÇÃO ABSOLUTA E REAL
     if(sortOrder === 'new') { 
         displayList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); 
     } else { 
         displayList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); 
     }
     
-    displayList.forEach((p) => {
-        let card = document.createElement('div');
-        card.id = `card-${p.uniqueId}`;
-        card.className = 'news-card';
-        card.onclick = () => openArticleById(p.uniqueId);
-        card.innerHTML = `
-            <img class="news-img" src="${p.img}" loading="lazy">
-            <div class="news-body">
-                <span class="news-tag">${p.srcName}</span>
-                <h3 class="news-title">${p.title}</h3>
-                <div class="news-meta">
-                    <span><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>
-                </div>
-            </div>`;
-        feed.appendChild(card);
+    // Insere sem apagar tudo (evita o bug ao rolar)
+    displayList.forEach((p, index) => {
+        let card = document.getElementById(`card-${p.uniqueId}`);
+        if (!card) {
+            card = document.createElement('div');
+            card.id = `card-${p.uniqueId}`;
+            card.className = 'news-card fade-in';
+            card.onclick = () => openArticleById(p.uniqueId);
+            card.innerHTML = `
+                <img class="news-img" src="${p.img}" loading="lazy">
+                <div class="news-body">
+                    <span class="news-tag">${p.srcName}</span>
+                    <h3 class="news-title">${p.title}</h3>
+                    <div class="news-meta">
+                        <span><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>
+                    </div>
+                </div>`;
+        }
+        
+        // Garante a ordem física no HTML
+        if (feed.children[index] !== card) {
+            feed.insertBefore(card, feed.children[index] || null);
+        }
+        card.style.display = 'flex';
+    });
+
+    // Esconde os que não fazem parte do filtro
+    Array.from(feed.children).forEach(child => {
+        const id = child.id.replace('card-', '');
+        if(!displayList.some(p => p.uniqueId === id)) { child.style.display = 'none'; }
     });
     
     localInstantSearch(); 
@@ -573,6 +603,13 @@ async function openArticleView(post, pushHistory = true) {
     
     const articleView = document.getElementById('article-view');
     articleView.style.display = 'block';
+    
+    // REINICIA A ANIMAÇÃO PREMIUM
+    const container = document.getElementById('article-main-container');
+    container.classList.remove('slide-up-fade');
+    void container.offsetWidth; // trigger reflow
+    container.classList.add('slide-up-fade');
+
     window.scrollTo(0, 0);
 
     document.getElementById('source-tag').innerText = post.srcName;
@@ -608,6 +645,7 @@ function closeArticleView(updateHistory = true) {
     window.scrollTo(0, savedScrollPosition);
 }
 
+// RELACIONADOS BLINDADOS - Agora carrega corretamente e não encavala no texto!
 function renderRelatedPosts(currentPost) {
     const section = document.getElementById('related-section');
     const grid = document.getElementById('related-grid');
@@ -618,7 +656,7 @@ function renderRelatedPosts(currentPost) {
     
     if(related.length > 0) {
         grid.innerHTML = related.map(p => `
-            <div class="related-card" onclick="window.scrollTo(0,0); openArticleById('${p.uniqueId}')">
+            <div class="related-card fade-in" onclick="window.scrollTo(0,0); openArticleById('${p.uniqueId}')">
                 <img src="${p.img}" loading="lazy">
                 <h4>${p.title}</h4>
             </div>
