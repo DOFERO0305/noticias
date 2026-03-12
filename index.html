@@ -23,6 +23,7 @@
             --icon-like: #e11d48;
             --icon-save: #0284c7;
             --icon-share: #10b981;
+            --icon-refresh: #3b82f6;
         }
 
         body.dark-mode {
@@ -65,7 +66,7 @@
         .sidebar-close { background: none; border: none; font-size: 1.4rem; color: var(--text); cursor: pointer; align-self: flex-end; }
         
         .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; cursor: pointer;}
-        .side-btn { display: flex; align-items: center; gap: 12px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border-radius: 6px; transition: 0.2s; text-align: left; }
+        .side-btn { display: flex; align-items: center; gap: 12px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border-radius: 6px; transition: 0.2s; text-align: left; margin-bottom: 5px;}
         .side-btn:hover, .side-btn.active { background: var(--surface); color: var(--primary); }
         .side-btn i { width: 18px; text-align: center; font-size: 1.1rem; }
         
@@ -74,27 +75,39 @@
         .i-new { color: #f59e0b; }
         
         .sidebar-footer { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-meta); line-height: 1.5; }
-        .contact-link { color: var(--text); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-        .contact-link i { color: var(--primary); }
+        .social-icons { display: flex; gap: 12px; margin-top: 15px; }
+        .social-icons a { color: var(--text-meta); font-size: 1.4rem; transition: 0.2s; }
+        .social-icons a:hover.wa { color: #25D366; }
+        .social-icons a:hover.fb { color: #1877F2; }
+        .social-icons a:hover.ig { color: #E4405F; }
+        .social-icons a:hover.tg { color: #229ED9; }
 
         /* PESQUISA E CATEGORIAS */
         .controls-container { max-width: 1200px; margin: 15px auto; padding: 0 20px; }
+        
+        /* BARRA GOOGLE */
+        .google-search { display: flex; align-items: center; background: #fff; border: 2px solid #4285f4; border-radius: 8px; overflow: hidden; margin-bottom: 15px; box-shadow: var(--shadow); }
+        .google-search img { height: 24px; padding: 0 10px; background: #fff; }
+        .google-search input { flex: 1; padding: 12px; border: none; outline: none; font-size: 0.95rem; color: #333; }
+        .google-search button { background: #4285f4; color: white; border: none; padding: 0 20px; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+        .google-search button:hover { background: #3367d6; }
+
         .search-box { position: relative; margin-bottom: 15px; }
-        .search-box input { width: 100%; padding: 12px 15px 12px 40px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 0.95rem; box-shadow: var(--shadow); outline: none; }
+        .search-box input { width: 100%; padding: 12px 15px 12px 40px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; }
         .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 0.9rem; }
         
         .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
-        .categories::-webkit-scrollbar { display: none; } /* Esconde a scrollbar das categorias */
-        .cat-item { padding: 6px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; letter-spacing: 0.5px; }
+        .categories::-webkit-scrollbar { display: none; }
+        .cat-item { padding: 6px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; transition: 0.2s;}
         .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* GRELHA DE NOTÍCIAS */
+        /* GRELHA DE NOTÍCIAS (COM ORDEM CSS) */
         .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; min-height: 50vh; }
         .news-card { background: var(--card); border-radius: 8px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: 0.2s; }
         .news-card:hover { border-color: var(--primary); transform: translateY(-3px); }
         .news-img { width: 100%; height: 180px; object-fit: cover; background: var(--surface); }
         .news-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
-        .news-tag { color: var(--primary); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .news-tag { color: white; background: var(--primary); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; display: inline-block; width: fit-content; }
         .news-title { font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
         .news-meta { font-size: 0.75rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 500; border-top: 1px solid var(--border); padding-top: 10px; }
 
@@ -110,18 +123,15 @@
         
         .btn-action-row { display: flex; gap: 10px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
         .btn-action { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        .btn-action i { font-size: 1rem; }
         
-        .btn-action.like-btn i { color: var(--icon-like); }
         .btn-action.like-btn.liked { background: rgba(225, 29, 72, 0.1); border-color: var(--icon-like); color: var(--icon-like); }
-        
-        .btn-action.save-btn i { color: var(--icon-save); }
         .btn-action.save-btn.saved { background: rgba(2, 132, 199, 0.1); border-color: var(--icon-save); color: var(--icon-save); }
         
         .article-main-img { width: 100%; border-radius: 6px; margin-bottom: 25px; object-fit: cover; max-height: 400px; }
-        .article-content { font-size: 1rem; line-height: 1.7; color: var(--text); }
+        .article-content { font-size: 1.05rem; line-height: 1.7; color: var(--text); }
         .article-content p { margin-bottom: 1.5rem; }
         .article-content img { max-width: 100%; height: auto; border-radius: 6px; margin: 20px 0; }
+        .article-content a { color: var(--primary); font-weight: bold; text-decoration: none; }
         
         .related-section { margin-top: 40px; padding-top: 30px; border-top: 4px solid var(--border); }
         .related-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; color: var(--primary); }
@@ -129,17 +139,16 @@
         .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; }
         .related-card:hover { border-color: var(--primary); }
         .related-card img { width: 100%; height: 100px; object-fit: cover; }
-        .related-card h4 { padding: 10px; font-size: 0.85rem; line-height: 1.3; font-weight: 600; color: var(--text); }
+        .related-card h4 { padding: 10px; font-size: 0.85rem; line-height: 1.3; font-weight: 600; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
 
         /* BOTÕES FLUTUANTES */
-        .floating-nav { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1001; opacity: 0; pointer-events: none; transition: 0.3s; }
-        .floating-nav.visible { opacity: 1; pointer-events: auto; }
-        .float-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.2s; }
-        .float-btn:hover { background: var(--primary-dark); transform: scale(1.05); }
+        .floating-nav { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1001; transition: 0.3s; }
+        .float-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.2s; }
+        .float-btn:hover { transform: scale(1.1); }
+        .float-btn.refresh { background: var(--icon-refresh); }
         .float-btn.share { background: var(--icon-share); }
-        .float-btn.share:hover { background: #059669; }
-
-        .loader { text-align: center; padding: 40px; grid-column: 1/-1; color: var(--primary); font-size: 1.5rem; }
+        
+        .loader-main { text-align: center; padding: 30px; grid-column: 1/-1; color: var(--primary); font-size: 1.2rem; font-weight: bold;}
     </style>
 </head>
 <body>
@@ -147,13 +156,13 @@
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <div class="sidebar" id="sidebar">
     <button class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-arrow-left"></i></button>
-    <h2 onclick="goHome()">Sua Notícia <span style="color: black;">365</span></h2>
+    <h2 onclick="goHome()">Sua Notícia <span style="color: var(--text);">365</span></h2>
 
-    <button class="side-btn" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
+    <button class="side-btn active" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
     <button class="side-btn" id="sidebar-saved-btn" onclick="toggleSavedView()"><i class="fas fa-bookmark i-saved"></i> Ler Mais Tarde</button>
     
     <div style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">
-        <p style="font-size: 0.75rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">Filtragem</p>
+        <p style="font-size: 0.75rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">Filtragem Automática</p>
         <button class="side-btn active" id="btn-sort-new" onclick="setSort('new')"><i class="fas fa-bolt i-new"></i> Mais Recentes</button>
         <button class="side-btn" id="btn-sort-old" onclick="setSort('old')"><i class="fas fa-history i-dark"></i> Mais Antigas</button>
     </div>
@@ -161,8 +170,13 @@
     <div class="sidebar-footer">
         <strong>&copy; Sua Notícia 365</strong><br>
         Criado por Donaldo F. Rodrigues<br>
-        <a href="https://wa.me/258849085157" class="contact-link" target="_blank"><i class="fab fa-whatsapp"></i> +258 84 908 5157</a>
-        <a href="mailto:donald.fer.fer@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> donald.fer.fer@gmail.com</a>
+        
+        <div class="social-icons">
+            <a href="https://wa.me/258849085157" target="_blank" class="wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="fb" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="tg" title="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
     </div>
 </div>
 
@@ -171,7 +185,7 @@
         <div class="nav-top">
             <div class="logo-area">
                 <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-                <div class="logo" onclick="goHome()">Sua Notícia <span style="color: black; font-weight: 900;">365</span></div>
+                <div class="logo" onclick="goHome()">Sua Notícia <span style="color: var(--card); font-weight: 900;">365</span></div>
             </div>
             <button class="theme-btn-top" onclick="toggleTheme()" title="Mudar Tema">
                 <i class="fas fa-moon" id="theme-icon-top"></i>
@@ -180,25 +194,33 @@
     </nav>
     
     <div class="breaking-bar">
-        <div class="breaking-text" id="breaking-ticker">A carregar as atualizações mais recentes de Moçambique...</div>
+        <div class="breaking-text" id="breaking-ticker">A carregar as atualizações mais recentes em Moçambique...</div>
     </div>
     
     <div class="controls-container">
+        
+        <form action="https://www.google.com/search" method="GET" target="_blank" class="google-search">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+            <input type="text" name="q" placeholder="Pesquisar no Google...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="search-input" placeholder="Pesquisar..." onkeyup="if(event.key==='Enter') resetAndLoad()">
+            <input type="text" id="search-input" placeholder="Filtrar notícias locais..." onkeyup="if(event.key==='Enter') resetAndLoad()">
         </div>
         <div class="categories">
             <div class="cat-item active" onclick="filterCat('', this)">Todas</div>
-            <div class="cat-item" onclick="filterCat('política', this)">Política</div>
-            <div class="cat-item" onclick="filterCat('economia', this)">Economia</div>
-            <div class="cat-item" onclick="filterCat('sociedade', this)">Sociedade</div>
-            <div class="cat-item" onclick="filterCat('desporto', this)">Desporto</div>
+            <div class="cat-item" onclick="filterCat('Política', this)">Política</div>
+            <div class="cat-item" onclick="filterCat('Economia', this)">Economia</div>
+            <div class="cat-item" onclick="filterCat('Sociedade', this)">Sociedade</div>
+            <div class="cat-item" onclick="filterCat('Desporto', this)">Desporto</div>
+            <div class="cat-item" onclick="filterCat('Mundo', this)">Mundo</div>
         </div>
     </div>
 
     <main class="feed" id="feed"></main>
-    <div id="scroll-anchor" class="loader"><i class="fas fa-circle-notch fa-spin"></i> A descarregar notícias...</div>
+    <div id="scroll-anchor" class="loader-main"><i class="fas fa-circle-notch fa-spin"></i> A descarregar...</div>
 </div>
 
 <div id="article-view">
@@ -216,7 +238,6 @@
         </div>
 
         <img id="feat-img" class="article-main-img" src="" style="display:none">
-        
         <div id="article-content" class="article-content"></div>
         
         <div class="related-section" id="related-section" style="display:none;">
@@ -227,18 +248,12 @@
 </div>
 
 <div class="floating-nav" id="floating-nav">
-    <button class="float-btn share" onclick="shareGlobal()" title="Partilhar"><i class="fas fa-share-alt"></i></button>
+    <button class="float-btn refresh" onclick="manualRefresh()" title="Atualizar Notícias"><i class="fas fa-sync-alt" id="refresh-icon"></i></button>
+    <button class="float-btn share" onclick="shareGlobal()" title="Partilhar"><i class="fas fa-share-nodes"></i></button>
     <button class="float-btn" onclick="window.scrollTo({top:0, behavior: 'smooth'})" title="Subir"><i class="fas fa-arrow-up"></i></button>
-    <button class="float-btn" onclick="window.scrollTo({top:document.body.scrollHeight, behavior: 'smooth'})" title="Descer"><i class="fas fa-arrow-down"></i></button>
 </div>
 
 <script>
-window.addEventListener('scroll', () => {
-    const floatNav = document.getElementById('floating-nav');
-    if (window.scrollY > 200) { floatNav.classList.add('visible'); } 
-    else { floatNav.classList.remove('visible'); }
-});
-
 const SOURCES = [
     { name: "O País", api: "https://opais.co.mz/wp-json/wp/v2/posts?_embed", slug: "opais" },
     { name: "Carta de MZ", api: "https://cartamz.com/wp-json/wp/v2/posts?_embed", slug: "carta" },
@@ -270,62 +285,68 @@ const SOURCES = [
 ];
 
 let allPosts = [], currentPage = 1, isFetching = false, currentCat = '', isSavedView = false, sortOrder = 'new';
-let currentReadingPost = null;
-let savedScrollPosition = 0;
+let currentReadingPost = null, savedScrollPosition = 0;
 
-// GESTÃO DO HISTÓRICO (BOTÃO VOLTAR INTELIGENTE)
+// SISTEMA DE CATEGORIZAÇÃO AUTOMÁTICA
+function detectCategory(title, content) {
+    const text = (title + " " + (content || "")).toLowerCase();
+    if (text.match(/filipe nyusi|governo|frelimo|renamo|mddm|política|eleições|parlamento|ministro/)) return 'Política';
+    if (text.match(/banco|metical|dólar|inflação|economia|mercado|empresas|investimento|finanças/)) return 'Economia';
+    if (text.match(/futebol|mambas|desporto|campeonato|bola|golo|selecção|atleta/)) return 'Desporto';
+    if (text.match(/internacional|mundo|eua|ucrânia|rússia|gaza|onu/)) return 'Mundo';
+    if (text.match(/polícia|saúde|educação|crime|sociedade|acidente|hospital|escola/)) return 'Sociedade';
+    return 'Geral'; // Se não encontrar palavra-chave
+}
+
 window.addEventListener('popstate', (e) => {
     if (e.state && e.state.view === 'article') {
         const post = allPosts.find(p => p.uniqueId === e.state.articleId);
         if (post) openArticleView(post, false);
-    } else {
-        closeArticleView(false);
-    }
+    } else { closeArticleView(false); }
 });
 
 function goHome() {
-    if(currentReadingPost) { goBack(); } 
-    else { window.scrollTo({top:0, behavior: 'smooth'}); location.reload(); }
+    if(currentReadingPost) { goBack(); } else { window.scrollTo({top:0, behavior: 'smooth'}); }
 }
-
 function goBack() { history.back(); }
-
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
-    document.getElementById('sidebarOverlay').classList.toggle('open');
-}
-
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
 function toggleTheme() {
     const isDark = document.body.classList.toggle('dark-mode');
     document.getElementById('theme-icon-top').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
 }
-
 function setSort(order) {
     sortOrder = order;
     document.getElementById('btn-sort-new').classList.toggle('active', order === 'new');
     document.getElementById('btn-sort-old').classList.toggle('active', order === 'old');
-    toggleSidebar(); 
-    document.getElementById('feed').innerHTML = ''; // Limpa para reordenar
-    renderFeed();
+    toggleSidebar(); renderFeed(); 
 }
 
-// EVITA O CONGELAMENTO SE UM JORNAL ESTIVER LENTO (Timeout de 8 segundos)
+function manualRefresh() {
+    const icon = document.getElementById('refresh-icon');
+    icon.classList.add('fa-spin'); // Faz o botão girar
+    currentPage = 1; // Volta à página 1 para pegar as mais recentes absolutas
+    loadNews().then(() => {
+        setTimeout(() => icon.classList.remove('fa-spin'), 1000);
+        window.scrollTo({top:0, behavior: 'smooth'}); // Sobe para mostrar as novas
+    });
+}
+
 async function fetchWithTimeout(resource, options = {}) {
     const { timeout = 8000 } = options;
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
     const response = await fetch(resource, { ...options, signal: controller.signal });
-    clearTimeout(id);
-    return response;
+    clearTimeout(id); return response;
 }
 
-// MOTOR ASSÍNCRONO ULTRA-RÁPIDO E SEM BUGS VISUAIS
-function loadNews() {
+// CARREGAMENTO SEGURO
+async function loadNews() {
     if (isFetching || isSavedView) return;
     isFetching = true;
     let fetchesCompleted = 0;
     
-    const query = currentCat || document.getElementById('search-input').value;
+    // O texto da pesquisa também conta
+    const query = document.getElementById('search-input').value;
 
     SOURCES.forEach(async (src) => {
         try {
@@ -341,42 +362,22 @@ function loadNews() {
                 const uniqueId = `${src.slug}-${p.id}`;
                 if(!allPosts.some(oldP => oldP.uniqueId === uniqueId)) { 
                     
-                    // PROCURA AVANÇADA DE IMAGENS (Evita notícias sem foto)
-                    let imgFinal = p._embedded?.['wp:featuredmedia']?.[0]?.source_url 
-                                || p.jetpack_featured_media_url 
-                                || p?.yoast_head_json?.og_image?.[0]?.url 
-                                || 'https://via.placeholder.com/400x200?text=Sua+Notícia+365';
-
+                    let imgFinal = p._embedded?.['wp:featuredmedia']?.[0]?.source_url || p.jetpack_featured_media_url || p?.yoast_head_json?.og_image?.[0]?.url || 'https://via.placeholder.com/400x200?text=Sua+Notícia+365';
+                    let contentText = p.content?.rendered || "";
+                    
                     allPosts.push({
-                        uniqueId: uniqueId, 
-                        apiId: p.id,
-                        title: p.title.rendered, 
-                        date: p.date, 
-                        srcName: src.name, 
-                        srcSlug: src.slug,
-                        apiBase: src.api.split('?')[0],
-                        link: p.link, 
-                        img: imgFinal,
-                        // GUARDA O TEXTO DA NOTÍCIA PARA ABERTURA INSTANTÂNEA
-                        contentLoaded: p.content?.rendered || "<p>O conteúdo completo desta notícia precisa ser lido no site oficial.</p>"
+                        uniqueId: uniqueId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: src.name, srcSlug: src.slug, apiBase: src.api.split('?')[0], link: p.link, img: imgFinal, contentLoaded: contentText,
+                        detectedCat: detectCategory(p.title.rendered, contentText) // Aplica categoria
                     });
                     added = true;
                 }
             });
             
-            if (added) {
-                renderFeed(); // Apenas acrescenta, não apaga a tela!
-                updateTicker();
-            }
-
-        } catch (e) { 
-            // Ignora jornais lentos ou falhados silenciosamente
-        } finally {
+            if (added) { renderFeed(); updateTicker(); }
+        } catch (e) { } 
+        finally {
             fetchesCompleted++;
-            if(fetchesCompleted === SOURCES.length) {
-                isFetching = false;
-                currentPage++;
-            }
+            if(fetchesCompleted === SOURCES.length) { isFetching = false; currentPage++; }
         }
     });
 }
@@ -384,58 +385,60 @@ function loadNews() {
 function updateTicker() {
     if(allPosts.length > 0) {
         let tempPosts = [...allPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
-        const top5 = tempPosts.slice(0, 5).map(p => p.title).join(" &nbsp; • &nbsp; ");
-        document.getElementById('breaking-ticker').innerHTML = top5;
+        document.getElementById('breaking-ticker').innerHTML = tempPosts.slice(0, 5).map(p => p.title).join(" &nbsp; • &nbsp; ");
     }
 }
 
-// DESENHO SUAVE NO ECRÃ
+// O SEGREDO DO ZERO BUGS E ORDENAÇÃO: CSS ORDER
 function renderFeed() {
     const feed = document.getElementById('feed');
     let displayList = isSavedView ? JSON.parse(localStorage.getItem('premium_news_saved') || '[]') : [...allPosts];
     
+    // Filtro por categoria Detetada (Super Rápido)
     if(currentCat && !isSavedView) {
-        const catLower = currentCat.toLowerCase();
-        displayList = displayList.filter(p => p.title.toLowerCase().includes(catLower) || p.srcName.toLowerCase().includes(catLower));
+        displayList = displayList.filter(p => p.detectedCat === currentCat);
     }
     
-    if(sortOrder === 'new') { displayList.sort((a, b) => new Date(b.date) - new Date(a.date)); } 
-    else { displayList.sort((a, b) => new Date(a.date) - new Date(b.date)); }
-    
-    // Só desenha as notícias novas que chegaram, não pisca o ecrã
     displayList.forEach(p => {
-        if (!document.getElementById(`card-${p.uniqueId}`)) {
-            const card = document.createElement('div');
+        let card = document.getElementById(`card-${p.uniqueId}`);
+        if (!card) {
+            // Se o card não existe, cria-o!
+            card = document.createElement('div');
             card.id = `card-${p.uniqueId}`;
             card.className = 'news-card';
-            card.onclick = () => openArticle(p);
+            // Chama por ID para não quebrar o HTML!
+            card.onclick = () => openArticleById(p.uniqueId);
+            
             card.innerHTML = `
                 <img class="news-img" src="${p.img}" loading="lazy">
                 <div class="news-body">
-                    <span class="news-tag">${p.srcName}</span>
+                    <span class="news-tag">${p.srcName} | ${p.detectedCat}</span>
                     <h3 class="news-title">${p.title}</h3>
                     <div class="news-meta">
-                        <span><i class="far fa-clock"></i> ${new Date(p.date).toLocaleDateString('pt-MZ')}</span>
-                        <i class="fas fa-chevron-right" style="color:var(--primary); font-size: 0.7rem;"></i>
+                        <span><i class="far fa-clock"></i> ${new Date(p.date).toLocaleDateString('pt-MZ')} às ${new Date(p.date).toLocaleTimeString('pt-MZ', {hour: '2-digit', minute:'2-digit'})}</span>
                     </div>
                 </div>`;
             feed.appendChild(card);
         }
+        
+        // ORDENA O CSS SEM PISCAR A TELA!
+        const timeVal = new Date(p.date).getTime();
+        card.style.order = sortOrder === 'new' ? -timeVal : timeVal;
+        card.style.display = 'flex'; // Garante que fica visível
+    });
+
+    // Esconde os cards que não pertencem à categoria atual
+    Array.from(feed.children).forEach(child => {
+        const id = child.id.replace('card-', '');
+        if(!displayList.some(p => p.uniqueId === id)) { child.style.display = 'none'; }
     });
 }
 
 function filterCat(cat, btn) {
     document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
     btn.classList.add('active');
-    
-    currentCat = cat; 
-    isSavedView = false;
-    
-    document.getElementById('feed').innerHTML = ''; // Limpa a tela na mudança de categoria
-    renderFeed(); // Renderiza instantaneamente o cache
-    
-    currentPage = 1; 
-    loadNews();
+    currentCat = cat; isSavedView = false;
+    renderFeed(); // Instantâneo!
 }
 
 function toggleSavedView() {
@@ -443,56 +446,41 @@ function toggleSavedView() {
     document.getElementById('sidebar-saved-btn').classList.toggle('active', isSavedView);
     document.getElementById('scroll-anchor').style.display = isSavedView ? 'none' : 'block';
     toggleSidebar();
-    
-    if(isSavedView && currentReadingPost) {
-        history.pushState(null, "", window.location.pathname);
-        closeArticleView(false);
-    }
-    document.getElementById('feed').innerHTML = '';
+    if(isSavedView && currentReadingPost) { history.pushState(null, "", window.location.pathname); closeArticleView(false); }
     renderFeed();
 }
 
-function resetAndLoad() { 
-    document.getElementById('feed').innerHTML = '';
-    allPosts = []; currentPage = 1; loadNews(); 
+function resetAndLoad() { document.getElementById('feed').innerHTML = ''; allPosts = []; currentPage = 1; loadNews(); }
+
+// NOVA FUNÇÃO DE ABERTURA 100% SEGURA
+function openArticleById(id) {
+    const post = allPosts.find(p => p.uniqueId === id);
+    if(post) {
+        if(!currentReadingPost) { savedScrollPosition = window.scrollY; }
+        openArticleView(post, true);
+    }
 }
 
-function openArticle(post) {
-    if(!currentReadingPost) { savedScrollPosition = window.scrollY; }
-    openArticleView(post, true);
-}
-
-// ABERTURA INSTANTÂNEA E LINK PARA PARTILHA
 async function openArticleView(post, pushHistory = true) {
     currentReadingPost = post;
-    
-    // Atualiza o link do site para a pessoa partilhar direto
-    if(pushHistory) {
-        history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId);
-    }
+    if(pushHistory) { history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId); }
     
     document.getElementById('home-view').style.display = 'none';
     document.getElementById('article-view').style.display = 'block';
     window.scrollTo(0, 0);
 
-    document.getElementById('source-tag').innerText = post.srcName;
+    document.getElementById('source-tag').innerText = post.srcName + " | " + post.detectedCat;
     document.getElementById('article-title').innerHTML = post.title;
     
     const img = document.getElementById('feat-img');
-    if (post.img && !post.img.includes('placeholder')) {
-        img.src = post.img; img.style.display = 'block';
-    } else { img.style.display = 'none'; }
+    if (post.img && !post.img.includes('placeholder')) { img.src = post.img; img.style.display = 'block'; } else { img.style.display = 'none'; }
 
     updateActionBtns();
-    renderRelatedPosts(post);
-
+    
     const contentDiv = document.getElementById('article-content');
+    contentDiv.innerHTML = (post.contentLoaded || "Conteúdo não disponível.") + `<br><br><a href="${post.link}" target="_blank" style="display: block; margin-top: 20px; font-weight: 800; color: var(--primary); text-decoration: none; padding-top: 20px; border-top: 1px solid var(--border);"><i class="fas fa-external-link-alt"></i> Ler a notícia no site oficial</a>`;
     
-    // O texto entra em zero segundos porque já foi baixado em background!
-    let finalContent = post.contentLoaded + 
-    `<br><br><a href="${post.link}" target="_blank" style="display: block; margin-top: 20px; font-weight: 800; color: var(--primary); text-decoration: none; padding-top: 20px; border-top: 1px solid var(--border);"><i class="fas fa-external-link-alt"></i> Ler no site oficial aqui</a>`;
-    
-    contentDiv.innerHTML = finalContent;
+    renderRelatedPosts(post); // Chama APÓS montar o artigo principal
 }
 
 function closeArticleView(updateHistory = true) {
@@ -500,18 +488,37 @@ function closeArticleView(updateHistory = true) {
     document.getElementById('home-view').style.display = 'block';
     document.getElementById('article-content').innerHTML = ''; 
     currentReadingPost = null;
-    
     if(updateHistory) { history.pushState({ view: 'home' }, "", window.location.pathname); }
-    
     window.scrollTo(0, savedScrollPosition);
+}
+
+// LEIA TAMBÉM CORRIGIDO - ALEATÓRIO DE QUALQUER JORNAL E SEM BUGS HTML
+function renderRelatedPosts(currentPost) {
+    const section = document.getElementById('related-section');
+    const grid = document.getElementById('related-grid');
+    
+    // Pega as notícias, remove a que estamos a ler, e "baralha" (Shuffle)
+    let others = allPosts.filter(p => p.uniqueId !== currentPost.uniqueId);
+    let shuffled = others.sort(() => 0.5 - Math.random());
+    let related = shuffled.slice(0, 4); // Escolhe 4 aleatórias
+    
+    if(related.length > 0) {
+        // Envia apenas o ID para evitar quebrar o HTML
+        grid.innerHTML = related.map(p => `
+            <div class="related-card" onclick="openArticleById('${p.uniqueId}')">
+                <img src="${p.img}" loading="lazy">
+                <h4>${p.title}</h4>
+            </div>
+        `).join('');
+        section.style.display = 'block';
+    } else { section.style.display = 'none'; }
 }
 
 function toggleSaveArticle() {
     if(!currentReadingPost) return;
     let saved = JSON.parse(localStorage.getItem('premium_news_saved') || '[]');
     const idx = saved.findIndex(x => x.uniqueId === currentReadingPost.uniqueId);
-    if(idx > -1) { saved.splice(idx, 1); } 
-    else { saved.push(currentReadingPost); }
+    if(idx > -1) { saved.splice(idx, 1); } else { saved.push(currentReadingPost); }
     localStorage.setItem('premium_news_saved', JSON.stringify(saved));
     updateActionBtns();
 }
@@ -529,7 +536,6 @@ function updateActionBtns() {
     if(!currentReadingPost) return;
     const saved = JSON.parse(localStorage.getItem('premium_news_saved') || '[]').some(x => x.uniqueId === currentReadingPost.uniqueId);
     document.getElementById('btn-save').classList.toggle('saved', saved);
-    
     const liked = JSON.parse(localStorage.getItem('premium_news_liked') || '[]').includes(currentReadingPost.uniqueId);
     document.getElementById('btn-like').classList.toggle('liked', liked);
 }
@@ -537,38 +543,12 @@ function updateActionBtns() {
 function shareGlobal() {
     if(!currentReadingPost) return;
     const shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
-    
-    if (navigator.share) { 
-        navigator.share({ 
-            title: currentReadingPost.title, 
-            text: `Leia esta notícia no Sua Notícia 365: ${currentReadingPost.title}`,
-            url: shareUrl 
-        }).catch(err => console.log('Partilha cancelada', err));
-    } else { 
-        navigator.clipboard.writeText(shareUrl);
-        alert("Link copiado para partilhar!"); 
-    }
-}
-
-function renderRelatedPosts(currentPost) {
-    const section = document.getElementById('related-section');
-    const grid = document.getElementById('related-grid');
-    let related = allPosts.filter(p => p.srcSlug === currentPost.srcSlug && p.uniqueId !== currentPost.uniqueId).slice(0, 4);
-    
-    if(related.length > 0) {
-        grid.innerHTML = related.map(p => `
-            <div class="related-card" onclick="openArticle({uniqueId: '${p.uniqueId}', title: '${p.title.replace(/'/g, "\\'")}', srcName: '${p.srcName}', img: '${p.img}', apiBase: '${p.apiBase}', apiId: '${p.apiId}', link: '${p.link}', contentLoaded: \`${(p.contentLoaded || '').replace(/`/g, "\\`")}\`})">
-                <img src="${p.img}" loading="lazy">
-                <h4>${p.title}</h4>
-            </div>
-        `).join('');
-        section.style.display = 'block';
-    } else { section.style.display = 'none'; }
+    if (navigator.share) { navigator.share({ title: currentReadingPost.title, url: shareUrl }); } 
+    else { navigator.clipboard.writeText(shareUrl); alert("Link copiado para partilhar!"); }
 }
 
 window.onload = async () => { 
     history.replaceState({ view: 'home' }, "", window.location.pathname + window.location.search);
-    
     const urlParams = new URLSearchParams(window.location.search);
     const sharedArticleId = urlParams.get('article');
     
@@ -585,11 +565,11 @@ window.onload = async () => {
                 let imgFinal = p._embedded?.['wp:featuredmedia']?.[0]?.source_url || p.jetpack_featured_media_url || p?.yoast_head_json?.og_image?.[0]?.url || 'https://via.placeholder.com/400x200?text=Sua+Notícia+365';
                 
                 const sharedPost = {
-                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: imgFinal, contentLoaded: p.content?.rendered || ""
+                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: imgFinal, contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, "")
                 };
                 allPosts.push(sharedPost);
                 openArticleView(sharedPost, false); 
-            } catch(e) { console.error("Erro ao carregar partilha."); }
+            } catch(e) { }
         }
     }
     
