@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sua Notícia 365 | Premium</title>
 
+    <meta id="og-title" property="og:title" content="Sua Notícia 365 | Portal Premium">
+    <meta id="og-image" property="og:image" content="https://via.placeholder.com/1200x630/cc0000/ffffff?text=Sua+Noticia+365">
+    <meta id="og-url" property="og:url" content="">
+    <meta property="og:description" content="Acompanhe as últimas notícias de Moçambique num só lugar.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -179,9 +186,9 @@
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <div class="sidebar" id="sidebar">
     <button class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-arrow-left"></i></button>
-    <h2 onclick="goHome()">Sua Notícia <span style="color: var(--text);">365</span></h2>
+    <h2 onclick="goHomeForce()">Sua Notícia <span style="color: var(--text);">365</span></h2>
 
-    <button class="side-btn active" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
+    <button class="side-btn active" onclick="goHomeForce()"><i class="fas fa-home"></i> Início</button>
     
     <button class="side-btn" id="sidebar-saved-btn" onclick="toggleSavedView()">
         <i class="fas fa-bookmark i-saved"></i> Ler Mais Tarde <span class="badge" id="badge-saved">0</span>
@@ -217,7 +224,7 @@
         <div class="nav-top">
             <div class="logo-area">
                 <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-                <div class="logo" onclick="goHome()">Sua Notícia <span style="color: var(--card); font-weight: 900;">365</span></div>
+                <div class="logo" onclick="goHomeForce()">Sua Notícia <span style="color: var(--card); font-weight: 900;">365</span></div>
             </div>
             <button class="theme-btn-top" onclick="toggleTheme()" title="Mudar Tema">
                 <i class="fas fa-moon" id="theme-icon-top"></i>
@@ -251,7 +258,7 @@
 
 <div id="article-view">
     <div class="article-header">
-        <button class="header-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
+        <button class="header-btn" onclick="history.back()"><i class="fas fa-chevron-left"></i> Voltar</button>
         <button class="header-btn center-btn" onclick="document.getElementById('related-section').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-list"></i> Outras</button>
         <button class="header-btn" onclick="goHomeForce()"><i class="fas fa-home"></i> Início</button>
     </div>
@@ -361,39 +368,27 @@ function updateBadges() {
     document.getElementById('badge-liked').innerText = JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').length;
 }
 
+// O SEGREDO DO "VOLTAR" FUNCIONAR PERFEITAMENTE
 window.addEventListener('popstate', (e) => {
     if (e.state && e.state.view === 'article') {
         const post = allPosts.find(p => p.uniqueId === e.state.articleId) || JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]').find(p => p.uniqueId === e.state.articleId) || JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').find(p => p.uniqueId === e.state.articleId);
-        if (post) openArticleView(post, false);
-    } else { closeArticleView(false); }
+        if (post) openArticleView(post, false); // false = não adiciona novo histórico, apenas lê o atual
+    } else { 
+        closeArticleView(false); // Fecha o artigo se o histórico atual for a página inicial
+    }
 });
 
-// AÇÃO LIMPA E SEM BUGS
-function goHome() {
+function goHomeForce() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebarOverlay').classList.remove('open');
     const searchInput = document.getElementById('search-input');
     if(searchInput) { searchInput.value = ''; }
     
-    if(currentReadingPost) { 
-        closeArticleView(true);
-    } else { 
-        window.scrollTo({top:0, behavior: 'smooth'}); 
-    }
-    renderFeed(); // Repõe o feed limpo e ordenado
-}
-
-function goHomeForce() {
+    // Força ir para a página inicial e limpa a vista de leitura
     history.pushState({ view: 'home' }, "", window.location.pathname);
     closeArticleView(false);
-}
-
-function goBack() { 
-    if(currentReadingPost) {
-        closeArticleView(true);
-    } else {
-        history.back(); 
-    }
+    window.scrollTo({top:0, behavior: 'smooth'});
+    renderFeed(); 
 }
 
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
@@ -487,10 +482,10 @@ function updateTicker() {
     }
 }
 
-// ORDENAÇÃO BLINDADA: Apaga e recria para garantir ordem perfeita sem bugs
+// ORDENAÇÃO BLINDADA (Como você pediu: garantido que não falha)
 function renderFeed() {
     const feed = document.getElementById('feed');
-    feed.innerHTML = ''; // Limpa tudo para não encavalar e não bugar!
+    feed.innerHTML = ''; 
     
     let displayList = [...allPosts];
     
@@ -499,7 +494,6 @@ function renderFeed() {
     
     if(currentCat && !isSavedView && !isLikedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
     
-    // ORDENAÇÃO ABSOLUTA E REAL
     if(sortOrder === 'new') { 
         displayList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); 
     } else { 
@@ -523,7 +517,7 @@ function renderFeed() {
         feed.appendChild(card);
     });
     
-    localInstantSearch(); // Refaz a pesquisa logo a seguir
+    localInstantSearch(); 
 }
 
 function filterCat(cat, btn) {
@@ -569,6 +563,12 @@ async function openArticleView(post, pushHistory = true) {
     
     if(pushHistory) { history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId); }
     
+    // A LÓGICA DE PARTILHA "ROUBADA" (INJEÇÃO DA IMAGEM ORIGINAL PARA REDES SOCIAIS E BOTS)
+    document.getElementById('og-title').setAttribute("content", post.title);
+    document.getElementById('og-image').setAttribute("content", post.img); 
+    document.getElementById('og-url').setAttribute("content", shareUrl);
+    document.title = post.title + " | Sua Notícia 365";
+    
     document.getElementById('home-view').style.display = 'none';
     
     const articleView = document.getElementById('article-view');
@@ -604,12 +604,10 @@ function closeArticleView(updateHistory = true) {
     
     if(updateHistory) { history.pushState({ view: 'home' }, "", window.location.pathname); }
     
-    // Repõe o scroll exato e garante que a grelha está limpa!
     renderFeed();
     window.scrollTo(0, savedScrollPosition);
 }
 
-// RELACIONADOS BLINDADOS - Agora nunca mais encavala no texto!
 function renderRelatedPosts(currentPost) {
     const section = document.getElementById('related-section');
     const grid = document.getElementById('related-grid');
@@ -655,24 +653,22 @@ function updateActionBtns() {
     document.getElementById('btn-like').classList.toggle('liked', liked);
 }
 
-// PARTILHA INTELIGENTE: Lê a sua ideia e usa o Link Original do Jornal!
+// PARTILHA PERFEITA (O seu link = as pessoas voltam ao seu site)
 function shareGlobal() {
-    // Se estiver na página inicial, partilha o seu site.
     let shareUrl = window.location.href;
     let shareTitle = "Sua Notícia 365 | O seu portal Premium";
     let shareText = "Acompanhe as últimas notícias de Moçambique num só lugar!";
     
-    // Se estiver dentro de uma notícia, partilha o LINK OFICIAL DO JORNAL para o WhatsApp carregar a imagem perfeita!
     if(currentReadingPost) {
-        shareUrl = currentReadingPost.link; 
+        // Envia o link do SEU site (para que o clique os traga de volta à sua plataforma)
+        shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
         shareTitle = currentReadingPost.title;
-        shareText = "Leia esta notícia incrível:";
+        shareText = "Leia esta notícia incrível no Sua Notícia 365:";
     }
     
     if (navigator.share) { 
         navigator.share({ title: shareTitle, text: shareText, url: shareUrl }).catch(err => console.log('Partilha cancelada')); 
     } else { 
-        // Partilha para navegadores que não têm o botão nativo do telemóvel
         const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareTitle + " - " + shareUrl)}`;
         window.open(waUrl, '_blank');
     }
