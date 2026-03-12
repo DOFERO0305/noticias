@@ -54,13 +54,23 @@
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
+        /* ANIMAÇÕES SUAVES E PREMIUM */
+        .fade-in {
+            animation: fadeInAnim 0.4s ease-out forwards;
+        }
+        @keyframes fadeInAnim {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
         /* HEADER PREMIUM */
         .navbar { position: sticky; top: 0; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; z-index: 1000; box-shadow: 0 4px 15px rgba(204,0,0,0.3); }
         .nav-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 12px 20px; }
         .logo-area { display: flex; align-items: center; gap: 15px; }
         .menu-toggle { background: none; border: none; font-size: 1.4rem; color: white; cursor: pointer; transition: 0.2s; }
         .menu-toggle:active { transform: scale(0.9); }
-        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: opacity 0.2s;}
+        .logo:active { opacity: 0.7; }
         
         .theme-btn-top { background: rgba(255,255,255,0.2); border: none; color: white; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; backdrop-filter: blur(5px); }
         .theme-btn-top:hover { background: rgba(255,255,255,0.3); transform: rotate(15deg); }
@@ -113,7 +123,7 @@
         .cat-item:hover { border-color: var(--primary); color: var(--primary); }
         .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 3px 8px rgba(204,0,0,0.2); }
 
-        /* GRELHA DE NOTÍCIAS (MAIS COMPACTA E ATRAENTE) */
+        /* GRELHA DE NOTÍCIAS (MUITO MAIS RÁPIDA COM FLEX ORDER) */
         .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; min-height: 50vh; }
         .news-card { background: var(--card); border-radius: 10px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: all 0.2s ease; }
         .news-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-hover); }
@@ -155,11 +165,6 @@
         
         .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 12px; border-radius: 8px; margin-top: 30px; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
         .read-more-btn:hover { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(204,0,0,0.2); }
-
-        /* SECÇÃO DE COMENTÁRIOS */
-        .comments-section { margin-top: 40px; padding-top: 25px; border-top: 1px solid var(--border); background: var(--card); border-radius: 10px; }
-        .comments-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 8px; }
-        .comments-section h3 i { color: var(--primary); }
 
         .related-section { margin-top: 40px; padding-top: 25px; border-top: 4px solid var(--border); }
         .related-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 8px; }
@@ -224,7 +229,7 @@
     </div>
 </div>
 
-<div id="home-view">
+<div id="home-view" class="fade-in">
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo-area">
@@ -265,7 +270,7 @@
     <div class="article-header">
         <button class="header-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
         <button class="header-btn center-btn" onclick="document.getElementById('related-section').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-list"></i> Outras</button>
-        <button class="header-btn" onclick="goHomeForce()"><i class="fas fa-home"></i> Início</button>
+        <button class="header-btn" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
     </div>
 
     <main class="article-container">
@@ -279,11 +284,6 @@
 
         <img id="feat-img" class="article-main-img" src="" style="display:none">
         <div id="article-content" class="article-content"></div>
-        
-        <div class="comments-section" id="comments-section">
-            <h3><i class="fas fa-comments"></i> Deixe o seu comentário</h3>
-            <div id="disqus_thread"></div>
-        </div>
         
         <div class="related-section" id="related-section" style="display:none;">
             <h3>Leia Também</h3>
@@ -357,24 +357,19 @@ function extractDeepImage(p) {
     return 'https://via.placeholder.com/600x300/e2e8f0/64748b?text=Sua+Notícia+365';
 }
 
-// FORMATADOR DE TEMPO (Ex: "Há 5 min", "Há 2 horas") - PREMIUM
 function timeAgo(dateString) {
     const date = new Date(dateString);
     const now = new Date();
     const diffInSeconds = Math.floor((now - date) / 1000);
 
     if (diffInSeconds < 60) return "<span class='time-ago'>Agora mesmo</span>";
-    
     const diffInMinutes = Math.floor(diffInSeconds / 60);
     if (diffInMinutes < 60) return `<span class='time-ago'>Há ${diffInMinutes} min</span>`;
-    
     const diffInHours = Math.floor(diffInMinutes / 60);
     if (diffInHours < 24) return `<span class='time-ago'>Há ${diffInHours}h</span>`;
-    
     const diffInDays = Math.floor(diffInHours / 24);
     if (diffInDays === 1) return "Ontem";
     if (diffInDays < 7) return `Há ${diffInDays} dias`;
-    
     return date.toLocaleDateString('pt-MZ');
 }
 
@@ -390,16 +385,27 @@ window.addEventListener('popstate', (e) => {
     } else { closeArticleView(false); }
 });
 
+// AÇÃO 100% LIMPA: Ao clicar "Início" ou "Sua Notícia 365"
 function goHome() {
-    if(currentReadingPost) { goBack(); } else { window.scrollTo({top:0, behavior: 'smooth'}); }
-}
-
-function goHomeForce() {
-    history.pushState({ view: 'home' }, "", window.location.pathname);
-    closeArticleView(false);
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+    
+    // Limpa e repõe a pesquisa
+    const searchInput = document.getElementById('search-input');
+    if(searchInput) { searchInput.value = ''; }
+    
+    if(currentReadingPost) { 
+        closeArticleView(true);
+    } else { 
+        window.scrollTo({top:0, behavior: 'smooth'}); 
+    }
+    
+    // Repõe tudo ao normal na grelha
+    localInstantSearch();
 }
 
 function goBack() { history.back(); }
+
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
 function toggleTheme() {
     const isDark = document.body.classList.toggle('dark-mode');
@@ -416,20 +422,25 @@ function setSort(order) {
 function manualRefresh() {
     const icon = document.getElementById('refresh-icon');
     icon.classList.add('fa-spin');
+    document.getElementById('search-input').value = ''; // Limpa pesquisa ao recarregar
     document.getElementById('feed').innerHTML = ''; 
     allPosts = []; currentPage = 1; 
     window.scrollTo({top:0, behavior: 'smooth'}); 
     loadNews().then(() => { setTimeout(() => icon.classList.remove('fa-spin'), 1000); });
 }
 
+// PESQUISA DESBUGADA
 function localInstantSearch() {
     const query = document.getElementById('search-input').value.toLowerCase();
     const feed = document.getElementById('feed');
     Array.from(feed.children).forEach(card => {
         const title = card.querySelector('.news-title').innerText.toLowerCase();
         const src = card.querySelector('.news-tag').innerText.toLowerCase();
-        if (title.includes(query) || src.includes(query)) { card.style.display = 'flex'; } 
-        else { card.style.display = 'none'; }
+        if (title.includes(query) || src.includes(query)) { 
+            card.style.display = 'flex'; 
+        } else { 
+            card.style.display = 'none'; 
+        }
     });
 }
 
@@ -441,6 +452,7 @@ async function fetchWithTimeout(resource, options = {}) {
     clearTimeout(id); return response;
 }
 
+// SISTEMA ULTRARRÁPIDO
 async function loadNews() {
     if (isFetching) return;
     if (isSavedView || isLikedView) { renderFeed(); return; } 
@@ -488,6 +500,7 @@ function updateTicker() {
     }
 }
 
+// ZERO BUGS NO SCROLL - GRELHA COM CSS ORDER 
 function renderFeed() {
     const feed = document.getElementById('feed');
     let displayList = [...allPosts];
@@ -497,15 +510,12 @@ function renderFeed() {
     
     if(currentCat && !isSavedView && !isLikedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
     
-    if(sortOrder === 'new') { displayList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); } 
-    else { displayList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); }
-    
-    displayList.forEach((p, index) => {
+    displayList.forEach((p) => {
         let card = document.getElementById(`card-${p.uniqueId}`);
         if (!card) {
             card = document.createElement('div');
             card.id = `card-${p.uniqueId}`;
-            card.className = 'news-card';
+            card.className = 'news-card fade-in'; // Animação ao entrar na grelha
             card.onclick = () => openArticleById(p.uniqueId);
             card.innerHTML = `
                 <img class="news-img" src="${p.img}" loading="lazy">
@@ -513,24 +523,28 @@ function renderFeed() {
                     <span class="news-tag">${p.srcName}</span>
                     <h3 class="news-title">${p.title}</h3>
                     <div class="news-meta">
-                        <span><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>
+                        <span class="meta-time"><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>
                     </div>
                 </div>`;
+            feed.appendChild(card);
         } else {
-            // Atualiza tempo dinamicamente caso o cartão já exista
-            card.querySelector('.news-meta').innerHTML = `<span><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>`;
+            card.querySelector('.meta-time').innerHTML = `<i class="far fa-clock"></i> ${timeAgo(p.date)}`;
         }
         
-        if (feed.children[index] !== card) { feed.insertBefore(card, feed.children[index] || null); }
+        // ORDENAÇÃO FÍSICA E SILENCIOSA: Sem solavancos!
+        const timeVal = new Date(p.date).getTime();
+        card.style.order = sortOrder === 'new' ? -timeVal : timeVal;
         card.style.display = 'flex'; 
     });
 
+    // Oculta as notícias que não pertencem à categoria/pesquisa atual
     Array.from(feed.children).forEach(child => {
         const id = child.id.replace('card-', '');
         if(!displayList.some(p => p.uniqueId === id)) { child.style.display = 'none'; }
     });
     
-    if(document.getElementById('search-input').value.length > 0) localInstantSearch();
+    // Repõe os filtros da pesquisa caso haja algo digitado
+    localInstantSearch();
 }
 
 function filterCat(cat, btn) {
@@ -541,6 +555,12 @@ function filterCat(cat, btn) {
     document.getElementById('sidebar-saved-btn').classList.remove('active');
     document.getElementById('sidebar-liked-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = 'block';
+    
+    // Animação de categoria
+    document.getElementById('feed').classList.remove('fade-in');
+    void document.getElementById('feed').offsetWidth; // Reset animation
+    document.getElementById('feed').classList.add('fade-in');
+    
     renderFeed();
 }
 
@@ -550,7 +570,7 @@ function toggleSavedView() {
     document.getElementById('sidebar-liked-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = isSavedView ? 'none' : 'block';
     toggleSidebar();
-    if(isSavedView && currentReadingPost) { goHomeForce(); } else { renderFeed(); }
+    if(isSavedView && currentReadingPost) { goHome(); } else { renderFeed(); }
 }
 
 function toggleLikedView() {
@@ -559,7 +579,7 @@ function toggleLikedView() {
     document.getElementById('sidebar-saved-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = isLikedView ? 'none' : 'block';
     toggleSidebar();
-    if(isLikedView && currentReadingPost) { goHomeForce(); } else { renderFeed(); }
+    if(isLikedView && currentReadingPost) { goHome(); } else { renderFeed(); }
 }
 
 function openArticleById(id) {
@@ -576,14 +596,16 @@ async function openArticleView(post, pushHistory = true) {
     
     if(pushHistory) { history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId); }
     
-    // Injeção forçada nas Meta Tags para partilha (Ajudará em alguns parsers web)
     document.getElementById('og-title').setAttribute("content", post.title);
     document.getElementById('og-image').setAttribute("content", post.img);
     document.getElementById('og-url').setAttribute("content", shareUrl);
     document.title = post.title + " | Sua Notícia 365";
     
     document.getElementById('home-view').style.display = 'none';
-    document.getElementById('article-view').style.display = 'block';
+    
+    const articleView = document.getElementById('article-view');
+    articleView.style.display = 'block';
+    articleView.classList.add('fade-in'); // Adiciona Efeito Fade-In 
     window.scrollTo(0, 0);
 
     document.getElementById('source-tag').innerText = post.srcName;
@@ -596,33 +618,22 @@ async function openArticleView(post, pushHistory = true) {
     
     const contentDiv = document.getElementById('article-content');
     contentDiv.innerHTML = (post.contentLoaded || "Conteúdo indisponível.") + `
-    <a href="${post.link}" target="_blank" class="read-more-btn">
+    <a href="${post.link}" target="_blank" class="read-more-btn fade-in">
         <i class="fas fa-external-link-alt"></i> Ler Notícia Completa no Site Oficial
     </a>`;
     
     renderRelatedPosts(post); 
-    loadDisqusComments(post.uniqueId, shareUrl);
-}
-
-// SISTEMA DE COMENTÁRIOS DISQUS
-function loadDisqusComments(id, url) {
-    if (window.DISQUS) {
-        DISQUS.reset({ reload: true, config: function () { this.page.identifier = id; this.page.url = url; } });
-    } else {
-        window.disqus_config = function () { this.page.url = url; this.page.identifier = id; };
-        (function() {
-            var d = document, s = d.createElement('script');
-            // 'suanoticia365' é um shortname de exemplo. Funciona para demonstração!
-            s.src = 'https://suanoticia365.disqus.com/embed.js'; 
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    }
 }
 
 function closeArticleView(updateHistory = true) {
-    document.getElementById('article-view').style.display = 'none';
-    document.getElementById('home-view').style.display = 'block';
+    const articleView = document.getElementById('article-view');
+    articleView.style.display = 'none';
+    articleView.classList.remove('fade-in');
+    
+    const homeView = document.getElementById('home-view');
+    homeView.style.display = 'block';
+    homeView.classList.add('fade-in'); // Efeito suave ao voltar ao feed
+    
     document.title = "Sua Notícia 365 | Premium";
     currentReadingPost = null;
     
@@ -640,7 +651,7 @@ function renderRelatedPosts(currentPost) {
     
     if(related.length > 0) {
         grid.innerHTML = related.map(p => `
-            <div class="related-card" onclick="openArticleById('${p.uniqueId}')">
+            <div class="related-card fade-in" onclick="openArticleById('${p.uniqueId}')">
                 <img src="${p.img}" loading="lazy">
                 <h4>${p.title}</h4>
             </div>
@@ -675,17 +686,21 @@ function updateActionBtns() {
     document.getElementById('btn-like').classList.toggle('liked', liked);
 }
 
+// BOTÃO PARTILHA REPARADO (Página Incial e Artigos)
 function shareGlobal() {
-    if(!currentReadingPost) return;
-    const shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
+    let shareUrl = window.location.href;
+    let shareTitle = "Sua Notícia 365 | O seu portal Premium";
     
-    // Método Web Share nativo (Mobile passa o link e título direto pro WhatsApp nativamente)
+    if(currentReadingPost) {
+        shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
+        shareTitle = currentReadingPost.title;
+    }
+    
     if (navigator.share) { 
-        navigator.share({ title: currentReadingPost.title, text: "Veja esta notícia no Sua Notícia 365:", url: shareUrl }); 
+        navigator.share({ title: shareTitle, text: "Veja isto no Sua Notícia 365:", url: shareUrl }).catch(err => console.log('Partilha cancelada')); 
     } else { 
-        // Alternativa PC ou navegadores não compatíveis
-        const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent("Veja esta notícia no Sua Notícia 365: " + currentReadingPost.title + " " + shareUrl)}`;
-        window.open(waUrl, '_blank');
+        navigator.clipboard.writeText(shareUrl); 
+        alert("Link copiado para partilhar!"); 
     }
 }
 
