@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sua Notícia 365 | Premium</title>
+    
+    <meta id="og-title" property="og:title" content="Sua Notícia 365 | Portal Premium">
+    <meta id="og-image" property="og:image" content="https://via.placeholder.com/800x400/cc0000/ffffff?text=Sua+Noticia+365">
+    <meta property="og:description" content="Acompanhe as últimas notícias de Moçambique e do mundo em tempo real.">
+    <meta property="og:type" content="article">
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -18,8 +24,8 @@
             --text-meta: #64748b;
             --border: #e2e8f0;
             --surface: #f8fafc;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 15px 35px rgba(204, 0, 0, 0.1);
             
             --icon-like: #e11d48;
             --icon-save: #0284c7;
@@ -52,12 +58,12 @@
         .logo-area { display: flex; align-items: center; gap: 15px; }
         .menu-toggle { background: none; border: none; font-size: 1.4rem; color: white; cursor: pointer; transition: 0.2s; }
         .menu-toggle:active { transform: scale(0.9); }
-        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.6rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
         
-        .theme-btn-top { background: rgba(255,255,255,0.2); border: none; color: white; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; backdrop-filter: blur(5px); }
+        .theme-btn-top { background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; backdrop-filter: blur(5px); }
         .theme-btn-top:hover { background: rgba(255,255,255,0.3); transform: rotate(15deg); }
 
-        .breaking-bar { background: var(--accent); color: white; padding: 8px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
+        .breaking-bar { background: var(--accent); color: white; padding: 10px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
         .breaking-text { animation: scrollLeft 30s linear infinite; display: inline-block; padding-left: 100%; }
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
@@ -75,6 +81,7 @@
         
         .i-dark { color: #475569; }
         .i-saved { color: var(--icon-save); }
+        .i-liked { color: var(--icon-like); }
         .i-new { color: #f59e0b; }
         
         .sidebar-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-meta); line-height: 1.6; }
@@ -93,9 +100,9 @@
         .controls-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
 
         .search-box { position: relative; margin-bottom: 20px; margin-top: 10px; }
-        .search-box input { width: 100%; padding: 14px 15px 14px 45px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
-        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1); }
-        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 1rem; }
+        .search-box input { width: 100%; padding: 14px 15px 14px 45px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
+        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.1); }
+        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 1.1rem; }
         
         .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
         .categories::-webkit-scrollbar { display: none; }
@@ -105,59 +112,63 @@
 
         /* GRELHA DE NOTÍCIAS */
         .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; min-height: 50vh; }
-        .news-card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: all 0.3s ease; }
-        .news-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-        .news-img { width: 100%; height: 200px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .news-card { background: var(--card); border-radius: 14px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: all 0.3s ease; }
+        .news-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .news-img { width: 100%; height: 210px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
         .news-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
         
-        .news-tag { color: white; background: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; display: inline-block; width: fit-content; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
+        .news-tag { color: white; background: var(--primary); padding: 5px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; display: inline-block; width: fit-content; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
         
-        .news-title { font-size: 1.15rem; font-weight: 700; line-height: 1.4; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
+        .news-title { font-size: 1.2rem; font-weight: 700; line-height: 1.4; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
         .news-meta { font-size: 0.8rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-top: 1px solid var(--border); padding-top: 15px; }
 
         /* VISTA DE LEITURA (ARTIGO) */
         #article-view { display: none; background: var(--card); min-height: 100vh; padding-bottom: 60px; }
         
-        /* CABEÇALHO DO ARTIGO */
         .article-header { position: sticky; top: 0; background: var(--card); padding: 12px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 8px 12px; border-radius: 6px;}
+        .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 10px 14px; border-radius: 8px;}
         .header-btn:hover { color: white; background: var(--primary); border-color: var(--primary); }
         .header-btn.center-btn { background: transparent; border: none; color: var(--primary); }
         .header-btn.center-btn:hover { background: var(--surface); color: var(--primary-dark); }
         
         .article-container { max-width: 750px; margin: 30px auto 0; padding: 0 20px; }
-        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
-        .article-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; line-height: 1.25; margin-bottom: 25px; color: var(--text); }
+        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
+        .article-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 900; line-height: 1.25; margin-bottom: 25px; color: var(--text); }
         
         .btn-action-row { display: flex; gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-        .btn-action { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
+        .btn-action { flex: 1; padding: 14px; border-radius: 8px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; box-shadow: var(--shadow); }
         .btn-action:active { transform: scale(0.95); }
         
         .btn-action.like-btn.liked { background: rgba(225, 29, 72, 0.1); border-color: var(--icon-like); color: var(--icon-like); }
         .btn-action.save-btn.saved { background: rgba(2, 132, 199, 0.1); border-color: var(--icon-save); color: var(--icon-save); }
         
-        .article-main-img { width: 100%; border-radius: 10px; margin-bottom: 30px; object-fit: cover; max-height: 450px; box-shadow: var(--shadow); }
-        .article-content { font-size: 1.1rem; line-height: 1.8; color: var(--text); }
+        .article-main-img { width: 100%; border-radius: 12px; margin-bottom: 30px; object-fit: cover; max-height: 450px; box-shadow: var(--shadow); }
+        .article-content { font-size: 1.15rem; line-height: 1.8; color: var(--text); }
         .article-content p { margin-bottom: 1.5rem; }
-        .article-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 25px 0; }
+        .article-content img { max-width: 100%; height: auto; border-radius: 10px; margin: 25px 0; }
         .article-content a { color: var(--primary); font-weight: bold; text-decoration: none; }
         .article-content a:hover { text-decoration: underline; }
         
-        .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 15px; border-radius: 8px; margin-top: 40px; text-decoration: none; transition: 0.3s; font-size: 1rem; }
-        .read-more-btn:hover { background: var(--primary); color: white; }
+        .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 15px; border-radius: 10px; margin-top: 40px; text-decoration: none; transition: 0.3s; font-size: 1.05rem; }
+        .read-more-btn:hover { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(204,0,0,0.2); }
+
+        /* SECÇÃO DE COMENTÁRIOS */
+        .comments-section { margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--border); background: var(--card); border-radius: 12px; }
+        .comments-section h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 10px; }
+        .comments-section h3 i { color: var(--primary); }
 
         .related-section { margin-top: 50px; padding-top: 30px; border-top: 4px solid var(--border); }
-        .related-section h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 10px; }
-        .related-section h3::before { content: ''; display: block; width: 4px; height: 20px; background: var(--primary); border-radius: 2px; }
+        .related-section h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 10px; }
+        .related-section h3::before { content: ''; display: block; width: 5px; height: 22px; background: var(--primary); border-radius: 3px; }
         .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-        .related-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow); }
-        .related-card img { width: 100%; height: 120px; object-fit: cover; }
-        .related-card h4 { padding: 12px; font-size: 0.9rem; line-height: 1.4; font-weight: 700; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .related-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .related-card img { width: 100%; height: 130px; object-fit: cover; }
+        .related-card h4 { padding: 15px; font-size: 0.95rem; line-height: 1.4; font-weight: 700; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
 
         /* BOTÕES FLUTUANTES */
-        .floating-nav { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 1001; transition: 0.3s; }
-        .float-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.2s; }
+        .floating-nav { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 1001; transition: 0.3s; }
+        .float-btn { width: 55px; height: 55px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: 0.2s; }
         .float-btn:hover { transform: scale(1.1); }
         .float-btn.refresh { background: var(--icon-refresh); }
         .float-btn.share { background: var(--icon-share); }
@@ -167,7 +178,9 @@
         @media (max-width: 600px) {
             .feed { grid-template-columns: 1fr; padding: 0 15px 15px; }
             .article-title { font-size: 1.8rem; }
-            .header-btn { font-size: 0.75rem; padding: 6px 8px; }
+            .header-btn { font-size: 0.75rem; padding: 8px 10px; }
+            .floating-nav { bottom: 20px; right: 20px; }
+            .float-btn { width: 50px; height: 50px; font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -179,10 +192,12 @@
     <h2 onclick="goHome()">Sua Notícia <span style="color: var(--text);">365</span></h2>
 
     <button class="side-btn active" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
-    <button class="side-btn" id="sidebar-saved-btn" onclick="toggleSavedView()"><i class="fas fa-bookmark i-saved"></i> Ler Mais Tarde</button>
     
-    <div style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">
-        <p style="font-size: 0.75rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">Filtragem Automática</p>
+    <button class="side-btn" id="sidebar-saved-btn" onclick="toggleSavedView()"><i class="fas fa-bookmark i-saved"></i> Ler Mais Tarde</button>
+    <button class="side-btn" id="sidebar-liked-btn" onclick="toggleLikedView()"><i class="fas fa-heart i-liked"></i> Favoritos</button>
+    
+    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
+        <p style="font-size: 0.8rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 10px; font-weight: 800;">Organização</p>
         <button class="side-btn active" id="btn-sort-new" onclick="setSort('new')"><i class="fas fa-bolt i-new"></i> Mais Recentes</button>
         <button class="side-btn" id="btn-sort-old" onclick="setSort('old')"><i class="fas fa-history i-dark"></i> Mais Antigas</button>
     </div>
@@ -223,7 +238,7 @@
     <div class="controls-container">
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="search-input" placeholder="Encontrar palavras-chave nas notícias..." oninput="localInstantSearch()">
+            <input type="text" id="search-input" placeholder="Pesquisar notícias, pessoas ou empresas..." oninput="localInstantSearch()">
         </div>
         
         <div class="categories">
@@ -244,7 +259,7 @@
     <div class="article-header">
         <button class="header-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
         <button class="header-btn center-btn" onclick="document.getElementById('related-section').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-list"></i> Outras Notícias</button>
-        <button class="header-btn" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
+        <button class="header-btn" onclick="goHomeForce()"><i class="fas fa-home"></i> Início</button>
     </div>
 
     <main class="article-container">
@@ -258,6 +273,11 @@
 
         <img id="feat-img" class="article-main-img" src="" style="display:none">
         <div id="article-content" class="article-content"></div>
+        
+        <div class="comments-section" id="comments-section">
+            <h3><i class="fas fa-comments"></i> Comentários</h3>
+            <div id="disqus_thread"></div>
+        </div>
         
         <div class="related-section" id="related-section" style="display:none;">
             <h3>Leia Também</h3>
@@ -273,7 +293,6 @@
 </div>
 
 <script>
-// LISTA ATUALIZADA DE FONTES COM OS NOVOS SITES PEDIDOS
 const SOURCES = [
     { name: "O País", api: "https://opais.co.mz/wp-json/wp/v2/posts?_embed", slug: "opais" },
     { name: "Carta de MZ", api: "https://cartamz.com/wp-json/wp/v2/posts?_embed", slug: "carta" },
@@ -307,7 +326,8 @@ const SOURCES = [
     { name: "Zitamar", api: "https://zitamar.com/wp-json/wp/v2/posts?_embed", slug: "zitamar" }
 ];
 
-let allPosts = [], currentPage = 1, isFetching = false, currentCat = '', isSavedView = false, sortOrder = 'new';
+let allPosts = [], currentPage = 1, isFetching = false, currentCat = '';
+let isSavedView = false, isLikedView = false, sortOrder = 'new';
 let currentReadingPost = null, savedScrollPosition = 0;
 
 function detectCategory(title, content) {
@@ -331,28 +351,29 @@ function extractDeepImage(p) {
     return 'https://via.placeholder.com/600x300/e2e8f0/64748b?text=Sua+Notícia+365';
 }
 
+// HISTÓRICO REAL PARA O BOTÃO VOLTAR
 window.addEventListener('popstate', (e) => {
     if (e.state && e.state.view === 'article') {
         const post = allPosts.find(p => p.uniqueId === e.state.articleId);
         if (post) openArticleView(post, false);
-    } else { closeArticleView(false); }
+    } else { 
+        closeArticleView(false); 
+    }
 });
 
 function goHome() {
-    if(currentReadingPost) { 
-        closeArticleView(true);
-    } else { 
-        window.scrollTo({top:0, behavior: 'smooth'}); 
-    }
+    if(currentReadingPost) { goBack(); } else { window.scrollTo({top:0, behavior: 'smooth'}); }
 }
 
-// CORREÇÃO DO BOTÃO VOLTAR
+// Força o regresso imediato à página principal, saltando o histórico da leitura
+function goHomeForce() {
+    history.pushState({ view: 'home' }, "", window.location.pathname);
+    closeArticleView(false);
+}
+
+// Segue estritamente as páginas abertas!
 function goBack() { 
-    if(currentReadingPost) {
-        closeArticleView(true); // Sempre que clicar voltar na notícia, recua para o feed principal!
-    } else {
-        history.back(); 
-    }
+    history.back(); 
 }
 
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
@@ -371,11 +392,8 @@ function setSort(order) {
 function manualRefresh() {
     const icon = document.getElementById('refresh-icon');
     icon.classList.add('fa-spin');
-    
     document.getElementById('feed').innerHTML = ''; 
-    allPosts = []; 
-    currentPage = 1; 
-    
+    allPosts = []; currentPage = 1; 
     window.scrollTo({top:0, behavior: 'smooth'}); 
     loadNews().then(() => { setTimeout(() => icon.classList.remove('fa-spin'), 1000); });
 }
@@ -400,7 +418,9 @@ async function fetchWithTimeout(resource, options = {}) {
 }
 
 async function loadNews() {
-    if (isFetching || isSavedView) return;
+    if (isFetching) return;
+    if (isSavedView || isLikedView) { renderFeed(); return; } // Não busca mais se estiver nos favoritos
+    
     isFetching = true;
     let fetchesCompleted = 0;
     const cacheBuster = new Date().getTime();
@@ -416,10 +436,7 @@ async function loadNews() {
             data.forEach(p => {
                 const uniqueId = `${src.slug}-${p.id}`;
                 if(!allPosts.some(oldP => oldP.uniqueId === uniqueId)) { 
-                    
-                    // CORREÇÃO DOS FUSOS HORÁRIOS: Garante que a data é absoluta para todas ficarem certas no topo!
                     const pubDate = p.date_gmt ? (p.date_gmt + 'Z') : p.date;
-
                     allPosts.push({
                         uniqueId: uniqueId, apiId: p.id, title: p.title.rendered, date: pubDate, srcName: src.name, srcSlug: src.slug, apiBase: src.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, p.content?.rendered || "") 
                     });
@@ -447,12 +464,15 @@ function updateTicker() {
     }
 }
 
-// CORREÇÃO DO SCROLL: Ordenação Física Inteligente no DOM
 function renderFeed() {
     const feed = document.getElementById('feed');
-    let displayList = isSavedView ? JSON.parse(localStorage.getItem('premium_news_saved') || '[]') : [...allPosts];
+    let displayList = [...allPosts];
     
-    if(currentCat && !isSavedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
+    // GERE VISTAS DE GUARDADOS E FAVORITOS
+    if(isSavedView) { displayList = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]'); }
+    else if(isLikedView) { displayList = JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]'); }
+    
+    if(currentCat && !isSavedView && !isLikedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
     
     if(sortOrder === 'new') { displayList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); } 
     else { displayList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); }
@@ -475,11 +495,7 @@ function renderFeed() {
                 </div>`;
         }
         
-        // Em vez de mudar ordem via CSS, garante a posição exata no HTML
-        // Isto elimina os bugs ao fazer scroll na página!
-        if (feed.children[index] !== card) {
-            feed.insertBefore(card, feed.children[index] || null);
-        }
+        if (feed.children[index] !== card) { feed.insertBefore(card, feed.children[index] || null); }
         card.style.display = 'flex'; 
     });
 
@@ -494,21 +510,40 @@ function renderFeed() {
 function filterCat(cat, btn) {
     document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
     btn.classList.add('active');
-    currentCat = cat; isSavedView = false;
+    currentCat = cat; 
+    isSavedView = false; isLikedView = false;
+    document.getElementById('sidebar-saved-btn').classList.remove('active');
+    document.getElementById('sidebar-liked-btn').classList.remove('active');
+    document.getElementById('scroll-anchor').style.display = 'block';
     renderFeed();
 }
 
 function toggleSavedView() {
     isSavedView = !isSavedView;
+    isLikedView = false;
     document.getElementById('sidebar-saved-btn').classList.toggle('active', isSavedView);
+    document.getElementById('sidebar-liked-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = isSavedView ? 'none' : 'block';
     toggleSidebar();
-    if(isSavedView && currentReadingPost) { history.pushState(null, "", window.location.pathname); closeArticleView(false); }
-    renderFeed();
+    if(isSavedView && currentReadingPost) { goHomeForce(); } else { renderFeed(); }
+}
+
+function toggleLikedView() {
+    isLikedView = !isLikedView;
+    isSavedView = false;
+    document.getElementById('sidebar-liked-btn').classList.toggle('active', isLikedView);
+    document.getElementById('sidebar-saved-btn').classList.remove('active');
+    document.getElementById('scroll-anchor').style.display = isLikedView ? 'none' : 'block';
+    toggleSidebar();
+    if(isLikedView && currentReadingPost) { goHomeForce(); } else { renderFeed(); }
 }
 
 function openArticleById(id) {
-    const post = allPosts.find(p => p.uniqueId === id);
+    // Procura na lista normal, depois nos guardados, depois nos favoritos (para links offline)
+    let post = allPosts.find(p => p.uniqueId === id) 
+            || JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]').find(p => p.uniqueId === id)
+            || JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').find(p => p.uniqueId === id);
+            
     if(post) {
         if(!currentReadingPost) { savedScrollPosition = window.scrollY; }
         openArticleView(post, true);
@@ -517,7 +552,14 @@ function openArticleById(id) {
 
 async function openArticleView(post, pushHistory = true) {
     currentReadingPost = post;
+    const shareUrl = window.location.origin + window.location.pathname + "?article=" + post.uniqueId;
+    
     if(pushHistory) { history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId); }
+    
+    // ATUALIZAÇÃO DINÂMICA DE META TAGS (MELHOR ESFORÇO PARA WHATSAPP)
+    document.getElementById('og-title').content = post.title;
+    document.getElementById('og-image').content = post.img;
+    document.title = post.title + " | Sua Notícia 365";
     
     document.getElementById('home-view').style.display = 'none';
     document.getElementById('article-view').style.display = 'block';
@@ -538,18 +580,32 @@ async function openArticleView(post, pushHistory = true) {
     </a>`;
     
     renderRelatedPosts(post); 
+    loadDisqusComments(post.uniqueId, shareUrl);
+}
+
+// INICIALIZA OU ATUALIZA O MOTOR DE COMENTÁRIOS DISQUS
+function loadDisqusComments(id, url) {
+    if (window.DISQUS) {
+        DISQUS.reset({ reload: true, config: function () { this.page.identifier = id; this.page.url = url; } });
+    } else {
+        window.disqus_config = function () { this.page.url = url; this.page.identifier = id; };
+        (function() {
+            var d = document, s = d.createElement('script');
+            // Usando um nome genérico. Pode criar uma conta no Disqus e substituir 'suanoticia365' pelo seu ID real!
+            s.src = 'https://suanoticia365.disqus.com/embed.js'; 
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    }
 }
 
 function closeArticleView(updateHistory = true) {
     document.getElementById('article-view').style.display = 'none';
     document.getElementById('home-view').style.display = 'block';
-    document.getElementById('article-content').innerHTML = ''; 
+    document.title = "Sua Notícia 365 | Premium";
     currentReadingPost = null;
     
-    if(updateHistory) { 
-        history.pushState({ view: 'home' }, "", window.location.pathname); 
-    }
-    
+    if(updateHistory) { history.pushState({ view: 'home' }, "", window.location.pathname); }
     window.scrollTo(0, savedScrollPosition);
 }
 
@@ -574,35 +630,38 @@ function renderRelatedPosts(currentPost) {
 
 function toggleSaveArticle() {
     if(!currentReadingPost) return;
-    let saved = JSON.parse(localStorage.getItem('premium_news_saved') || '[]');
+    let saved = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]');
     const idx = saved.findIndex(x => x.uniqueId === currentReadingPost.uniqueId);
     if(idx > -1) { saved.splice(idx, 1); } else { saved.push(currentReadingPost); }
-    localStorage.setItem('premium_news_saved', JSON.stringify(saved));
+    localStorage.setItem('premium_news_saved_full', JSON.stringify(saved));
     updateActionBtns();
 }
 
 function toggleLike() {
     if(!currentReadingPost) return;
-    let liked = JSON.parse(localStorage.getItem('premium_news_liked') || '[]');
-    const idx = liked.findIndex(id => id === currentReadingPost.uniqueId);
-    idx > -1 ? liked.splice(idx, 1) : liked.push(currentReadingPost.uniqueId);
-    localStorage.setItem('premium_news_liked', JSON.stringify(liked));
+    let liked = JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]');
+    const idx = liked.findIndex(x => x.uniqueId === currentReadingPost.uniqueId);
+    if(idx > -1) { liked.splice(idx, 1); } else { liked.push(currentReadingPost); }
+    localStorage.setItem('premium_news_liked_full', JSON.stringify(liked));
     updateActionBtns();
 }
 
 function updateActionBtns() {
     if(!currentReadingPost) return;
-    const saved = JSON.parse(localStorage.getItem('premium_news_saved') || '[]').some(x => x.uniqueId === currentReadingPost.uniqueId);
+    const saved = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]').some(x => x.uniqueId === currentReadingPost.uniqueId);
     document.getElementById('btn-save').classList.toggle('saved', saved);
-    const liked = JSON.parse(localStorage.getItem('premium_news_liked') || '[]').includes(currentReadingPost.uniqueId);
+    const liked = JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').some(x => x.uniqueId === currentReadingPost.uniqueId);
     document.getElementById('btn-like').classList.toggle('liked', liked);
 }
 
 function shareGlobal() {
     if(!currentReadingPost) return;
     const shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
-    if (navigator.share) { navigator.share({ title: currentReadingPost.title, url: shareUrl }); } 
-    else { navigator.clipboard.writeText(shareUrl); alert("Link copiado para partilhar!"); }
+    if (navigator.share) { 
+        navigator.share({ title: currentReadingPost.title, text: "Leia esta notícia fantástica!", url: shareUrl }); 
+    } else { 
+        navigator.clipboard.writeText(shareUrl); alert("Link copiado para partilhar!"); 
+    }
 }
 
 window.onload = async () => { 
