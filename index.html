@@ -4,13 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sua Notícia 365 | Premium</title>
-    
-    <meta id="og-title" property="og:title" content="Sua Notícia 365 | Portal Premium">
-    <meta id="og-image" property="og:image" content="https://via.placeholder.com/1200x630/cc0000/ffffff?text=Sua+Noticia+365">
-    <meta id="og-url" property="og:url" content="">
-    <meta property="og:description" content="Acompanhe as últimas notícias de Moçambique e do mundo em tempo real.">
-    <meta property="og:type" content="article">
-    <meta name="twitter:card" content="summary_large_image">
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,14 +13,14 @@
             --primary-dark: #a30000;
             --accent: #1e293b;
             
-            --bg: #f3f6f8;
+            --bg: #f4f7f6;
             --card: #ffffff;
             --text: #1e293b;
             --text-meta: #64748b;
             --border: #e2e8f0;
             --surface: #f8fafc;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 12px 24px rgba(204, 0, 0, 0.08);
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
             
             --icon-like: #e11d48;
             --icon-save: #0284c7;
@@ -36,7 +29,7 @@
         }
 
         body.dark-mode {
-            --bg: #0b1120;
+            --bg: #0f172a;
             --card: #1e293b;
             --text: #f8fafc;
             --text-meta: #94a3b8;
@@ -54,28 +47,18 @@
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        /* ANIMAÇÕES SUAVES E PREMIUM */
-        .fade-in {
-            animation: fadeInAnim 0.4s ease-out forwards;
-        }
-        @keyframes fadeInAnim {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
         /* HEADER PREMIUM */
         .navbar { position: sticky; top: 0; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; z-index: 1000; box-shadow: 0 4px 15px rgba(204,0,0,0.3); }
         .nav-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 12px 20px; }
         .logo-area { display: flex; align-items: center; gap: 15px; }
         .menu-toggle { background: none; border: none; font-size: 1.4rem; color: white; cursor: pointer; transition: 0.2s; }
         .menu-toggle:active { transform: scale(0.9); }
-        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: opacity 0.2s;}
-        .logo:active { opacity: 0.7; }
+        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
         
         .theme-btn-top { background: rgba(255,255,255,0.2); border: none; color: white; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; backdrop-filter: blur(5px); }
         .theme-btn-top:hover { background: rgba(255,255,255,0.3); transform: rotate(15deg); }
 
-        .breaking-bar { background: var(--accent); color: white; padding: 8px 20px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
+        .breaking-bar { background: var(--accent); color: white; padding: 8px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
         .breaking-text { animation: scrollLeft 30s linear infinite; display: inline-block; padding-left: 100%; }
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
@@ -86,8 +69,8 @@
         .sidebar.open { left: 0; }
         .sidebar-close { background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; align-self: flex-end; margin-bottom: 10px; }
         
-        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 25px; text-transform: uppercase; cursor: pointer;}
-        .side-btn { display: flex; align-items: center; gap: 15px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 15px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: 0.2s; text-align: left; margin-bottom: 5px;}
+        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--primary); margin-bottom: 25px; text-transform: uppercase; cursor: pointer;}
+        .side-btn { display: flex; align-items: center; gap: 15px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 15px; font-size: 1rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: 0.2s; text-align: left; margin-bottom: 5px;}
         .side-btn:hover, .side-btn.active { background: var(--surface); color: var(--primary); }
         .side-btn i { width: 20px; text-align: center; font-size: 1.1rem; }
         .badge { background: var(--surface); color: var(--primary); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: auto; font-weight: 800; border: 1px solid var(--border); }
@@ -97,96 +80,96 @@
         .i-liked { color: var(--icon-like); }
         .i-new { color: #f59e0b; }
         
-        .sidebar-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-meta); line-height: 1.6; }
+        .sidebar-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-meta); line-height: 1.6; }
         .contact-link { color: var(--text); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 10px; margin-top: 10px; transition: 0.2s; }
         .contact-link:hover { color: var(--primary); }
         .contact-link i { color: var(--primary); font-size: 1.1rem; }
         
         .social-icons { display: flex; gap: 15px; margin-top: 20px; }
-        .social-icons a { color: var(--text-meta); font-size: 1.4rem; transition: 0.2s; }
+        .social-icons a { color: var(--text-meta); font-size: 1.5rem; transition: 0.2s; }
         .social-icons a:hover.wa { color: #25D366; transform: scale(1.1); }
         .social-icons a:hover.fb { color: #1877F2; transform: scale(1.1); }
         .social-icons a:hover.ig { color: #E4405F; transform: scale(1.1); }
         .social-icons a:hover.tg { color: #229ED9; transform: scale(1.1); }
 
         /* PESQUISA E CATEGORIAS */
-        .controls-container { max-width: 1200px; margin: 15px auto; padding: 0 20px; }
+        .controls-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
 
-        .search-box { position: relative; margin-bottom: 15px; margin-top: 5px; }
-        .search-box input { width: 100%; padding: 12px 15px 12px 42px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 0.95rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
+        .search-box { position: relative; margin-bottom: 20px; margin-top: 10px; }
+        .search-box input { width: 100%; padding: 14px 15px 14px 45px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1); }
-        .search-box i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 0.95rem; }
+        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 1rem; }
         
-        .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
         .categories::-webkit-scrollbar { display: none; }
-        .cat-item { padding: 6px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; transition: all 0.2s ease; }
+        .cat-item { padding: 8px 18px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
         .cat-item:hover { border-color: var(--primary); color: var(--primary); }
-        .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 3px 8px rgba(204,0,0,0.2); }
+        .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(204,0,0,0.2); }
 
-        /* GRELHA DE NOTÍCIAS (MUITO MAIS RÁPIDA COM FLEX ORDER) */
-        .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; min-height: 50vh; }
-        .news-card { background: var(--card); border-radius: 10px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: all 0.2s ease; }
-        .news-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-        .news-img { width: 100%; height: 165px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
-        .news-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+        /* GRELHA DE NOTÍCIAS */
+        .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; min-height: 50vh; }
+        .news-card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: all 0.3s ease; }
+        .news-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .news-img { width: 100%; height: 200px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .news-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
         
-        .news-tag { color: white; background: var(--primary); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; display: inline-block; width: fit-content; letter-spacing: 0.5px; }
+        .news-tag { color: white; background: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; display: inline-block; width: fit-content; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
         
-        .news-title { font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
-        .news-meta { font-size: 0.75rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-top: 1px solid var(--border); padding-top: 12px; }
-        .time-ago { color: var(--primary); font-weight: 700; }
+        .news-title { font-size: 1.15rem; font-weight: 700; line-height: 1.4; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
+        .news-meta { font-size: 0.8rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-top: 1px solid var(--border); padding-top: 15px; }
 
         /* VISTA DE LEITURA (ARTIGO) */
         #article-view { display: none; background: var(--card); min-height: 100vh; padding-bottom: 60px; }
         
-        .article-header { position: sticky; top: 0; background: var(--card); padding: 10px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.8rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 8px 12px; border-radius: 6px;}
+        .article-header { position: sticky; top: 0; background: var(--card); padding: 12px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 8px 12px; border-radius: 6px;}
         .header-btn:hover { color: white; background: var(--primary); border-color: var(--primary); }
         .header-btn.center-btn { background: transparent; border: none; color: var(--primary); }
         .header-btn.center-btn:hover { background: var(--surface); color: var(--primary-dark); }
         
-        .article-container { max-width: 700px; margin: 25px auto 0; padding: 0 20px; }
-        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 5px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
-        .article-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 900; line-height: 1.25; margin-bottom: 20px; color: var(--text); }
+        .article-container { max-width: 750px; margin: 30px auto 0; padding: 0 20px; }
+        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
+        .article-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; line-height: 1.25; margin-bottom: 25px; color: var(--text); }
         
-        .btn-action-row { display: flex; gap: 12px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
-        .btn-action { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
+        .btn-action-row { display: flex; gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .btn-action { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
         .btn-action:active { transform: scale(0.95); }
         
         .btn-action.like-btn.liked { background: rgba(225, 29, 72, 0.1); border-color: var(--icon-like); color: var(--icon-like); }
         .btn-action.save-btn.saved { background: rgba(2, 132, 199, 0.1); border-color: var(--icon-save); color: var(--icon-save); }
         
-        .article-main-img { width: 100%; border-radius: 10px; margin-bottom: 25px; object-fit: cover; max-height: 380px; box-shadow: var(--shadow); }
-        .article-content { font-size: 1.05rem; line-height: 1.7; color: var(--text); }
-        .article-content p { margin-bottom: 1.4rem; }
-        .article-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; }
+        .article-main-img { width: 100%; border-radius: 10px; margin-bottom: 30px; object-fit: cover; max-height: 450px; box-shadow: var(--shadow); }
+        .article-content { font-size: 1.1rem; line-height: 1.8; color: var(--text); }
+        .article-content p { margin-bottom: 1.5rem; }
+        .article-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 25px 0; }
         .article-content a { color: var(--primary); font-weight: bold; text-decoration: none; }
         .article-content a:hover { text-decoration: underline; }
         
-        .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 12px; border-radius: 8px; margin-top: 30px; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
-        .read-more-btn:hover { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(204,0,0,0.2); }
+        .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 15px; border-radius: 8px; margin-top: 40px; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .read-more-btn:hover { background: var(--primary); color: white; }
 
-        .related-section { margin-top: 40px; padding-top: 25px; border-top: 4px solid var(--border); }
-        .related-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 8px; }
-        .related-section h3::before { content: ''; display: block; width: 4px; height: 18px; background: var(--primary); border-radius: 2px; }
-        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; }
+        /* RELACIONADOS - BLINDADO CONTRA BUGS DE LAYOUT */
+        .related-section { margin-top: 50px; padding-top: 30px; border-top: 4px solid var(--border); clear: both; display: block; overflow: hidden; }
+        .related-section h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 10px; }
+        .related-section h3::before { content: ''; display: block; width: 4px; height: 20px; background: var(--primary); border-radius: 2px; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .related-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow); }
-        .related-card img { width: 100%; height: 110px; object-fit: cover; }
-        .related-card h4 { padding: 12px; font-size: 0.85rem; line-height: 1.4; font-weight: 700; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+        .related-card img { width: 100%; height: 120px; object-fit: cover; }
+        .related-card h4 { padding: 12px; font-size: 0.9rem; line-height: 1.4; font-weight: 700; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
 
         /* BOTÕES FLUTUANTES */
-        .floating-nav { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1001; transition: 0.3s; }
-        .float-btn { width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.2s; }
+        .floating-nav { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 1001; transition: 0.3s; }
+        .float-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.2s; }
         .float-btn:hover { transform: scale(1.1); }
         .float-btn.refresh { background: var(--icon-refresh); }
         .float-btn.share { background: var(--icon-share); }
         
-        .loader-main { text-align: center; padding: 40px; grid-column: 1/-1; color: var(--primary); font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;}
+        .loader-main { text-align: center; padding: 40px; grid-column: 1/-1; color: var(--primary); font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;}
         
         @media (max-width: 600px) {
             .feed { grid-template-columns: 1fr; padding: 0 15px 15px; }
-            .article-title { font-size: 1.6rem; }
+            .article-title { font-size: 1.8rem; }
             .header-btn { font-size: 0.75rem; padding: 6px 8px; }
         }
     </style>
@@ -229,7 +212,7 @@
     </div>
 </div>
 
-<div id="home-view" class="fade-in">
+<div id="home-view">
     <nav class="navbar">
         <div class="nav-top">
             <div class="logo-area">
@@ -270,7 +253,7 @@
     <div class="article-header">
         <button class="header-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
         <button class="header-btn center-btn" onclick="document.getElementById('related-section').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-list"></i> Outras</button>
-        <button class="header-btn" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
+        <button class="header-btn" onclick="goHomeForce()"><i class="fas fa-home"></i> Início</button>
     </div>
 
     <main class="article-container">
@@ -362,11 +345,11 @@ function timeAgo(dateString) {
     const now = new Date();
     const diffInSeconds = Math.floor((now - date) / 1000);
 
-    if (diffInSeconds < 60) return "<span class='time-ago'>Agora mesmo</span>";
+    if (diffInSeconds < 60) return "Agora mesmo";
     const diffInMinutes = Math.floor(diffInSeconds / 60);
-    if (diffInMinutes < 60) return `<span class='time-ago'>Há ${diffInMinutes} min</span>`;
+    if (diffInMinutes < 60) return `Há ${diffInMinutes} min`;
     const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) return `<span class='time-ago'>Há ${diffInHours}h</span>`;
+    if (diffInHours < 24) return `Há ${diffInHours}h`;
     const diffInDays = Math.floor(diffInHours / 24);
     if (diffInDays === 1) return "Ontem";
     if (diffInDays < 7) return `Há ${diffInDays} dias`;
@@ -385,12 +368,10 @@ window.addEventListener('popstate', (e) => {
     } else { closeArticleView(false); }
 });
 
-// AÇÃO 100% LIMPA: Ao clicar "Início" ou "Sua Notícia 365"
+// AÇÃO LIMPA E SEM BUGS
 function goHome() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebarOverlay').classList.remove('open');
-    
-    // Limpa e repõe a pesquisa
     const searchInput = document.getElementById('search-input');
     if(searchInput) { searchInput.value = ''; }
     
@@ -399,12 +380,21 @@ function goHome() {
     } else { 
         window.scrollTo({top:0, behavior: 'smooth'}); 
     }
-    
-    // Repõe tudo ao normal na grelha
-    localInstantSearch();
+    renderFeed(); // Repõe o feed limpo e ordenado
 }
 
-function goBack() { history.back(); }
+function goHomeForce() {
+    history.pushState({ view: 'home' }, "", window.location.pathname);
+    closeArticleView(false);
+}
+
+function goBack() { 
+    if(currentReadingPost) {
+        closeArticleView(true);
+    } else {
+        history.back(); 
+    }
+}
 
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
 function toggleTheme() {
@@ -422,14 +412,13 @@ function setSort(order) {
 function manualRefresh() {
     const icon = document.getElementById('refresh-icon');
     icon.classList.add('fa-spin');
-    document.getElementById('search-input').value = ''; // Limpa pesquisa ao recarregar
+    document.getElementById('search-input').value = ''; 
     document.getElementById('feed').innerHTML = ''; 
     allPosts = []; currentPage = 1; 
     window.scrollTo({top:0, behavior: 'smooth'}); 
     loadNews().then(() => { setTimeout(() => icon.classList.remove('fa-spin'), 1000); });
 }
 
-// PESQUISA DESBUGADA
 function localInstantSearch() {
     const query = document.getElementById('search-input').value.toLowerCase();
     const feed = document.getElementById('feed');
@@ -452,7 +441,6 @@ async function fetchWithTimeout(resource, options = {}) {
     clearTimeout(id); return response;
 }
 
-// SISTEMA ULTRARRÁPIDO
 async function loadNews() {
     if (isFetching) return;
     if (isSavedView || isLikedView) { renderFeed(); return; } 
@@ -482,7 +470,6 @@ async function loadNews() {
             
             if (added) { 
                 if (!currentReadingPost) { renderFeed(); } 
-                else { renderRelatedPosts(currentReadingPost); }
                 updateTicker(); 
             }
         } catch (e) { } 
@@ -500,9 +487,11 @@ function updateTicker() {
     }
 }
 
-// ZERO BUGS NO SCROLL - GRELHA COM CSS ORDER 
+// ORDENAÇÃO BLINDADA: Apaga e recria para garantir ordem perfeita sem bugs
 function renderFeed() {
     const feed = document.getElementById('feed');
+    feed.innerHTML = ''; // Limpa tudo para não encavalar e não bugar!
+    
     let displayList = [...allPosts];
     
     if(isSavedView) { displayList = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]'); }
@@ -510,41 +499,31 @@ function renderFeed() {
     
     if(currentCat && !isSavedView && !isLikedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
     
+    // ORDENAÇÃO ABSOLUTA E REAL
+    if(sortOrder === 'new') { 
+        displayList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); 
+    } else { 
+        displayList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); 
+    }
+    
     displayList.forEach((p) => {
-        let card = document.getElementById(`card-${p.uniqueId}`);
-        if (!card) {
-            card = document.createElement('div');
-            card.id = `card-${p.uniqueId}`;
-            card.className = 'news-card fade-in'; // Animação ao entrar na grelha
-            card.onclick = () => openArticleById(p.uniqueId);
-            card.innerHTML = `
-                <img class="news-img" src="${p.img}" loading="lazy">
-                <div class="news-body">
-                    <span class="news-tag">${p.srcName}</span>
-                    <h3 class="news-title">${p.title}</h3>
-                    <div class="news-meta">
-                        <span class="meta-time"><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>
-                    </div>
-                </div>`;
-            feed.appendChild(card);
-        } else {
-            card.querySelector('.meta-time').innerHTML = `<i class="far fa-clock"></i> ${timeAgo(p.date)}`;
-        }
-        
-        // ORDENAÇÃO FÍSICA E SILENCIOSA: Sem solavancos!
-        const timeVal = new Date(p.date).getTime();
-        card.style.order = sortOrder === 'new' ? -timeVal : timeVal;
-        card.style.display = 'flex'; 
-    });
-
-    // Oculta as notícias que não pertencem à categoria/pesquisa atual
-    Array.from(feed.children).forEach(child => {
-        const id = child.id.replace('card-', '');
-        if(!displayList.some(p => p.uniqueId === id)) { child.style.display = 'none'; }
+        let card = document.createElement('div');
+        card.id = `card-${p.uniqueId}`;
+        card.className = 'news-card';
+        card.onclick = () => openArticleById(p.uniqueId);
+        card.innerHTML = `
+            <img class="news-img" src="${p.img}" loading="lazy">
+            <div class="news-body">
+                <span class="news-tag">${p.srcName}</span>
+                <h3 class="news-title">${p.title}</h3>
+                <div class="news-meta">
+                    <span><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>
+                </div>
+            </div>`;
+        feed.appendChild(card);
     });
     
-    // Repõe os filtros da pesquisa caso haja algo digitado
-    localInstantSearch();
+    localInstantSearch(); // Refaz a pesquisa logo a seguir
 }
 
 function filterCat(cat, btn) {
@@ -555,12 +534,6 @@ function filterCat(cat, btn) {
     document.getElementById('sidebar-saved-btn').classList.remove('active');
     document.getElementById('sidebar-liked-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = 'block';
-    
-    // Animação de categoria
-    document.getElementById('feed').classList.remove('fade-in');
-    void document.getElementById('feed').offsetWidth; // Reset animation
-    document.getElementById('feed').classList.add('fade-in');
-    
     renderFeed();
 }
 
@@ -570,7 +543,7 @@ function toggleSavedView() {
     document.getElementById('sidebar-liked-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = isSavedView ? 'none' : 'block';
     toggleSidebar();
-    if(isSavedView && currentReadingPost) { goHome(); } else { renderFeed(); }
+    if(isSavedView && currentReadingPost) { goHomeForce(); } else { renderFeed(); }
 }
 
 function toggleLikedView() {
@@ -579,7 +552,7 @@ function toggleLikedView() {
     document.getElementById('sidebar-saved-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = isLikedView ? 'none' : 'block';
     toggleSidebar();
-    if(isLikedView && currentReadingPost) { goHome(); } else { renderFeed(); }
+    if(isLikedView && currentReadingPost) { goHomeForce(); } else { renderFeed(); }
 }
 
 function openArticleById(id) {
@@ -596,16 +569,10 @@ async function openArticleView(post, pushHistory = true) {
     
     if(pushHistory) { history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId); }
     
-    document.getElementById('og-title').setAttribute("content", post.title);
-    document.getElementById('og-image').setAttribute("content", post.img);
-    document.getElementById('og-url').setAttribute("content", shareUrl);
-    document.title = post.title + " | Sua Notícia 365";
-    
     document.getElementById('home-view').style.display = 'none';
     
     const articleView = document.getElementById('article-view');
     articleView.style.display = 'block';
-    articleView.classList.add('fade-in'); // Adiciona Efeito Fade-In 
     window.scrollTo(0, 0);
 
     document.getElementById('source-tag').innerText = post.srcName;
@@ -618,7 +585,7 @@ async function openArticleView(post, pushHistory = true) {
     
     const contentDiv = document.getElementById('article-content');
     contentDiv.innerHTML = (post.contentLoaded || "Conteúdo indisponível.") + `
-    <a href="${post.link}" target="_blank" class="read-more-btn fade-in">
+    <a href="${post.link}" target="_blank" class="read-more-btn">
         <i class="fas fa-external-link-alt"></i> Ler Notícia Completa no Site Oficial
     </a>`;
     
@@ -628,19 +595,21 @@ async function openArticleView(post, pushHistory = true) {
 function closeArticleView(updateHistory = true) {
     const articleView = document.getElementById('article-view');
     articleView.style.display = 'none';
-    articleView.classList.remove('fade-in');
     
     const homeView = document.getElementById('home-view');
     homeView.style.display = 'block';
-    homeView.classList.add('fade-in'); // Efeito suave ao voltar ao feed
     
     document.title = "Sua Notícia 365 | Premium";
     currentReadingPost = null;
     
     if(updateHistory) { history.pushState({ view: 'home' }, "", window.location.pathname); }
+    
+    // Repõe o scroll exato e garante que a grelha está limpa!
+    renderFeed();
     window.scrollTo(0, savedScrollPosition);
 }
 
+// RELACIONADOS BLINDADOS - Agora nunca mais encavala no texto!
 function renderRelatedPosts(currentPost) {
     const section = document.getElementById('related-section');
     const grid = document.getElementById('related-grid');
@@ -651,7 +620,7 @@ function renderRelatedPosts(currentPost) {
     
     if(related.length > 0) {
         grid.innerHTML = related.map(p => `
-            <div class="related-card fade-in" onclick="openArticleById('${p.uniqueId}')">
+            <div class="related-card" onclick="window.scrollTo(0,0); openArticleById('${p.uniqueId}')">
                 <img src="${p.img}" loading="lazy">
                 <h4>${p.title}</h4>
             </div>
@@ -686,21 +655,26 @@ function updateActionBtns() {
     document.getElementById('btn-like').classList.toggle('liked', liked);
 }
 
-// BOTÃO PARTILHA REPARADO (Página Incial e Artigos)
+// PARTILHA INTELIGENTE: Lê a sua ideia e usa o Link Original do Jornal!
 function shareGlobal() {
+    // Se estiver na página inicial, partilha o seu site.
     let shareUrl = window.location.href;
     let shareTitle = "Sua Notícia 365 | O seu portal Premium";
+    let shareText = "Acompanhe as últimas notícias de Moçambique num só lugar!";
     
+    // Se estiver dentro de uma notícia, partilha o LINK OFICIAL DO JORNAL para o WhatsApp carregar a imagem perfeita!
     if(currentReadingPost) {
-        shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
+        shareUrl = currentReadingPost.link; 
         shareTitle = currentReadingPost.title;
+        shareText = "Leia esta notícia incrível:";
     }
     
     if (navigator.share) { 
-        navigator.share({ title: shareTitle, text: "Veja isto no Sua Notícia 365:", url: shareUrl }).catch(err => console.log('Partilha cancelada')); 
+        navigator.share({ title: shareTitle, text: shareText, url: shareUrl }).catch(err => console.log('Partilha cancelada')); 
     } else { 
-        navigator.clipboard.writeText(shareUrl); 
-        alert("Link copiado para partilhar!"); 
+        // Partilha para navegadores que não têm o botão nativo do telemóvel
+        const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareTitle + " - " + shareUrl)}`;
+        window.open(waUrl, '_blank');
     }
 }
 
