@@ -91,16 +91,8 @@
 
         /* PESQUISA E CATEGORIAS */
         .controls-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
-        
-        /* BARRA GOOGLE OTIMIZADA */
-        .google-search { display: flex; align-items: center; background: #fff; border: 2px solid #4285f4; border-radius: 10px; overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow); transition: 0.3s; }
-        .google-search:focus-within { box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.3); }
-        .google-search img { height: 24px; padding: 0 12px; background: #fff; }
-        .google-search input { flex: 1; padding: 14px 10px; border: none; outline: none; font-size: 1rem; color: #333; }
-        .google-search button { background: #4285f4; color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.1rem; transition: 0.2s; height: 100%; }
-        .google-search button:hover { background: #3367d6; }
 
-        .search-box { position: relative; margin-bottom: 15px; }
+        .search-box { position: relative; margin-bottom: 20px; margin-top: 10px; }
         .search-box input { width: 100%; padding: 14px 15px 14px 45px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
         .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1); }
         .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 1rem; }
@@ -118,17 +110,20 @@
         .news-img { width: 100%; height: 200px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
         .news-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
         
-        /* TAG LIMPA E PROFISSIONAL */
         .news-tag { color: white; background: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; display: inline-block; width: fit-content; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
         
         .news-title { font-size: 1.15rem; font-weight: 700; line-height: 1.4; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
         .news-meta { font-size: 0.8rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-top: 1px solid var(--border); padding-top: 15px; }
 
-        /* VISTA DE LEITURA */
+        /* VISTA DE LEITURA (ARTIGO) */
         #article-view { display: none; background: var(--card); min-height: 100vh; padding-bottom: 60px; }
-        .article-header { position: sticky; top: 0; background: var(--card); padding: 15px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .back-btn { background: none; border: none; font-size: 1rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: color 0.2s; padding: 5px 10px; border-radius: 6px;}
-        .back-btn:hover { color: var(--primary); background: var(--surface); }
+        
+        /* NOVO CABEÇALHO DO ARTIGO - 3 BOTÕES PROFISSIONAIS */
+        .article-header { position: sticky; top: 0; background: var(--card); padding: 12px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 8px 12px; border-radius: 6px;}
+        .header-btn:hover { color: white; background: var(--primary); border-color: var(--primary); }
+        .header-btn.center-btn { background: transparent; border: none; color: var(--primary); }
+        .header-btn.center-btn:hover { background: var(--surface); color: var(--primary-dark); }
         
         .article-container { max-width: 750px; margin: 30px auto 0; padding: 0 20px; }
         .article-tag { display: inline-block; background: var(--primary); color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
@@ -148,7 +143,6 @@
         .article-content a { color: var(--primary); font-weight: bold; text-decoration: none; }
         .article-content a:hover { text-decoration: underline; }
         
-        /* BOTÃO PROFISSIONAL DE LER NO SITE ORIGINAL */
         .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 15px; border-radius: 8px; margin-top: 40px; text-decoration: none; transition: 0.3s; font-size: 1rem; }
         .read-more-btn:hover { background: var(--primary); color: white; }
 
@@ -173,7 +167,7 @@
         @media (max-width: 600px) {
             .feed { grid-template-columns: 1fr; padding: 0 15px 15px; }
             .article-title { font-size: 1.8rem; }
-            .google-search input { width: 100px; } /* Evita quebra de layout em telas pequenas */
+            .header-btn { font-size: 0.75rem; padding: 6px 8px; }
         }
     </style>
 </head>
@@ -227,13 +221,6 @@
     </div>
     
     <div class="controls-container">
-        
-        <form action="https://www.google.com/search" method="GET" target="_blank" class="google-search">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
-            <input type="text" name="q" placeholder="Pesquisar no Google...">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-
         <div class="search-box">
             <i class="fas fa-search"></i>
             <input type="text" id="search-input" placeholder="Encontrar palavras-chave nas notícias..." oninput="localInstantSearch()">
@@ -255,7 +242,9 @@
 
 <div id="article-view">
     <div class="article-header">
-        <button class="back-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
+        <button class="header-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
+        <button class="header-btn center-btn" onclick="document.getElementById('related-section').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-list"></i> Outras Notícias</button>
+        <button class="header-btn" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
     </div>
 
     <main class="article-container">
@@ -328,19 +317,15 @@ function detectCategory(title, content) {
     return 'Geral'; 
 }
 
-// RAIO-X: EXTRAÇÃO PROFUNDA DE IMAGENS (NUNCA FALHA)
+// RAIO-X: EXTRAÇÃO PROFUNDA DE IMAGENS
 function extractDeepImage(p) {
-    // 1. Tenta API Padrão WP
     if (p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0].source_url) return p._embedded['wp:featuredmedia'][0].source_url;
-    // 2. Tenta Jetpack / Yoast SEO / Parsely
     if (p.jetpack_featured_media_url) return p.jetpack_featured_media_url;
     if (p.yoast_head_json && p.yoast_head_json.og_image && p.yoast_head_json.og_image[0].url) return p.yoast_head_json.og_image[0].url;
-    // 3. O RAIO-X: Procura uma tag <img> escondida dentro do próprio texto da notícia!
     if (p.content && p.content.rendered) {
         const match = p.content.rendered.match(/<img[^>]+src="([^">]+)"/);
         if (match) return match[1];
     }
-    // 4. Se nada funcionar, coloca um placeholder genérico (Acontece raramente agora)
     return 'https://via.placeholder.com/600x300/e2e8f0/64748b?text=Sua+Notícia+365';
 }
 
@@ -352,14 +337,20 @@ window.addEventListener('popstate', (e) => {
 });
 
 function goHome() {
-    if(currentReadingPost) { goBack(); } else { window.scrollTo({top:0, behavior: 'smooth'}); }
+    if(currentReadingPost) { 
+        closeArticleView(true);
+    } else { 
+        window.scrollTo({top:0, behavior: 'smooth'}); 
+    }
 }
+
 function goBack() { history.back(); }
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
 function toggleTheme() {
     const isDark = document.body.classList.toggle('dark-mode');
     document.getElementById('theme-icon-top').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
 }
+
 function setSort(order) {
     sortOrder = order;
     document.getElementById('btn-sort-new').classList.toggle('active', order === 'new');
@@ -367,36 +358,27 @@ function setSort(order) {
     toggleSidebar(); renderFeed(); 
 }
 
-// BOTÃO ATUALIZAR MANUAL (FORÇA O NOVO FETCH E LIMPA A MEMÓRIA)
+// BOTÃO ATUALIZAR MANUAL
 function manualRefresh() {
     const icon = document.getElementById('refresh-icon');
     icon.classList.add('fa-spin');
     
-    // Zera tudo
     document.getElementById('feed').innerHTML = ''; 
     allPosts = []; 
     currentPage = 1; 
     
-    // Rola para o topo e busca de novo
     window.scrollTo({top:0, behavior: 'smooth'}); 
-    loadNews().then(() => {
-        setTimeout(() => icon.classList.remove('fa-spin'), 1000);
-    });
+    loadNews().then(() => { setTimeout(() => icon.classList.remove('fa-spin'), 1000); });
 }
 
-// PESQUISA INSTANTÂNEA POR PALAVRA-CHAVE
 function localInstantSearch() {
     const query = document.getElementById('search-input').value.toLowerCase();
     const feed = document.getElementById('feed');
-    
     Array.from(feed.children).forEach(card => {
         const title = card.querySelector('.news-title').innerText.toLowerCase();
         const src = card.querySelector('.news-tag').innerText.toLowerCase();
-        if (title.includes(query) || src.includes(query)) {
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
-        }
+        if (title.includes(query) || src.includes(query)) { card.style.display = 'flex'; } 
+        else { card.style.display = 'none'; }
     });
 }
 
@@ -408,20 +390,16 @@ async function fetchWithTimeout(resource, options = {}) {
     clearTimeout(id); return response;
 }
 
-// CARREGAMENTO COM ANTI-CACHE (SEMPRE A ÚLTIMA NOTÍCIA)
+// CARREGAMENTO COM ANTI-CACHE
 async function loadNews() {
     if (isFetching || isSavedView) return;
     isFetching = true;
     let fetchesCompleted = 0;
-    
-    // O timestamp impede os navegadores de mostrar notícias antigas presas na memória
     const cacheBuster = new Date().getTime();
 
     SOURCES.forEach(async (src) => {
         try {
-            // URL c/ Anti-cache inserido (_cb=...)
             let url = `${src.api}&per_page=6&page=${currentPage}&_cb=${cacheBuster}`;
-            
             const res = await fetchWithTimeout(url);
             if (!res.ok) throw new Error('Bloqueio');
             const data = await res.json();
@@ -430,19 +408,20 @@ async function loadNews() {
             data.forEach(p => {
                 const uniqueId = `${src.slug}-${p.id}`;
                 if(!allPosts.some(oldP => oldP.uniqueId === uniqueId)) { 
-                    
-                    let contentText = p.content?.rendered || "";
-                    let imgFinal = extractDeepImage(p); // Usa o novo Raio-X
-                    
                     allPosts.push({
-                        uniqueId: uniqueId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: src.name, srcSlug: src.slug, apiBase: src.api.split('?')[0], link: p.link, img: imgFinal, contentLoaded: contentText,
-                        detectedCat: detectCategory(p.title.rendered, contentText) 
+                        uniqueId: uniqueId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: src.name, srcSlug: src.slug, apiBase: src.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, p.content?.rendered || "") 
                     });
                     added = true;
                 }
             });
             
-            if (added) { renderFeed(); updateTicker(); }
+            if (added) { 
+                // Atualiza a grelha principal
+                if (!currentReadingPost) { renderFeed(); } 
+                // Se a pessoa já estiver a ler uma notícia, o "Leia Também" ganha vida logo que chegam as novas!
+                else { renderRelatedPosts(currentReadingPost); }
+                updateTicker(); 
+            }
         } catch (e) { } 
         finally {
             fetchesCompleted++;
@@ -458,12 +437,16 @@ function updateTicker() {
     }
 }
 
-// O SEGREDO DO ZERO BUGS E ORDENAÇÃO: CSS ORDER
+// ORDENAÇÃO FÍSICA NO DOM (A MAIS RECENTE FICA ABSOLUTAMENTE NO TOPO)
 function renderFeed() {
     const feed = document.getElementById('feed');
     let displayList = isSavedView ? JSON.parse(localStorage.getItem('premium_news_saved') || '[]') : [...allPosts];
     
     if(currentCat && !isSavedView) { displayList = displayList.filter(p => p.detectedCat === currentCat); }
+    
+    // ORDENAÇÃO ESTRITA: Compara as datas das notícias e ordena perfeitamente
+    if(sortOrder === 'new') { displayList.sort((a, b) => new Date(b.date) - new Date(a.date)); } 
+    else { displayList.sort((a, b) => new Date(a.date) - new Date(b.date)); }
     
     displayList.forEach(p => {
         let card = document.getElementById(`card-${p.uniqueId}`);
@@ -472,8 +455,6 @@ function renderFeed() {
             card.id = `card-${p.uniqueId}`;
             card.className = 'news-card';
             card.onclick = () => openArticleById(p.uniqueId);
-            
-            // UI LIMPA: MOSTRA SÓ O NOME DO JORNAL (ex: Times de Todos)
             card.innerHTML = `
                 <img class="news-img" src="${p.img}" loading="lazy">
                 <div class="news-body">
@@ -483,21 +464,18 @@ function renderFeed() {
                         <span><i class="far fa-clock"></i> ${new Date(p.date).toLocaleDateString('pt-MZ')} às ${new Date(p.date).toLocaleTimeString('pt-MZ', {hour: '2-digit', minute:'2-digit'})}</span>
                     </div>
                 </div>`;
-            feed.appendChild(card);
         }
-        
-        // ORDENA O CSS SEM PISCAR A TELA!
-        const timeVal = new Date(p.date).getTime();
-        card.style.order = sortOrder === 'new' ? -timeVal : timeVal;
+        // "appendChild" reordena fisicamente os elementos no HTML, pondo as recentes primeiro sem bugs
+        feed.appendChild(card);
         card.style.display = 'flex'; 
     });
 
+    // Oculta as que não estão na lista (para as categorias funcionarem lisas)
     Array.from(feed.children).forEach(child => {
         const id = child.id.replace('card-', '');
         if(!displayList.some(p => p.uniqueId === id)) { child.style.display = 'none'; }
     });
     
-    // Re-aplica a pesquisa se houver algo escrito
     if(document.getElementById('search-input').value.length > 0) localInstantSearch();
 }
 
@@ -505,7 +483,7 @@ function filterCat(cat, btn) {
     document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
     btn.classList.add('active');
     currentCat = cat; isSavedView = false;
-    renderFeed(); // Instantâneo!
+    renderFeed();
 }
 
 function toggleSavedView() {
@@ -533,7 +511,6 @@ async function openArticleView(post, pushHistory = true) {
     document.getElementById('article-view').style.display = 'block';
     window.scrollTo(0, 0);
 
-    // Na visualização de artigo, também omitimos a categoria colada no nome para ficar bonito
     document.getElementById('source-tag').innerText = post.srcName;
     document.getElementById('article-title').innerHTML = post.title;
     
@@ -543,8 +520,6 @@ async function openArticleView(post, pushHistory = true) {
     updateActionBtns();
     
     const contentDiv = document.getElementById('article-content');
-    
-    // BOTÃO MAIOR E PROFISSIONAL NO FINAL DA LEITURA
     contentDiv.innerHTML = (post.contentLoaded || "Conteúdo não disponível na API.") + `
     <a href="${post.link}" target="_blank" class="read-more-btn">
         <i class="fas fa-external-link-alt"></i> Ler Notícia Completa no Site Oficial
@@ -562,7 +537,7 @@ function closeArticleView(updateHistory = true) {
     window.scrollTo(0, savedScrollPosition);
 }
 
-// LEIA TAMBÉM ALEATÓRIO E SEGURO
+// LEIA TAMBÉM SEGURO PARA LINKS PARTILHADOS
 function renderRelatedPosts(currentPost) {
     const section = document.getElementById('related-section');
     const grid = document.getElementById('related-grid');
@@ -631,10 +606,8 @@ window.onload = async () => {
                 const res = await fetch(`${source.api.split('?')[0]}/${apiId}?_embed`);
                 const p = await res.json();
                 
-                let imgFinal = extractDeepImage(p);
-                
                 const sharedPost = {
-                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: imgFinal, contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, "")
+                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: p.date, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentLoaded: p.content?.rendered || "", detectedCat: detectCategory(p.title.rendered, "")
                 };
                 allPosts.push(sharedPost);
                 openArticleView(sharedPost, false); 
