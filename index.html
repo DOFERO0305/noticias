@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sua Notícia 365 | Premium</title>
-    <meta property="og:title" content="Sua Notícia 365 | O seu portal Premium">
-    <meta property="og:description" content="Acompanhe as últimas notícias de Moçambique e do mundo em tempo real.">
-    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -17,11 +14,11 @@
             
             --bg: #f8fafc;
             --card: #ffffff;
-            --text: #0f172a;
+            --text: #1e293b;
             --text-meta: #64748b;
             --border: #e2e8f0;
             --surface: #f1f5f9;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             
             --icon-like: #e11d48;
             --icon-save: #0284c7;
@@ -39,88 +36,81 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 20px; transition: background 0.3s ease, color 0.3s ease; font-size: 16px; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 20px; transition: background 0.3s, color 0.3s; font-size: 15px; scroll-behavior: smooth; }
         
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        /* HEADER */
-        .navbar { position: sticky; top: 0; background: var(--primary); color: white; z-index: 1000; box-shadow: 0 4px 15px rgba(204,0,0,0.25); }
+        /* HEADER PREMIUM */
+        .navbar { position: sticky; top: 0; background: var(--primary); color: white; z-index: 1000; box-shadow: 0 4px 12px rgba(204,0,0,0.2); }
         .nav-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 12px 20px; }
         .logo-area { display: flex; align-items: center; gap: 15px; }
-        .menu-toggle { background: none; border: none; font-size: 1.4rem; color: white; cursor: pointer; transition: transform 0.2s; }
-        .menu-toggle:active { transform: scale(0.9); }
-        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .menu-toggle { background: none; border: none; font-size: 1.3rem; color: white; cursor: pointer; }
+        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.4rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
         
-        .theme-btn-top { background: rgba(0,0,0,0.15); border: none; color: white; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
-        .theme-btn-top:hover { background: rgba(0,0,0,0.3); }
+        .theme-btn-top { background: rgba(0,0,0,0.2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
+        .theme-btn-top:hover { background: rgba(0,0,0,0.4); }
 
-        .breaking-bar { background: var(--accent); color: white; padding: 10px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
-        .breaking-text { animation: scrollLeft 30s linear infinite; display: inline-block; padding-left: 100%; letter-spacing: 0.5px; }
+        .breaking-bar { background: var(--accent); color: white; padding: 8px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
+        .breaking-text { animation: scrollLeft 25s linear infinite; display: inline-block; padding-left: 100%; }
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
         /* MENU LATERAL */
-        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1999; display: none; opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(2px); }
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1999; display: none; opacity: 0; transition: 0.3s; }
         .sidebar-overlay.open { display: block; opacity: 1; }
-        .sidebar { position: fixed; top: 0; left: -300px; width: 280px; height: 100vh; background: var(--card); z-index: 2000; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 25px 20px; border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; box-shadow: 4px 0 15px rgba(0,0,0,0.1); }
+        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100vh; background: var(--card); z-index: 2000; transition: left 0.3s ease; padding: 20px; border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
         .sidebar.open { left: 0; }
-        .sidebar-close { background: none; border: none; font-size: 1.4rem; color: var(--text); cursor: pointer; align-self: flex-end; margin-bottom: 10px; }
+        .sidebar-close { background: none; border: none; font-size: 1.4rem; color: var(--text); cursor: pointer; align-self: flex-end; }
         
-        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--primary); margin-bottom: 25px; text-transform: uppercase; cursor: pointer;}
-        .side-btn { display: flex; align-items: center; gap: 15px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 15px; font-size: 1rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: 0.2s; text-align: left; margin-bottom: 5px; }
+        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; cursor: pointer;}
+        .side-btn { display: flex; align-items: center; gap: 12px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border-radius: 6px; transition: 0.2s; text-align: left; }
         .side-btn:hover, .side-btn.active { background: var(--surface); color: var(--primary); }
-        .side-btn i { width: 20px; text-align: center; font-size: 1.1rem; }
+        .side-btn i { width: 18px; text-align: center; font-size: 1.1rem; }
         
         .i-dark { color: #475569; }
         .i-saved { color: var(--icon-save); }
         .i-new { color: #f59e0b; }
         
-        .sidebar-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-meta); line-height: 1.6; }
-        .contact-link { color: var(--text); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 10px; margin-top: 10px; transition: color 0.2s; }
-        .contact-link:hover { color: var(--primary); }
-        .contact-link i { color: var(--primary); font-size: 1.1rem; }
+        .sidebar-footer { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-meta); line-height: 1.5; }
+        .contact-link { color: var(--text); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+        .contact-link i { color: var(--primary); }
 
         /* PESQUISA E CATEGORIAS */
-        .controls-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
-        .search-box { position: relative; margin-bottom: 20px; }
-        .search-box input { width: 100%; padding: 14px 15px 14px 45px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: border-color 0.2s; }
-        .search-box input:focus { border-color: var(--primary); }
-        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 1rem; }
+        .controls-container { max-width: 1200px; margin: 15px auto; padding: 0 20px; }
+        .search-box { position: relative; margin-bottom: 15px; }
+        .search-box input { width: 100%; padding: 12px 15px 12px 40px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 0.95rem; box-shadow: var(--shadow); outline: none; }
+        .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 0.9rem; }
         
-        .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; -ms-overflow-style: none; }
-        .categories::-webkit-scrollbar { display: none; }
-        .cat-item { padding: 8px 18px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .cat-item:hover { border-color: var(--primary); color: var(--primary); }
-        .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(204,0,0,0.2); }
+        .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .categories::-webkit-scrollbar { display: none; } /* Esconde a scrollbar das categorias */
+        .cat-item { padding: 6px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; letter-spacing: 0.5px; }
+        .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); }
 
         /* GRELHA DE NOTÍCIAS */
-        .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; min-height: 50vh; }
-        .news-card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: transform 0.2s ease, box-shadow 0.2s ease; animation: fadeIn 0.5s ease; }
-        .news-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-color: var(--primary); }
-        .news-img { width: 100%; height: 200px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
-        .news-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-        .news-tag { color: var(--primary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px; }
-        .news-title { font-size: 1.15rem; font-weight: 700; line-height: 1.4; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
-        .news-meta { font-size: 0.8rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-top: 1px solid var(--border); padding-top: 15px; }
+        .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; min-height: 50vh; }
+        .news-card { background: var(--card); border-radius: 8px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: 0.2s; }
+        .news-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .news-img { width: 100%; height: 180px; object-fit: cover; background: var(--surface); }
+        .news-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+        .news-tag { color: var(--primary); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .news-title { font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
+        .news-meta { font-size: 0.75rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 500; border-top: 1px solid var(--border); padding-top: 10px; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* VISTA DE LEITURA (ARTIGO) */
-        #article-view { display: none; background: var(--card); min-height: 100vh; padding-bottom: 60px; }
-        .article-header { position: sticky; top: 0; background: var(--card); padding: 15px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .back-btn { background: none; border: none; font-size: 1rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: color 0.2s; padding: 5px 10px; border-radius: 6px; }
-        .back-btn:hover { color: var(--primary); background: var(--surface); }
+        /* VISTA DE LEITURA */
+        #article-view { display: none; background: var(--card); min-height: 100vh; padding-bottom: 50px; }
+        .article-header { position: sticky; top: 0; background: var(--card); padding: 12px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; align-items: center; box-shadow: var(--shadow); }
+        .back-btn { background: none; border: none; font-size: 0.95rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: color 0.2s; }
+        .back-btn:hover { color: var(--primary); }
         
-        .article-container { max-width: 750px; margin: 30px auto 0; padding: 0 20px; }
-        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
-        .article-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; line-height: 1.25; margin-bottom: 25px; color: var(--text); }
+        .article-container { max-width: 700px; margin: 20px auto 0; padding: 0 20px; }
+        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
+        .article-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; line-height: 1.25; margin-bottom: 20px; color: var(--text); }
         
-        .btn-action-row { display: flex; gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-        .btn-action { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
-        .btn-action:active { transform: scale(0.95); }
-        .btn-action i { font-size: 1.1rem; }
+        .btn-action-row { display: flex; gap: 10px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+        .btn-action { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .btn-action i { font-size: 1rem; }
         
         .btn-action.like-btn i { color: var(--icon-like); }
         .btn-action.like-btn.liked { background: rgba(225, 29, 72, 0.1); border-color: var(--icon-like); color: var(--icon-like); }
@@ -128,37 +118,28 @@
         .btn-action.save-btn i { color: var(--icon-save); }
         .btn-action.save-btn.saved { background: rgba(2, 132, 199, 0.1); border-color: var(--icon-save); color: var(--icon-save); }
         
-        .article-main-img { width: 100%; border-radius: 8px; margin-bottom: 30px; object-fit: cover; max-height: 450px; box-shadow: var(--shadow); }
-        .article-content { font-size: 1.1rem; line-height: 1.8; color: var(--text); }
+        .article-main-img { width: 100%; border-radius: 6px; margin-bottom: 25px; object-fit: cover; max-height: 400px; }
+        .article-content { font-size: 1rem; line-height: 1.7; color: var(--text); }
         .article-content p { margin-bottom: 1.5rem; }
-        .article-content img, .article-content iframe { max-width: 100%; height: auto; border-radius: 8px; margin: 25px 0; }
-        .article-content a { color: var(--primary); text-decoration: none; font-weight: 600; }
-        .article-content a:hover { text-decoration: underline; }
+        .article-content img { max-width: 100%; height: auto; border-radius: 6px; margin: 20px 0; }
         
-        .related-section { margin-top: 50px; padding-top: 30px; border-top: 4px solid var(--border); }
-        .related-section h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 10px; }
-        .related-section h3::before { content: ''; display: block; width: 4px; height: 20px; background: var(--primary); border-radius: 2px; }
-        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; }
-        .related-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow); }
-        .related-card img { width: 100%; height: 120px; object-fit: cover; }
-        .related-card h4 { padding: 12px; font-size: 0.9rem; line-height: 1.4; font-weight: 700; color: var(--text); }
+        .related-section { margin-top: 40px; padding-top: 30px; border-top: 4px solid var(--border); }
+        .related-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; color: var(--primary); }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; }
+        .related-card:hover { border-color: var(--primary); }
+        .related-card img { width: 100%; height: 100px; object-fit: cover; }
+        .related-card h4 { padding: 10px; font-size: 0.85rem; line-height: 1.3; font-weight: 600; color: var(--text); }
 
         /* BOTÕES FLUTUANTES */
-        .floating-nav { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 12px; z-index: 1001; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .floating-nav { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1001; opacity: 0; pointer-events: none; transition: 0.3s; }
         .floating-nav.visible { opacity: 1; pointer-events: auto; }
-        .float-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.2s; }
-        .float-btn:hover { background: var(--primary-dark); transform: scale(1.1); }
+        .float-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.2s; }
+        .float-btn:hover { background: var(--primary-dark); transform: scale(1.05); }
         .float-btn.share { background: var(--icon-share); }
         .float-btn.share:hover { background: #059669; }
 
-        .loader { text-align: center; padding: 40px; grid-column: 1/-1; color: var(--text-meta); font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        
-        @media (max-width: 600px) {
-            .article-title { font-size: 1.7rem; }
-            .feed { grid-template-columns: 1fr; padding: 0 15px 15px; }
-            .controls-container, .article-container { padding: 0 15px; }
-        }
+        .loader { text-align: center; padding: 40px; grid-column: 1/-1; color: var(--primary); font-size: 1.5rem; }
     </style>
 </head>
 <body>
@@ -166,17 +147,17 @@
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <div class="sidebar" id="sidebar">
     <button class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-arrow-left"></i></button>
-    <h2 onclick="goHome()">Sua Notícia <span style="color: var(--text);">365</span></h2>
+    <h2 onclick="goHome()">Sua Notícia <span style="color: black;">365</span></h2>
 
     <button class="side-btn" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
     <button class="side-btn" id="sidebar-saved-btn" onclick="toggleSavedView()"><i class="fas fa-bookmark i-saved"></i> Ler Mais Tarde</button>
     
-    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
-        <p style="font-size: 0.8rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 12px; font-weight: 800; letter-spacing: 0.5px;">Organização</p>
+    <div style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">
+        <p style="font-size: 0.75rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">Filtragem</p>
         <button class="side-btn active" id="btn-sort-new" onclick="setSort('new')"><i class="fas fa-bolt i-new"></i> Mais Recentes</button>
         <button class="side-btn" id="btn-sort-old" onclick="setSort('old')"><i class="fas fa-history i-dark"></i> Mais Antigas</button>
     </div>
-
+    
     <div class="sidebar-footer">
         <strong>&copy; Sua Notícia 365</strong><br>
         Criado por Donaldo F. Rodrigues<br>
@@ -190,7 +171,7 @@
         <div class="nav-top">
             <div class="logo-area">
                 <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-                <div class="logo" onclick="goHome()">Sua Notícia <span style="color: var(--text); font-weight: 900;">365</span></div>
+                <div class="logo" onclick="goHome()">Sua Notícia <span style="color: black; font-weight: 900;">365</span></div>
             </div>
             <button class="theme-btn-top" onclick="toggleTheme()" title="Mudar Tema">
                 <i class="fas fa-moon" id="theme-icon-top"></i>
@@ -199,13 +180,13 @@
     </nav>
     
     <div class="breaking-bar">
-        <div class="breaking-text" id="breaking-ticker">A preparar as atualizações mais recentes de Moçambique...</div>
+        <div class="breaking-text" id="breaking-ticker">A carregar as atualizações mais recentes de Moçambique...</div>
     </div>
     
     <div class="controls-container">
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="search-input" placeholder="Pesquisar notícias..." onkeyup="if(event.key==='Enter') resetAndLoad()">
+            <input type="text" id="search-input" placeholder="Pesquisar..." onkeyup="if(event.key==='Enter') resetAndLoad()">
         </div>
         <div class="categories">
             <div class="cat-item active" onclick="filterCat('', this)">Todas</div>
@@ -213,17 +194,16 @@
             <div class="cat-item" onclick="filterCat('economia', this)">Economia</div>
             <div class="cat-item" onclick="filterCat('sociedade', this)">Sociedade</div>
             <div class="cat-item" onclick="filterCat('desporto', this)">Desporto</div>
-            <div class="cat-item" onclick="filterCat('mundo', this)">Mundo</div>
         </div>
     </div>
 
     <main class="feed" id="feed"></main>
-    <div id="scroll-anchor" class="loader"><i class="fas fa-circle-notch fa-spin" style="color: var(--primary)"></i> A descarregar mais notícias...</div>
+    <div id="scroll-anchor" class="loader"><i class="fas fa-circle-notch fa-spin"></i> A descarregar notícias...</div>
 </div>
 
 <div id="article-view">
     <div class="article-header">
-        <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Voltar</button>
+        <button class="back-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
     </div>
 
     <main class="article-container">
@@ -247,27 +227,46 @@
 </div>
 
 <div class="floating-nav" id="floating-nav">
-    <button class="float-btn share" onclick="shareGlobal()" title="Partilhar"><i class="fas fa-share-nodes"></i></button>
+    <button class="float-btn share" onclick="shareGlobal()" title="Partilhar"><i class="fas fa-share-alt"></i></button>
     <button class="float-btn" onclick="window.scrollTo({top:0, behavior: 'smooth'})" title="Subir"><i class="fas fa-arrow-up"></i></button>
+    <button class="float-btn" onclick="window.scrollTo({top:document.body.scrollHeight, behavior: 'smooth'})" title="Descer"><i class="fas fa-arrow-down"></i></button>
 </div>
 
 <script>
 window.addEventListener('scroll', () => {
     const floatNav = document.getElementById('floating-nav');
-    if (window.scrollY > 300) { floatNav.classList.add('visible'); } 
+    if (window.scrollY > 200) { floatNav.classList.add('visible'); } 
     else { floatNav.classList.remove('visible'); }
 });
 
 const SOURCES = [
     { name: "O País", api: "https://opais.co.mz/wp-json/wp/v2/posts?_embed", slug: "opais" },
     { name: "Carta de MZ", api: "https://cartamz.com/wp-json/wp/v2/posts?_embed", slug: "carta" },
+    { name: "MZ News", api: "https://mznews.co.mz/wp-json/wp/v2/posts?_embed", slug: "mznews" },
     { name: "Folha de Maputo", api: "https://www.folhademaputo.co.mz/wp-json/wp/v2/posts?_embed", slug: "folha" },
     { name: "Evidências", api: "https://evidencias.co.mz/wp-json/wp/v2/posts?_embed", slug: "evidencias" },
     { name: "Integrity Mag", api: "https://integritymagazine.co.mz/wp-json/wp/v2/posts?_embed", slug: "integrity" },
     { name: "Savana", api: "https://savana.co.mz/wp-json/wp/v2/posts?_embed", slug: "savana" },
+    { name: "Ngani", api: "https://ngani.co.mz/wp-json/wp/v2/posts?_embed", slug: "ngani" },
     { name: "AIM News", api: "https://aimnews.org/wp-json/wp/v2/posts?_embed", slug: "aim" },
+    { name: "Jornal Ikweli", api: "https://ikweli.co.mz/wp-json/wp/v2/posts?_embed", slug: "ikweli" },
+    { name: "Zumbo FM", api: "https://zumbofm.com/wp-json/wp/v2/posts?_embed", slug: "zumbo" },
+    { name: "Moz24h", api: "https://moz24h.co.mz/wp-json/wp/v2/posts?_embed", slug: "moz24h" },
+    { name: "Jornal Domingo", api: "https://www.jornaldomingo.co.mz/wp-json/wp/v2/posts?_embed", slug: "domingo" },
+    { name: "Jornal Desafio", api: "https://www.jornaldesafio.co.mz/wp-json/wp/v2/posts?_embed", slug: "desafio" },
     { name: "Jornal Notícias", api: "https://www.jornalnoticias.co.mz/wp-json/wp/v2/posts?_embed", slug: "noticias" },
-    { name: "Miramar", api: "https://miramar.co.mz/wp-json/wp/v2/posts?_embed", slug: "miramar" }
+    { name: "Dossiers e Factos", api: "https://dossiersefactos.com/wp-json/wp/v2/posts?_embed", slug: "dossiers" },
+    { name: "Diário Económico", api: "https://www.diarioeconomico.co.mz/wp-json/wp/v2/posts?_embed", slug: "diario" },
+    { name: "O Económico", api: "https://www.oeconomico.com/wp-json/wp/v2/posts?_embed", slug: "oeconomico" },
+    { name: "CIP Moz", api: "https://www.cipmoz.org/wp-json/wp/v2/posts?_embed", slug: "cip" },
+    { name: "CDD Moz", api: "https://cddmoz.org/wp-json/wp/v2/posts?_embed", slug: "cdd" },
+    { name: "O Destaque", api: "https://odestaque.co.mz/wp-json/wp/v2/posts?_embed", slug: "destaque" },
+    { name: "Canal Moz", api: "https://canal.co.mz/wp-json/wp/v2/posts?_embed", slug: "canal" },
+    { name: "Moz Times", api: "https://moztimes.com/wp-json/wp/v2/posts?_embed", slug: "moztimes" },
+    { name: "Rádio Moçambique", api: "https://www.rm.co.mz/wp-json/wp/v2/posts?_embed", slug: "rm" },
+    { name: "Miramar", api: "https://miramar.co.mz/wp-json/wp/v2/posts?_embed", slug: "miramar" },
+    { name: "DW Moçambique", api: "https://www.dw.com/wp-json/wp/v2/posts?_embed", slug: "dw" },
+    { name: "Times de Todos", api: "https://www.timesdetodos.com/wp-json/wp/v2/posts?_embed", slug: "timesdetodos" }
 ];
 
 let allPosts = [], currentPage = 1, isFetching = false, currentCat = '', isSavedView = false, sortOrder = 'new';
@@ -310,9 +309,9 @@ function setSort(order) {
     renderFeed();
 }
 
-// FETCH COM TIMEOUT (EVITA CONGELAMENTOS SE O SITE ESTIVER LENTO)
+// EVITA O CONGELAMENTO SE UM JORNAL ESTIVER LENTO (Timeout de 8 segundos)
 async function fetchWithTimeout(resource, options = {}) {
-    const { timeout = 8000 } = options; // Desiste após 8 segundos
+    const { timeout = 8000 } = options;
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
     const response = await fetch(resource, { ...options, signal: controller.signal });
@@ -320,7 +319,7 @@ async function fetchWithTimeout(resource, options = {}) {
     return response;
 }
 
-// MOTOR ASSÍNCRONO OTIMIZADO - SEM BUGS DE SCROLL
+// MOTOR ASSÍNCRONO ULTRA-RÁPIDO E SEM BUGS VISUAIS
 function loadNews() {
     if (isFetching || isSavedView) return;
     isFetching = true;
@@ -330,7 +329,7 @@ function loadNews() {
 
     SOURCES.forEach(async (src) => {
         try {
-            let url = `${src.api}&per_page=6&page=${currentPage}`; 
+            let url = `${src.api}&per_page=5&page=${currentPage}`;
             if (query) url += `&search=${encodeURIComponent(query)}`;
             
             const res = await fetchWithTimeout(url);
@@ -358,7 +357,7 @@ function loadNews() {
                         apiBase: src.api.split('?')[0],
                         link: p.link, 
                         img: imgFinal,
-                        // SEGREDO: Guarda o texto logo aqui para abrir instantaneamente!
+                        // GUARDA O TEXTO DA NOTÍCIA PARA ABERTURA INSTANTÂNEA
                         contentLoaded: p.content?.rendered || "<p>O conteúdo completo desta notícia precisa ser lido no site oficial.</p>"
                     });
                     added = true;
@@ -366,12 +365,12 @@ function loadNews() {
             });
             
             if (added) {
-                renderFeed(); // Adiciona ao ecrã sem apagar o que já lá está
+                renderFeed(); // Apenas acrescenta, não apaga a tela!
                 updateTicker();
             }
 
         } catch (e) { 
-            // Se falhar ou demorar muito, ignora silenciosamente e não bloqueia a aplicação!
+            // Ignora jornais lentos ou falhados silenciosamente
         } finally {
             fetchesCompleted++;
             if(fetchesCompleted === SOURCES.length) {
@@ -390,22 +389,20 @@ function updateTicker() {
     }
 }
 
-// DESENHO SUAVE (NÃO APAGA A TELA, SÓ ACRESCENTA)
+// DESENHO SUAVE NO ECRÃ
 function renderFeed() {
     const feed = document.getElementById('feed');
     let displayList = isSavedView ? JSON.parse(localStorage.getItem('premium_news_saved') || '[]') : [...allPosts];
     
-    // FILTRAGEM
     if(currentCat && !isSavedView) {
         const catLower = currentCat.toLowerCase();
         displayList = displayList.filter(p => p.title.toLowerCase().includes(catLower) || p.srcName.toLowerCase().includes(catLower));
     }
     
-    // ORDENAÇÃO
     if(sortOrder === 'new') { displayList.sort((a, b) => new Date(b.date) - new Date(a.date)); } 
     else { displayList.sort((a, b) => new Date(a.date) - new Date(b.date)); }
     
-    // Apenas desenha os cards que ainda não estão na tela (evita o Bug do salto no scroll)
+    // Só desenha as notícias novas que chegaram, não pisca o ecrã
     displayList.forEach(p => {
         if (!document.getElementById(`card-${p.uniqueId}`)) {
             const card = document.createElement('div');
@@ -413,12 +410,13 @@ function renderFeed() {
             card.className = 'news-card';
             card.onclick = () => openArticle(p);
             card.innerHTML = `
-                <img class="news-img" src="${p.img}" loading="lazy" alt="Capa">
+                <img class="news-img" src="${p.img}" loading="lazy">
                 <div class="news-body">
                     <span class="news-tag">${p.srcName}</span>
                     <h3 class="news-title">${p.title}</h3>
                     <div class="news-meta">
-                        <span><i class="far fa-clock"></i> ${new Date(p.date).toLocaleDateString('pt-MZ')} às ${new Date(p.date).toLocaleTimeString('pt-MZ', {hour: '2-digit', minute:'2-digit'})}</span>
+                        <span><i class="far fa-clock"></i> ${new Date(p.date).toLocaleDateString('pt-MZ')}</span>
+                        <i class="fas fa-chevron-right" style="color:var(--primary); font-size: 0.7rem;"></i>
                     </div>
                 </div>`;
             feed.appendChild(card);
@@ -433,19 +431,17 @@ function filterCat(cat, btn) {
     currentCat = cat; 
     isSavedView = false;
     
-    // Limpa a tela especificamente porque o utilizador quer uma nova categoria
-    document.getElementById('feed').innerHTML = '';
-    
-    renderFeed(); // Mostra o que já tem na memória rápido
+    document.getElementById('feed').innerHTML = ''; // Limpa a tela na mudança de categoria
+    renderFeed(); // Renderiza instantaneamente o cache
     
     currentPage = 1; 
-    loadNews(); // Vai buscar mais em silêncio
+    loadNews();
 }
 
 function toggleSavedView() {
     isSavedView = !isSavedView;
     document.getElementById('sidebar-saved-btn').classList.toggle('active', isSavedView);
-    document.getElementById('scroll-anchor').style.display = isSavedView ? 'none' : 'flex';
+    document.getElementById('scroll-anchor').style.display = isSavedView ? 'none' : 'block';
     toggleSidebar();
     
     if(isSavedView && currentReadingPost) {
@@ -466,10 +462,11 @@ function openArticle(post) {
     openArticleView(post, true);
 }
 
-// ABERTURA INSTANTÂNEA
+// ABERTURA INSTANTÂNEA E LINK PARA PARTILHA
 async function openArticleView(post, pushHistory = true) {
     currentReadingPost = post;
     
+    // Atualiza o link do site para a pessoa partilhar direto
     if(pushHistory) {
         history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId);
     }
@@ -491,9 +488,9 @@ async function openArticleView(post, pushHistory = true) {
 
     const contentDiv = document.getElementById('article-content');
     
-    // COMO JÁ GRAVAMOS O TEXTO ANTES, A NOTÍCIA CARREGA NA HORA ZERO ATRASO!
+    // O texto entra em zero segundos porque já foi baixado em background!
     let finalContent = post.contentLoaded + 
-    `<br><br><a href="${post.link}" target="_blank" style="display: block; margin-top: 30px; font-weight: 800; color: var(--primary); text-decoration: none; padding-top: 20px; border-top: 1px solid var(--border);"><i class="fas fa-external-link-alt"></i> Ler a notícia completa no site do jornal</a>`;
+    `<br><br><a href="${post.link}" target="_blank" style="display: block; margin-top: 20px; font-weight: 800; color: var(--primary); text-decoration: none; padding-top: 20px; border-top: 1px solid var(--border);"><i class="fas fa-external-link-alt"></i> Ler no site oficial aqui</a>`;
     
     contentDiv.innerHTML = finalContent;
 }
@@ -506,7 +503,6 @@ function closeArticleView(updateHistory = true) {
     
     if(updateHistory) { history.pushState({ view: 'home' }, "", window.location.pathname); }
     
-    // Regressa suavemente à posição exata onde estava
     window.scrollTo(0, savedScrollPosition);
 }
 
@@ -562,7 +558,7 @@ function renderRelatedPosts(currentPost) {
     if(related.length > 0) {
         grid.innerHTML = related.map(p => `
             <div class="related-card" onclick="openArticle({uniqueId: '${p.uniqueId}', title: '${p.title.replace(/'/g, "\\'")}', srcName: '${p.srcName}', img: '${p.img}', apiBase: '${p.apiBase}', apiId: '${p.apiId}', link: '${p.link}', contentLoaded: \`${(p.contentLoaded || '').replace(/`/g, "\\`")}\`})">
-                <img src="${p.img}" loading="lazy" alt="Relacionado">
+                <img src="${p.img}" loading="lazy">
                 <h4>${p.title}</h4>
             </div>
         `).join('');
@@ -584,7 +580,6 @@ window.onload = async () => {
         
         if(source) {
             try {
-                // Ao abrir de um link partilhado, descarrega apenas essa notícia
                 const res = await fetch(`${source.api.split('?')[0]}/${apiId}?_embed`);
                 const p = await res.json();
                 let imgFinal = p._embedded?.['wp:featuredmedia']?.[0]?.source_url || p.jetpack_featured_media_url || p?.yoast_head_json?.og_image?.[0]?.url || 'https://via.placeholder.com/400x200?text=Sua+Notícia+365';
