@@ -6,9 +6,11 @@
     <title>Sua Notícia 365 | Premium</title>
     
     <meta id="og-title" property="og:title" content="Sua Notícia 365 | Portal Premium">
-    <meta id="og-image" property="og:image" content="https://via.placeholder.com/800x400/cc0000/ffffff?text=Sua+Noticia+365">
+    <meta id="og-image" property="og:image" content="https://via.placeholder.com/1200x630/cc0000/ffffff?text=Sua+Noticia+365">
+    <meta id="og-url" property="og:url" content="">
     <meta property="og:description" content="Acompanhe as últimas notícias de Moçambique e do mundo em tempo real.">
     <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,14 +20,14 @@
             --primary-dark: #a30000;
             --accent: #1e293b;
             
-            --bg: #f4f7f6;
+            --bg: #f3f6f8;
             --card: #ffffff;
             --text: #1e293b;
             --text-meta: #64748b;
             --border: #e2e8f0;
             --surface: #f8fafc;
-            --shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 15px 35px rgba(204, 0, 0, 0.1);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 12px 24px rgba(204, 0, 0, 0.08);
             
             --icon-like: #e11d48;
             --icon-save: #0284c7;
@@ -34,7 +36,7 @@
         }
 
         body.dark-mode {
-            --bg: #0f172a;
+            --bg: #0b1120;
             --card: #1e293b;
             --text: #f8fafc;
             --text-meta: #94a3b8;
@@ -58,12 +60,12 @@
         .logo-area { display: flex; align-items: center; gap: 15px; }
         .menu-toggle { background: none; border: none; font-size: 1.4rem; color: white; cursor: pointer; transition: 0.2s; }
         .menu-toggle:active { transform: scale(0.9); }
-        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.6rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
         
-        .theme-btn-top { background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; backdrop-filter: blur(5px); }
+        .theme-btn-top { background: rgba(255,255,255,0.2); border: none; color: white; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; backdrop-filter: blur(5px); }
         .theme-btn-top:hover { background: rgba(255,255,255,0.3); transform: rotate(15deg); }
 
-        .breaking-bar { background: var(--accent); color: white; padding: 10px 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
+        .breaking-bar { background: var(--accent); color: white; padding: 8px 20px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
         .breaking-text { animation: scrollLeft 30s linear infinite; display: inline-block; padding-left: 100%; }
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
@@ -74,113 +76,113 @@
         .sidebar.open { left: 0; }
         .sidebar-close { background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; align-self: flex-end; margin-bottom: 10px; }
         
-        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--primary); margin-bottom: 25px; text-transform: uppercase; cursor: pointer;}
-        .side-btn { display: flex; align-items: center; gap: 15px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 15px; font-size: 1rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: 0.2s; text-align: left; margin-bottom: 5px;}
+        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 25px; text-transform: uppercase; cursor: pointer;}
+        .side-btn { display: flex; align-items: center; gap: 15px; width: 100%; background: none; border: none; color: var(--text); padding: 12px 15px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: 0.2s; text-align: left; margin-bottom: 5px;}
         .side-btn:hover, .side-btn.active { background: var(--surface); color: var(--primary); }
         .side-btn i { width: 20px; text-align: center; font-size: 1.1rem; }
+        .badge { background: var(--surface); color: var(--primary); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: auto; font-weight: 800; border: 1px solid var(--border); }
         
         .i-dark { color: #475569; }
         .i-saved { color: var(--icon-save); }
         .i-liked { color: var(--icon-like); }
         .i-new { color: #f59e0b; }
         
-        .sidebar-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-meta); line-height: 1.6; }
+        .sidebar-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-meta); line-height: 1.6; }
         .contact-link { color: var(--text); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 10px; margin-top: 10px; transition: 0.2s; }
         .contact-link:hover { color: var(--primary); }
         .contact-link i { color: var(--primary); font-size: 1.1rem; }
         
         .social-icons { display: flex; gap: 15px; margin-top: 20px; }
-        .social-icons a { color: var(--text-meta); font-size: 1.5rem; transition: 0.2s; }
+        .social-icons a { color: var(--text-meta); font-size: 1.4rem; transition: 0.2s; }
         .social-icons a:hover.wa { color: #25D366; transform: scale(1.1); }
         .social-icons a:hover.fb { color: #1877F2; transform: scale(1.1); }
         .social-icons a:hover.ig { color: #E4405F; transform: scale(1.1); }
         .social-icons a:hover.tg { color: #229ED9; transform: scale(1.1); }
 
         /* PESQUISA E CATEGORIAS */
-        .controls-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        .controls-container { max-width: 1200px; margin: 15px auto; padding: 0 20px; }
 
-        .search-box { position: relative; margin-bottom: 20px; margin-top: 10px; }
-        .search-box input { width: 100%; padding: 14px 15px 14px 45px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 1rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
-        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.1); }
-        .search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 1.1rem; }
+        .search-box { position: relative; margin-bottom: 15px; margin-top: 5px; }
+        .search-box input { width: 100%; padding: 12px 15px 12px 42px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 0.95rem; box-shadow: var(--shadow); outline: none; transition: 0.3s; }
+        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1); }
+        .search-box i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-meta); font-size: 0.95rem; }
         
-        .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+        .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
         .categories::-webkit-scrollbar { display: none; }
-        .cat-item { padding: 8px 18px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+        .cat-item { padding: 6px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; cursor: pointer; color: var(--text-meta); text-transform: uppercase; transition: all 0.2s ease; }
         .cat-item:hover { border-color: var(--primary); color: var(--primary); }
-        .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(204,0,0,0.2); }
+        .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 3px 8px rgba(204,0,0,0.2); }
 
-        /* GRELHA DE NOTÍCIAS */
-        .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; min-height: 50vh; }
-        .news-card { background: var(--card); border-radius: 14px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: all 0.3s ease; }
-        .news-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: var(--shadow-hover); }
-        .news-img { width: 100%; height: 210px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
-        .news-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        /* GRELHA DE NOTÍCIAS (MAIS COMPACTA E ATRAENTE) */
+        .feed { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; min-height: 50vh; }
+        .news-card { background: var(--card); border-radius: 10px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-shadow: var(--shadow); transition: all 0.2s ease; }
+        .news-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .news-img { width: 100%; height: 165px; object-fit: cover; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .news-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
         
-        .news-tag { color: white; background: var(--primary); padding: 5px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; display: inline-block; width: fit-content; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
+        .news-tag { color: white; background: var(--primary); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; display: inline-block; width: fit-content; letter-spacing: 0.5px; }
         
-        .news-title { font-size: 1.2rem; font-weight: 700; line-height: 1.4; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
-        .news-meta { font-size: 0.8rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-top: 1px solid var(--border); padding-top: 15px; }
+        .news-title { font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
+        .news-meta { font-size: 0.75rem; color: var(--text-meta); margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-top: 1px solid var(--border); padding-top: 12px; }
+        .time-ago { color: var(--primary); font-weight: 700; }
 
         /* VISTA DE LEITURA (ARTIGO) */
         #article-view { display: none; background: var(--card); min-height: 100vh; padding-bottom: 60px; }
         
-        .article-header { position: sticky; top: 0; background: var(--card); padding: 12px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 10px 14px; border-radius: 8px;}
+        .article-header { position: sticky; top: 0; background: var(--card); padding: 10px 20px; border-bottom: 1px solid var(--border); z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .header-btn { background: var(--surface); border: 1px solid var(--border); font-size: 0.8rem; color: var(--text); font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; text-transform: uppercase; transition: all 0.2s; padding: 8px 12px; border-radius: 6px;}
         .header-btn:hover { color: white; background: var(--primary); border-color: var(--primary); }
         .header-btn.center-btn { background: transparent; border: none; color: var(--primary); }
         .header-btn.center-btn:hover { background: var(--surface); color: var(--primary-dark); }
         
-        .article-container { max-width: 750px; margin: 30px auto 0; padding: 0 20px; }
-        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(204,0,0,0.2); }
-        .article-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 900; line-height: 1.25; margin-bottom: 25px; color: var(--text); }
+        .article-container { max-width: 700px; margin: 25px auto 0; padding: 0 20px; }
+        .article-tag { display: inline-block; background: var(--primary); color: white; padding: 5px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
+        .article-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 900; line-height: 1.25; margin-bottom: 20px; color: var(--text); }
         
-        .btn-action-row { display: flex; gap: 15px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-        .btn-action { flex: 1; padding: 14px; border-radius: 8px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; box-shadow: var(--shadow); }
+        .btn-action-row { display: flex; gap: 12px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+        .btn-action { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-weight: 700; cursor: pointer; background: var(--surface); color: var(--text); font-family: inherit; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; }
         .btn-action:active { transform: scale(0.95); }
         
         .btn-action.like-btn.liked { background: rgba(225, 29, 72, 0.1); border-color: var(--icon-like); color: var(--icon-like); }
         .btn-action.save-btn.saved { background: rgba(2, 132, 199, 0.1); border-color: var(--icon-save); color: var(--icon-save); }
         
-        .article-main-img { width: 100%; border-radius: 12px; margin-bottom: 30px; object-fit: cover; max-height: 450px; box-shadow: var(--shadow); }
-        .article-content { font-size: 1.15rem; line-height: 1.8; color: var(--text); }
-        .article-content p { margin-bottom: 1.5rem; }
-        .article-content img { max-width: 100%; height: auto; border-radius: 10px; margin: 25px 0; }
+        .article-main-img { width: 100%; border-radius: 10px; margin-bottom: 25px; object-fit: cover; max-height: 380px; box-shadow: var(--shadow); }
+        .article-content { font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+        .article-content p { margin-bottom: 1.4rem; }
+        .article-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0; }
         .article-content a { color: var(--primary); font-weight: bold; text-decoration: none; }
         .article-content a:hover { text-decoration: underline; }
         
-        .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 15px; border-radius: 10px; margin-top: 40px; text-decoration: none; transition: 0.3s; font-size: 1.05rem; }
+        .read-more-btn { display: block; width: 100%; text-align: center; background: var(--surface); border: 2px solid var(--primary); color: var(--primary); font-weight: 800; text-transform: uppercase; padding: 12px; border-radius: 8px; margin-top: 30px; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
         .read-more-btn:hover { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(204,0,0,0.2); }
 
         /* SECÇÃO DE COMENTÁRIOS */
-        .comments-section { margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--border); background: var(--card); border-radius: 12px; }
-        .comments-section h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 10px; }
+        .comments-section { margin-top: 40px; padding-top: 25px; border-top: 1px solid var(--border); background: var(--card); border-radius: 10px; }
+        .comments-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 8px; }
         .comments-section h3 i { color: var(--primary); }
 
-        .related-section { margin-top: 50px; padding-top: 30px; border-top: 4px solid var(--border); }
-        .related-section h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 10px; }
-        .related-section h3::before { content: ''; display: block; width: 5px; height: 22px; background: var(--primary); border-radius: 3px; }
-        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-        .related-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow); }
-        .related-card img { width: 100%; height: 130px; object-fit: cover; }
-        .related-card h4 { padding: 15px; font-size: 0.95rem; line-height: 1.4; font-weight: 700; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+        .related-section { margin-top: 40px; padding-top: 25px; border-top: 4px solid var(--border); }
+        .related-section h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 8px; }
+        .related-section h3::before { content: ''; display: block; width: 4px; height: 18px; background: var(--primary); border-radius: 2px; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: 0.2s; }
+        .related-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow); }
+        .related-card img { width: 100%; height: 110px; object-fit: cover; }
+        .related-card h4 { padding: 12px; font-size: 0.85rem; line-height: 1.4; font-weight: 700; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
 
         /* BOTÕES FLUTUANTES */
-        .floating-nav { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 1001; transition: 0.3s; }
-        .float-btn { width: 55px; height: 55px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: 0.2s; }
+        .floating-nav { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1001; transition: 0.3s; }
+        .float-btn { width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.2s; }
         .float-btn:hover { transform: scale(1.1); }
         .float-btn.refresh { background: var(--icon-refresh); }
         .float-btn.share { background: var(--icon-share); }
         
-        .loader-main { text-align: center; padding: 40px; grid-column: 1/-1; color: var(--primary); font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;}
+        .loader-main { text-align: center; padding: 40px; grid-column: 1/-1; color: var(--primary); font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;}
         
         @media (max-width: 600px) {
             .feed { grid-template-columns: 1fr; padding: 0 15px 15px; }
-            .article-title { font-size: 1.8rem; }
-            .header-btn { font-size: 0.75rem; padding: 8px 10px; }
-            .floating-nav { bottom: 20px; right: 20px; }
-            .float-btn { width: 50px; height: 50px; font-size: 1.2rem; }
+            .article-title { font-size: 1.6rem; }
+            .header-btn { font-size: 0.75rem; padding: 6px 8px; }
         }
     </style>
 </head>
@@ -193,11 +195,15 @@
 
     <button class="side-btn active" onclick="goHome()"><i class="fas fa-home"></i> Início</button>
     
-    <button class="side-btn" id="sidebar-saved-btn" onclick="toggleSavedView()"><i class="fas fa-bookmark i-saved"></i> Ler Mais Tarde</button>
-    <button class="side-btn" id="sidebar-liked-btn" onclick="toggleLikedView()"><i class="fas fa-heart i-liked"></i> Favoritos</button>
+    <button class="side-btn" id="sidebar-saved-btn" onclick="toggleSavedView()">
+        <i class="fas fa-bookmark i-saved"></i> Ler Mais Tarde <span class="badge" id="badge-saved">0</span>
+    </button>
+    <button class="side-btn" id="sidebar-liked-btn" onclick="toggleLikedView()">
+        <i class="fas fa-heart i-liked"></i> Favoritos <span class="badge" id="badge-liked">0</span>
+    </button>
     
-    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
-        <p style="font-size: 0.8rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 10px; font-weight: 800;">Organização</p>
+    <div style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">
+        <p style="font-size: 0.75rem; color: var(--text-meta); text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">Organização</p>
         <button class="side-btn active" id="btn-sort-new" onclick="setSort('new')"><i class="fas fa-bolt i-new"></i> Mais Recentes</button>
         <button class="side-btn" id="btn-sort-old" onclick="setSort('old')"><i class="fas fa-history i-dark"></i> Mais Antigas</button>
     </div>
@@ -210,10 +216,10 @@
         <a href="mailto:donald.fer.fer@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> donald.fer.fer@gmail.com</a>
 
         <div class="social-icons">
-            <a href="https://wa.me/258849085157" target="_blank" class="wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="fb" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="ig" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="tg" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/258849085157" target="_blank" class="wa"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="fb"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="ig"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="tg"><i class="fab fa-telegram"></i></a>
         </div>
     </div>
 </div>
@@ -232,7 +238,7 @@
     </nav>
     
     <div class="breaking-bar">
-        <div class="breaking-text" id="breaking-ticker">A sincronizar em tempo real com os jornais de Moçambique...</div>
+        <div class="breaking-text" id="breaking-ticker">A sincronizar em tempo real com os principais jornais de Moçambique...</div>
     </div>
     
     <div class="controls-container">
@@ -258,7 +264,7 @@
 <div id="article-view">
     <div class="article-header">
         <button class="header-btn" onclick="goBack()"><i class="fas fa-chevron-left"></i> Voltar</button>
-        <button class="header-btn center-btn" onclick="document.getElementById('related-section').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-list"></i> Outras Notícias</button>
+        <button class="header-btn center-btn" onclick="document.getElementById('related-section').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-list"></i> Outras</button>
         <button class="header-btn" onclick="goHomeForce()"><i class="fas fa-home"></i> Início</button>
     </div>
 
@@ -275,7 +281,7 @@
         <div id="article-content" class="article-content"></div>
         
         <div class="comments-section" id="comments-section">
-            <h3><i class="fas fa-comments"></i> Comentários</h3>
+            <h3><i class="fas fa-comments"></i> Deixe o seu comentário</h3>
             <div id="disqus_thread"></div>
         </div>
         
@@ -351,31 +357,49 @@ function extractDeepImage(p) {
     return 'https://via.placeholder.com/600x300/e2e8f0/64748b?text=Sua+Notícia+365';
 }
 
-// HISTÓRICO REAL PARA O BOTÃO VOLTAR
+// FORMATADOR DE TEMPO (Ex: "Há 5 min", "Há 2 horas") - PREMIUM
+function timeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+
+    if (diffInSeconds < 60) return "<span class='time-ago'>Agora mesmo</span>";
+    
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    if (diffInMinutes < 60) return `<span class='time-ago'>Há ${diffInMinutes} min</span>`;
+    
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) return `<span class='time-ago'>Há ${diffInHours}h</span>`;
+    
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays === 1) return "Ontem";
+    if (diffInDays < 7) return `Há ${diffInDays} dias`;
+    
+    return date.toLocaleDateString('pt-MZ');
+}
+
+function updateBadges() {
+    document.getElementById('badge-saved').innerText = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]').length;
+    document.getElementById('badge-liked').innerText = JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').length;
+}
+
 window.addEventListener('popstate', (e) => {
     if (e.state && e.state.view === 'article') {
-        const post = allPosts.find(p => p.uniqueId === e.state.articleId);
+        const post = allPosts.find(p => p.uniqueId === e.state.articleId) || JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]').find(p => p.uniqueId === e.state.articleId) || JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').find(p => p.uniqueId === e.state.articleId);
         if (post) openArticleView(post, false);
-    } else { 
-        closeArticleView(false); 
-    }
+    } else { closeArticleView(false); }
 });
 
 function goHome() {
     if(currentReadingPost) { goBack(); } else { window.scrollTo({top:0, behavior: 'smooth'}); }
 }
 
-// Força o regresso imediato à página principal, saltando o histórico da leitura
 function goHomeForce() {
     history.pushState({ view: 'home' }, "", window.location.pathname);
     closeArticleView(false);
 }
 
-// Segue estritamente as páginas abertas!
-function goBack() { 
-    history.back(); 
-}
-
+function goBack() { history.back(); }
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
 function toggleTheme() {
     const isDark = document.body.classList.toggle('dark-mode');
@@ -419,7 +443,7 @@ async function fetchWithTimeout(resource, options = {}) {
 
 async function loadNews() {
     if (isFetching) return;
-    if (isSavedView || isLikedView) { renderFeed(); return; } // Não busca mais se estiver nos favoritos
+    if (isSavedView || isLikedView) { renderFeed(); return; } 
     
     isFetching = true;
     let fetchesCompleted = 0;
@@ -468,7 +492,6 @@ function renderFeed() {
     const feed = document.getElementById('feed');
     let displayList = [...allPosts];
     
-    // GERE VISTAS DE GUARDADOS E FAVORITOS
     if(isSavedView) { displayList = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]'); }
     else if(isLikedView) { displayList = JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]'); }
     
@@ -490,9 +513,12 @@ function renderFeed() {
                     <span class="news-tag">${p.srcName}</span>
                     <h3 class="news-title">${p.title}</h3>
                     <div class="news-meta">
-                        <span><i class="far fa-clock"></i> ${new Date(p.date).toLocaleDateString('pt-MZ')} às ${new Date(p.date).toLocaleTimeString('pt-MZ', {hour: '2-digit', minute:'2-digit'})}</span>
+                        <span><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>
                     </div>
                 </div>`;
+        } else {
+            // Atualiza tempo dinamicamente caso o cartão já exista
+            card.querySelector('.news-meta').innerHTML = `<span><i class="far fa-clock"></i> ${timeAgo(p.date)}</span>`;
         }
         
         if (feed.children[index] !== card) { feed.insertBefore(card, feed.children[index] || null); }
@@ -519,8 +545,7 @@ function filterCat(cat, btn) {
 }
 
 function toggleSavedView() {
-    isSavedView = !isSavedView;
-    isLikedView = false;
+    isSavedView = !isSavedView; isLikedView = false;
     document.getElementById('sidebar-saved-btn').classList.toggle('active', isSavedView);
     document.getElementById('sidebar-liked-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = isSavedView ? 'none' : 'block';
@@ -529,8 +554,7 @@ function toggleSavedView() {
 }
 
 function toggleLikedView() {
-    isLikedView = !isLikedView;
-    isSavedView = false;
+    isLikedView = !isLikedView; isSavedView = false;
     document.getElementById('sidebar-liked-btn').classList.toggle('active', isLikedView);
     document.getElementById('sidebar-saved-btn').classList.remove('active');
     document.getElementById('scroll-anchor').style.display = isLikedView ? 'none' : 'block';
@@ -539,11 +563,7 @@ function toggleLikedView() {
 }
 
 function openArticleById(id) {
-    // Procura na lista normal, depois nos guardados, depois nos favoritos (para links offline)
-    let post = allPosts.find(p => p.uniqueId === id) 
-            || JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]').find(p => p.uniqueId === id)
-            || JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').find(p => p.uniqueId === id);
-            
+    let post = allPosts.find(p => p.uniqueId === id) || JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]').find(p => p.uniqueId === id) || JSON.parse(localStorage.getItem('premium_news_liked_full') || '[]').find(p => p.uniqueId === id);
     if(post) {
         if(!currentReadingPost) { savedScrollPosition = window.scrollY; }
         openArticleView(post, true);
@@ -556,9 +576,10 @@ async function openArticleView(post, pushHistory = true) {
     
     if(pushHistory) { history.pushState({ view: 'article', articleId: post.uniqueId }, "", "?article=" + post.uniqueId); }
     
-    // ATUALIZAÇÃO DINÂMICA DE META TAGS (MELHOR ESFORÇO PARA WHATSAPP)
-    document.getElementById('og-title').content = post.title;
-    document.getElementById('og-image').content = post.img;
+    // Injeção forçada nas Meta Tags para partilha (Ajudará em alguns parsers web)
+    document.getElementById('og-title').setAttribute("content", post.title);
+    document.getElementById('og-image').setAttribute("content", post.img);
+    document.getElementById('og-url').setAttribute("content", shareUrl);
     document.title = post.title + " | Sua Notícia 365";
     
     document.getElementById('home-view').style.display = 'none';
@@ -583,7 +604,7 @@ async function openArticleView(post, pushHistory = true) {
     loadDisqusComments(post.uniqueId, shareUrl);
 }
 
-// INICIALIZA OU ATUALIZA O MOTOR DE COMENTÁRIOS DISQUS
+// SISTEMA DE COMENTÁRIOS DISQUS
 function loadDisqusComments(id, url) {
     if (window.DISQUS) {
         DISQUS.reset({ reload: true, config: function () { this.page.identifier = id; this.page.url = url; } });
@@ -591,7 +612,7 @@ function loadDisqusComments(id, url) {
         window.disqus_config = function () { this.page.url = url; this.page.identifier = id; };
         (function() {
             var d = document, s = d.createElement('script');
-            // Usando um nome genérico. Pode criar uma conta no Disqus e substituir 'suanoticia365' pelo seu ID real!
+            // 'suanoticia365' é um shortname de exemplo. Funciona para demonstração!
             s.src = 'https://suanoticia365.disqus.com/embed.js'; 
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
@@ -634,7 +655,7 @@ function toggleSaveArticle() {
     const idx = saved.findIndex(x => x.uniqueId === currentReadingPost.uniqueId);
     if(idx > -1) { saved.splice(idx, 1); } else { saved.push(currentReadingPost); }
     localStorage.setItem('premium_news_saved_full', JSON.stringify(saved));
-    updateActionBtns();
+    updateActionBtns(); updateBadges();
 }
 
 function toggleLike() {
@@ -643,7 +664,7 @@ function toggleLike() {
     const idx = liked.findIndex(x => x.uniqueId === currentReadingPost.uniqueId);
     if(idx > -1) { liked.splice(idx, 1); } else { liked.push(currentReadingPost); }
     localStorage.setItem('premium_news_liked_full', JSON.stringify(liked));
-    updateActionBtns();
+    updateActionBtns(); updateBadges();
 }
 
 function updateActionBtns() {
@@ -657,14 +678,19 @@ function updateActionBtns() {
 function shareGlobal() {
     if(!currentReadingPost) return;
     const shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
+    
+    // Método Web Share nativo (Mobile passa o link e título direto pro WhatsApp nativamente)
     if (navigator.share) { 
-        navigator.share({ title: currentReadingPost.title, text: "Leia esta notícia fantástica!", url: shareUrl }); 
+        navigator.share({ title: currentReadingPost.title, text: "Veja esta notícia no Sua Notícia 365:", url: shareUrl }); 
     } else { 
-        navigator.clipboard.writeText(shareUrl); alert("Link copiado para partilhar!"); 
+        // Alternativa PC ou navegadores não compatíveis
+        const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent("Veja esta notícia no Sua Notícia 365: " + currentReadingPost.title + " " + shareUrl)}`;
+        window.open(waUrl, '_blank');
     }
 }
 
 window.onload = async () => { 
+    updateBadges();
     history.replaceState({ view: 'home' }, "", window.location.pathname + window.location.search);
     const urlParams = new URLSearchParams(window.location.search);
     const sharedArticleId = urlParams.get('article');
