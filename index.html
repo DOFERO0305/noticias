@@ -286,7 +286,6 @@
         </div>
 
         <img id="feat-img" class="article-main-img" src="" style="display:none">
-        
         <div id="article-content" class="article-content"></div>
         
         <div class="related-section" id="related-section" style="display:none;">
@@ -339,7 +338,7 @@ const SOURCES = [
 let allPosts = [], currentPage = 1, isFetching = false, currentCat = '';
 let isSavedView = false, isLikedView = false, sortOrder = 'new';
 let currentReadingPost = null, savedScrollPosition = 0;
-let currentSourceIndex = 0; // CONTROLO DE LOTES PARA NÃO TRAVAR A REDE
+let currentSourceIndex = 0; // Ajuda a processar os sites em grupos (não trava a rede)
 
 function detectCategory(title, content) {
     const text = (title + " " + (content || "")).toLowerCase();
@@ -347,28 +346,28 @@ function detectCategory(title, content) {
     if (text.match(/banco|metical|dólar|inflação|economia|mercado|empresas|investimento|finanças|impostos/)) return 'Economia';
     if (text.match(/futebol|mambas|desporto|campeonato|bola|golo|selecção|atleta|moçambola/)) return 'Desporto';
     if (text.match(/internacional|mundo|eua|ucrânia|rússia|gaza|onu|biden|putin/)) return 'Mundo';
-    if (text.match(/polícia|saúde|educação|crime|sociedade|acidente|hospital|escola|sernic|pram/)) return 'Sociedade';
+    if (text.match(/polícia|saúde|educação|crime|sociedade|acidente|hospital|escola|sermnic|pram/)) return 'Sociedade';
     return 'Geral'; 
 }
 
-// NOVO: EXTRAIR APENAS O RESUMO PARA POUPAR DADOS E MEMÓRIA
+// NOVO: Função que corta o conteúdo (Resumo) para proteger a memória e os dados
 function extractSnippet(html) {
     if (!html) return "<p>Resumo indisponível.</p>";
     const doc = new DOMParser().parseFromString(html, 'text/html');
-    // Remove iframes pesados (YouTube, anúncios) e scripts que travam o telemóvel
+    // Remove scripts e iframes
     doc.querySelectorAll('script, iframe, style').forEach(el => el.remove());
     
-    // Pega nos primeiros 3 parágrafos relevantes
+    // Pega nos primeiros parágrafos úteis
     const paragraphs = Array.from(doc.querySelectorAll('p')).map(p => p.outerHTML).filter(t => t.length > 30);
     if (paragraphs.length > 0) {
         return paragraphs.slice(0, 3).join('') + "<br><p style='color:var(--primary); font-weight:bold;'><em>[...]</em></p>";
     }
-    // Se não houver parágrafos limpos, corta o texto bruto
+    // Caso não haja parágrafos bem formatados
     let rawText = doc.body.textContent || "";
     return "<p>" + rawText.substring(0, 400) + "...</p>";
 }
 
-// MELHORADO: PROCURA IMAGENS ESCONDIDAS (LAZY LOAD)
+// ATUALIZADO: Vasculha sites à procura da imagem que não carregava
 function extractDeepImage(p) {
     if (p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0].source_url) return p._embedded['wp:featuredmedia'][0].source_url;
     if (p.jetpack_featured_media_url) return p.jetpack_featured_media_url;
@@ -376,7 +375,7 @@ function extractDeepImage(p) {
     if (p.content && p.content.rendered) {
         const doc = new DOMParser().parseFromString(p.content.rendered, 'text/html');
         const img = doc.querySelector('img');
-        // Lê data-src para sites que bloqueiam as imagens normais
+        // Lê os links de imagens escondidas pelos sites
         if (img) return img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || img.src;
     }
     return 'https://via.placeholder.com/600x300/e2e8f0/64748b?text=Sua+Notícia+365';
@@ -462,36 +461,39 @@ function localInstantSearch() {
 }
 
 async function fetchWithTimeout(resource, options = {}) {
-    const { timeout = 8000 } = options;
+    const { timeout = 10000 } = options;
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
     const response = await fetch(resource, { ...options, signal: controller.signal });
     clearTimeout(id); return response;
 }
 
-// MELHORADO: NÃO TRAVA A REDE. CARREGA 3 JORNAIS POR VEZ.
+// ATUALIZADO: Carregamento em lotes pequenos. Evita fechar a rede de internet.
 async function loadNews() {
     if (isFetching || isSavedView || isLikedView) return;
     
     isFetching = true;
+    const cacheBuster = new Date().getTime();
 
+    // Se varreu todos, passa para a página 2 e reinicia
     if (currentSourceIndex >= SOURCES.length) {
         currentSourceIndex = 0;
         currentPage++;
     }
 
+    // Carrega de 3 em 3 para não estourar a RAM/Rede
     const sourcesToFetch = SOURCES.slice(currentSourceIndex, currentSourceIndex + 3);
     currentSourceIndex += 3;
 
-    const cacheBuster = new Date().getTime();
     let addedAny = false;
 
-    // Pedidos Sequenciais Protegidos
+    // Aguarda que um acabe para pedir o outro (Aumenta estabilidade)
     for (const src of sourcesToFetch) {
         try {
-            let url = `${src.api}&per_page=5&page=${currentPage}&_cb=${cacheBuster}`;
-            const res = await fetchWithTimeout(url, { timeout: 8000 });
+            let url = `${src.api}&per_page=6&page=${currentPage}&_cb=${cacheBuster}`;
+            const res = await fetchWithTimeout(url, { timeout: 10000 });
             if (!res.ok) continue;
+            
             const data = await res.json();
             
             data.forEach(p => {
@@ -510,7 +512,7 @@ async function loadNews() {
                         apiBase: src.api.split('?')[0], 
                         link: p.link, 
                         img: extractDeepImage(p), 
-                        // GUARDA APENAS O RESUMO! NUNCA O HTML COMPLETO
+                        // GUARDA APENAS O RESUMO
                         contentSnippet: extractSnippet(htmlContent), 
                         detectedCat: detectCategory(p.title.rendered, htmlContent) 
                     });
@@ -518,7 +520,7 @@ async function loadNews() {
                 }
             });
         } catch (e) {
-            // Se um jornal der erro de rede, avança silenciosamente para o próximo
+            // Se um site falhar, passa ao próximo silenciosamente sem quebrar
         }
     }
 
@@ -655,15 +657,11 @@ async function openArticleView(post, pushHistory = true) {
     
     const contentDiv = document.getElementById('article-content');
     
-    // INJEÇÃO DO RESUMO E DO BOTÃO DE LER NO SITE OFICIAL (No exato estilo que tinhas antes)
+    // ATUALIZADO: Mostra APENAS o resumo e o botão requerido
     contentDiv.innerHTML = (post.contentSnippet || "<p>Conteúdo indisponível.</p>") + `
-    <div style="margin-top: 35px; padding: 25px; background: var(--surface); border: 1px dashed var(--border); border-radius: 12px; text-align: center;">
-        <h3 style="margin-bottom: 12px; color: var(--text); font-weight: 800;">Continue a ler no site oficial</h3>
-        <p style="font-size: 0.95rem; color: var(--text-meta); margin-bottom: 20px;">Para proteger os seus dados móveis e garantir uma leitura rápida, exibimos apenas o resumo desta notícia.</p>
-        <a href="${post.link}" target="_blank" class="read-more-btn" style="margin-top: 0; display: inline-block; width: auto; padding: 12px 30px;">
-            <i class="fas fa-external-link-alt"></i> Ler Notícia Completa
-        </a>
-    </div>`;
+    <a href="${post.link}" target="_blank" class="read-more-btn">
+        <i class="fas fa-external-link-alt"></i> Ler artigo completo no site oficial
+    </a>`;
     
     renderRelatedPosts(post); 
 }
@@ -707,7 +705,6 @@ function toggleSaveArticle() {
     if(!currentReadingPost) return;
     let saved = JSON.parse(localStorage.getItem('premium_news_saved_full') || '[]');
     const idx = saved.findIndex(x => x.uniqueId === currentReadingPost.uniqueId);
-    // Como agora currentReadingPost só tem o snippet leve, não vai mais dar erro de memória!
     if(idx > -1) { saved.splice(idx, 1); } else { saved.push(currentReadingPost); }
     localStorage.setItem('premium_news_saved_full', JSON.stringify(saved));
     updateActionBtns(); updateBadges();
@@ -738,7 +735,7 @@ function shareGlobal() {
     if(currentReadingPost) {
         shareUrl = window.location.origin + window.location.pathname + "?article=" + currentReadingPost.uniqueId;
         shareTitle = currentReadingPost.title;
-        shareText = "Leia esta notícia incrível no Sua Notícia 365:";
+        shareText = "Leia esta notícia no Sua Notícia 365:";
     }
     
     if (navigator.share) { 
@@ -770,7 +767,7 @@ window.onload = async () => {
                 const htmlContent = p.content?.rendered || "";
                 
                 const sharedPost = {
-                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: pubDate, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentSnippet: extractSnippet(htmlContent), detectedCat: detectCategory(p.title.rendered, htmlContent)
+                    uniqueId: sharedArticleId, apiId: p.id, title: p.title.rendered, date: pubDate, srcName: source.name, srcSlug: source.slug, apiBase: source.api.split('?')[0], link: p.link, img: extractDeepImage(p), contentSnippet: extractSnippet(htmlContent), detectedCat: detectCategory(p.title.rendered, "")
                 };
                 allPosts.push(sharedPost);
                 openArticleView(sharedPost, false); 
